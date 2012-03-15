@@ -157,42 +157,52 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
 
 });
 Ext.define('Macros.app.ribbonAction', {
-    extend: 'Ext.Element',
+    extend: 'Ext.Container',
     //extend: 'Ext.panel.Panel',
     alias: 'widget.ribbonAction',
-
-
+    text : "ClickMe",
+    action: null,
     initComponent: function () {
         Ext.apply(this, {
-                title:'Search this..',
                 items:[
-                    new Ext.form.TextField({
-                        id:"DocTitle",
-                        fieldLabel:"Titel",
-                        width:275,
-                        allowBlank:false,
-                        blankText:"Please enter a to address"
-                    }),
-                    new Ext.form.TextField({
-                        id:"Author",
-                        fieldLabel:"Autor",
-                        width:275,
-                        allowBlank:false,
-                        blankText:"Please enter a to address"
-                    }),
-                    new Ext.form.TextField({
-                        id:"Comment",
-                        fieldLabel:"Kommentar",
-                        width:275,
-                        allowBlank:false,
-                        blankText:"Please enter a to address"
-                    })
-                ],
-                buttons:[{
-                    text:'Go!',
-                    handler:this.submitSearch
 
-                }]
+                        new Ext.Button( {
+                        text: this.text,
+
+                        handler: this.action
+                        }),
+                        {
+                            xtype: 'box',
+                            autoEl: {
+                                tag:'a',
+                                href:'#',
+                                html:'link'
+                            }
+                        }
+                    ]
+            }
+        );
+        this.callParent(arguments);
+    }});Ext.define('Macros.app.ribbonGroup', {
+    extend: 'Ext.Container',
+    //extend: 'Ext.panel.Panel',
+    alias: 'widget.ribbonGroup',
+    text : "ClickMe",
+    action: null,
+    initComponent: function () {
+        Ext.apply(this, {
+                items:[
+                    {
+                        xtype:'ribbonAction',
+                        text: "Suchen",
+                        handler: macros.openSearch()
+                    },
+                    {
+                        xtype:'ribbonAction',
+                        text: "Hilfe",
+                        handler: macros.openSearch()
+                    }
+                ]
             }
         );
         this.callParent(arguments);
@@ -213,6 +223,7 @@ Ext.define('Macros.app.ribbonAction', {
     },
 
     initComponent: function () {
+
         Ext.apply(this, {
                 title:'Search this..',
                 items:[
@@ -363,9 +374,13 @@ Ext.onReady(function(){
             }
         });
 
+    var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
     mainWin.hide();
     //Ext.create('Macros.app.Panel');
     //Ext.create('Macros.app.SearchForm',{renderTo:'test'});
+
+
+
 
 });
 

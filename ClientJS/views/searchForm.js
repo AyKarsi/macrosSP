@@ -15,6 +15,7 @@ Ext.define('Macros.app.SearchForm', {
     },
 
     initComponent: function () {
+
         Ext.apply(this, {
                 title:'Search this..',
                 items:[

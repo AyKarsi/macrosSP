@@ -34,9 +34,13 @@ Ext.onReady(function(){
             }
         });
 
+    var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
     mainWin.hide();
     //Ext.create('Macros.app.Panel');
     //Ext.create('Macros.app.SearchForm',{renderTo:'test'});
+
+
+
 
 });
 
