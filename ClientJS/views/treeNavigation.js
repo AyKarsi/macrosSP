@@ -23,5 +23,14 @@ Ext.define('Ext.macros.TreeNavigation', {
         });
 
         this.callParent(arguments);
+    },
+    listeners:{
+        itemclick: function(view,rec,item,index,eventObj)
+        {
+            debugger;
+            var id = rec.get("id");
+            var text = rec.get("text");
+            //alert(id + " " + text);
+        }
     }
 });

@@ -9,22 +9,35 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
     root: {
         expanded: true,
         children: [
-            { text: "Projekte", leaf: false,
+            { text: "Ordner", leaf: false,
                 children:[
-                    { text: "Bauprojekt", leaf: false,
+                    { text: "Test", leaf: false,
                         children:[
-                            { text: "Grafiken", leaf: true },
-                            { text: "Veträge", leaf: true},
-                            { text: "Dokumentation", leaf: true},
-                            { text: "Beratung", leaf: true}
+                            { text: "Test2",
+                                leaf: true,
+                                id:"1000006"
+                            },
+                            { text: "Test3",
+                                leaf: true,
+                                id:"1000007"
+                            },
+                            { text: "Test4",
+                                leaf: true,
+                                id:"1000008"
+                            },
+                            { text: "Test5",
+                                leaf: true,
+                                id:"1000009"
+                            }
                         ]},
                     { text: "Kaufprojekt", leaf: false}
                 ]},
-            { text: "homework", expanded: true, children: [
+            { text: "Fonds", expanded: true, children: [
                 { text: "book report", leaf: true },
                 { text: "alegrbra", leaf: true}
             ] },
-            { text: "buy lottery tickets", leaf: true }
+            { text: "News", leaf: true },
+            { text: "Vorlagen", leaf: true }
         ]
     }
 });

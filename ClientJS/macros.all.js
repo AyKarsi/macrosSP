@@ -41,22 +41,35 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
     root: {
         expanded: true,
         children: [
-            { text: "Projekte", leaf: false,
+            { text: "Ordner", leaf: false,
                 children:[
-                    { text: "Bauprojekt", leaf: false,
+                    { text: "Test", leaf: false,
                         children:[
-                            { text: "Grafiken", leaf: true },
-                            { text: "Veträge", leaf: true},
-                            { text: "Dokumentation", leaf: true},
-                            { text: "Beratung", leaf: true}
+                            { text: "Test2",
+                                leaf: true,
+                                id:"1000006"
+                            },
+                            { text: "Test3",
+                                leaf: true,
+                                id:"1000007"
+                            },
+                            { text: "Test4",
+                                leaf: true,
+                                id:"1000008"
+                            },
+                            { text: "Test5",
+                                leaf: true,
+                                id:"1000009"
+                            }
                         ]},
                     { text: "Kaufprojekt", leaf: false}
                 ]},
-            { text: "homework", expanded: true, children: [
+            { text: "Fonds", expanded: true, children: [
                 { text: "book report", leaf: true },
                 { text: "alegrbra", leaf: true}
             ] },
-            { text: "buy lottery tickets", leaf: true }
+            { text: "News", leaf: true },
+            { text: "Vorlagen", leaf: true }
         ]
     }
 });Ext.define('Macros.app.Panel', {
@@ -143,7 +156,47 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
 
 
 });
-Ext.define('Macros.app.SearchForm', {
+Ext.define('Macros.app.ribbonAction', {
+    extend: 'Ext.Element',
+    //extend: 'Ext.panel.Panel',
+    alias: 'widget.ribbonAction',
+
+
+    initComponent: function () {
+        Ext.apply(this, {
+                title:'Search this..',
+                items:[
+                    new Ext.form.TextField({
+                        id:"DocTitle",
+                        fieldLabel:"Titel",
+                        width:275,
+                        allowBlank:false,
+                        blankText:"Please enter a to address"
+                    }),
+                    new Ext.form.TextField({
+                        id:"Author",
+                        fieldLabel:"Autor",
+                        width:275,
+                        allowBlank:false,
+                        blankText:"Please enter a to address"
+                    }),
+                    new Ext.form.TextField({
+                        id:"Comment",
+                        fieldLabel:"Kommentar",
+                        width:275,
+                        allowBlank:false,
+                        blankText:"Please enter a to address"
+                    })
+                ],
+                buttons:[{
+                    text:'Go!',
+                    handler:this.submitSearch
+
+                }]
+            }
+        );
+        this.callParent(arguments);
+    }});Ext.define('Macros.app.SearchForm', {
     extend: 'Ext.form.FormPanel',
     //extend: 'Ext.panel.Panel',
     alias: 'widget.searchform',
@@ -257,8 +310,18 @@ Ext.define('Ext.macros.TreeNavigation', {
         });
 
         this.callParent(arguments);
+    },
+    listeners:{
+        itemclick: function(view,rec,item,index,eventObj)
+        {
+            debugger;
+            var id = rec.get("id");
+            var text = rec.get("text");
+            //alert(id + " " + text);
+        }
     }
-});Ext.define('Macros.app.Window', {
+});
+Ext.define('Macros.app.Window', {
     extend: 'Ext.window.Window',
     //extend: 'Ext.panel.Panel',
     renderTo: Ext.getBody()
@@ -271,7 +334,7 @@ Ext.define('Ext.macros.TreeNavigation', {
  * Time: 10:10
  * To change this template use File | Settings | File Templates.
  */
-Ext.Loader.setPath('Ext.app', 'classes');
+Ext.Loader.setPath('Ext.app', 'views');
 
 Ext.require([
     'Ext.layout.container.*',
@@ -315,7 +378,7 @@ macros.openSearch = function()
     mainWin.setHeight('auto');
     mainWin.setWidth('auto');
     mainWin.alignTo("s4-mainarea","tl");
-}/**
+};/**
  * Created by JetBrains WebStorm.
  * User: tropper
  * Date: 08.03.12
