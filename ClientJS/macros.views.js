@@ -82,7 +82,47 @@ Ext.define('Macros.app.Panel', {
 
 
 });
-Ext.define('Macros.app.SearchForm', {
+Ext.define('Macros.app.ribbonAction', {
+    extend: 'Ext.Element',
+    //extend: 'Ext.panel.Panel',
+    alias: 'widget.ribbonAction',
+
+
+    initComponent: function () {
+        Ext.apply(this, {
+                title:'Search this..',
+                items:[
+                    new Ext.form.TextField({
+                        id:"DocTitle",
+                        fieldLabel:"Titel",
+                        width:275,
+                        allowBlank:false,
+                        blankText:"Please enter a to address"
+                    }),
+                    new Ext.form.TextField({
+                        id:"Author",
+                        fieldLabel:"Autor",
+                        width:275,
+                        allowBlank:false,
+                        blankText:"Please enter a to address"
+                    }),
+                    new Ext.form.TextField({
+                        id:"Comment",
+                        fieldLabel:"Kommentar",
+                        width:275,
+                        allowBlank:false,
+                        blankText:"Please enter a to address"
+                    })
+                ],
+                buttons:[{
+                    text:'Go!',
+                    handler:this.submitSearch
+
+                }]
+            }
+        );
+        this.callParent(arguments);
+    }});Ext.define('Macros.app.SearchForm', {
     extend: 'Ext.form.FormPanel',
     //extend: 'Ext.panel.Panel',
     alias: 'widget.searchform',
@@ -196,8 +236,18 @@ Ext.define('Ext.macros.TreeNavigation', {
         });
 
         this.callParent(arguments);
+    },
+    listeners:{
+        itemclick: function(view,rec,item,index,eventObj)
+        {
+            debugger;
+            var id = rec.get("id");
+            var text = rec.get("text");
+            //alert(id + " " + text);
+        }
     }
-});Ext.define('Macros.app.Window', {
+});
+Ext.define('Macros.app.Window', {
     extend: 'Ext.window.Window',
     //extend: 'Ext.panel.Panel',
     renderTo: Ext.getBody()

@@ -5,7 +5,7 @@
  * Time: 10:10
  * To change this template use File | Settings | File Templates.
  */
-Ext.Loader.setPath('Ext.app', 'classes');
+Ext.Loader.setPath('Ext.app', 'views');
 
 Ext.require([
     'Ext.layout.container.*',
@@ -49,4 +49,4 @@ macros.openSearch = function()
     mainWin.setHeight('auto');
     mainWin.setWidth('auto');
     mainWin.alignTo("s4-mainarea","tl");
-}
+};
