@@ -1,18 +1,15 @@
 Ext.define('Macros.app.ribbonAction', {
     extend: 'Ext.Container',
-    //extend: 'Ext.panel.Panel',
     alias: 'widget.ribbonAction',
     text : "ClickMe",
-    action: null,
+    handler: null,
     initComponent: function () {
         Ext.apply(this, {
                 items:[
-
                         new Ext.Button( {
                         text: this.text,
-
-                        handler: this.action
-                        }),
+                        handler: this.handler
+                        })/*,
                         {
                             xtype: 'box',
                             autoEl: {
@@ -20,7 +17,7 @@ Ext.define('Macros.app.ribbonAction', {
                                 href:'#',
                                 html:'link'
                             }
-                        }
+                        }*/
                     ]
             }
         );

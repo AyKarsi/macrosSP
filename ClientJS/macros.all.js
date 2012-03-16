@@ -158,19 +158,16 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
 });
 Ext.define('Macros.app.ribbonAction', {
     extend: 'Ext.Container',
-    //extend: 'Ext.panel.Panel',
     alias: 'widget.ribbonAction',
     text : "ClickMe",
-    action: null,
+    handler: null,
     initComponent: function () {
         Ext.apply(this, {
                 items:[
-
                         new Ext.Button( {
                         text: this.text,
-
-                        handler: this.action
-                        }),
+                        handler: this.handler
+                        })/*,
                         {
                             xtype: 'box',
                             autoEl: {
@@ -178,29 +175,27 @@ Ext.define('Macros.app.ribbonAction', {
                                 href:'#',
                                 html:'link'
                             }
-                        }
+                        }*/
                     ]
             }
         );
         this.callParent(arguments);
     }});Ext.define('Macros.app.ribbonGroup', {
     extend: 'Ext.Container',
-    //extend: 'Ext.panel.Panel',
     alias: 'widget.ribbonGroup',
-    text : "ClickMe",
-    action: null,
+    layout:'hbox',
     initComponent: function () {
         Ext.apply(this, {
                 items:[
                     {
                         xtype:'ribbonAction',
                         text: "Suchen",
-                        handler: macros.openSearch()
+                        handler: macros.openSearch
                     },
                     {
                         xtype:'ribbonAction',
                         text: "Hilfe",
-                        handler: macros.openSearch()
+                        handler: macros.openSearch
                     }
                 ]
             }
@@ -334,9 +329,8 @@ Ext.define('Ext.macros.TreeNavigation', {
 });
 Ext.define('Macros.app.Window', {
     extend: 'Ext.window.Window',
-    //extend: 'Ext.panel.Panel',
-    renderTo: Ext.getBody()
-
+    renderTo: Ext.getBody(),
+    closeAction:'hide'
 });
 /**
  * Created by JetBrains WebStorm.
@@ -374,8 +368,10 @@ Ext.onReady(function(){
             }
         });
 
-    var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
+
     mainWin.hide();
+    var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
+
     //Ext.create('Macros.app.Panel');
     //Ext.create('Macros.app.SearchForm',{renderTo:'test'});
 
@@ -387,6 +383,7 @@ Ext.onReady(function(){
 var macros = {};
 macros.openSearch = function()
 {
+    debugger;
     //mainWin.restore();
     mainWin.show();
     //mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);

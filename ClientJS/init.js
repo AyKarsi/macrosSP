@@ -34,8 +34,10 @@ Ext.onReady(function(){
             }
         });
 
-    var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
+
     mainWin.hide();
+    var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
+
     //Ext.create('Macros.app.Panel');
     //Ext.create('Macros.app.SearchForm',{renderTo:'test'});
 
@@ -47,6 +49,7 @@ Ext.onReady(function(){
 var macros = {};
 macros.openSearch = function()
 {
+    debugger;
     //mainWin.restore();
     mainWin.show();
     //mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);
