@@ -320,10 +320,9 @@ Ext.define('Ext.macros.TreeNavigation', {
     listeners:{
         itemclick: function(view,rec,item,index,eventObj)
         {
-            debugger;
             var id = rec.get("id");
             var text = rec.get("text");
-            //alert(id + " " + text);
+            alert(id + " " + text);
         }
     }
 });
@@ -361,7 +360,7 @@ Ext.onReady(function(){
 
             //maximizable : true,
             height: 800,
-            width: 1000,
+            //width: 1000,
             layout: 'fit',
             items: {  // Let's put an empty grid in just to illustrate fit layout
                 xtype: 'macrosWindow'
@@ -385,11 +384,14 @@ macros.openSearch = function()
 {
     debugger;
     //mainWin.restore();
+
     mainWin.show();
-    //mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);
-    mainWin.setHeight('auto');
+
+    mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);
+    //mainWin.setHeight('auto');
     mainWin.setWidth('auto');
     mainWin.alignTo("s4-mainarea","tl");
+    main.maximize();
 };/**
  * Created by JetBrains WebStorm.
  * User: tropper
