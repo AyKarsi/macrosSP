@@ -1,21 +1,35 @@
+Ext.onReady(function(){
+    //Ext.Loader.setConfig({enabled:true});
+});
 Ext.application({
     name: 'Macros',
 
-    //appFolder: 'app',
+    stores:[
+        'users',
+        'foldertreeStore'
+
+    ],
+
+    models:[
+        'user',
+        'foldertreeModel'
+
+    ],
 
     launch: function() {
+
         Ext.create('Ext.container.Viewport', {
             layout: 'fit',
             items: [
                 {
-                    xtype: 'userlist'
-
-
+                    xtype: 'foldertree'
                 }
             ]
         });
     },
     controllers: [
-        'main'
+        'folder',
+        'user'
+
     ]
 });

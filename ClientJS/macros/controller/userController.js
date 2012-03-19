@@ -1,10 +1,17 @@
-Ext.define('Macros.controller.main', {
+Ext.define('Macros.controller.user', {
     extend: 'Ext.app.Controller',
 
     views: [
-        'user.list'
+        'user.list',
+        'user.edit'
     ],
+    stores: [
+        'users'
 
+    ],
+    models: [
+        'user'
+    ],
     init: function() {
         this.control({
             'userlist': {
@@ -12,8 +19,9 @@ Ext.define('Macros.controller.main', {
             }
         });
     },
-
     editUser: function(grid, record) {
-        console.log('Double clicked on ' + record.get('name'));
+        var view = Ext.widget('useredit');
+
+        view.down('form').loadRecord(record);
     }
 });

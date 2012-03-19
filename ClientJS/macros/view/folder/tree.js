@@ -1,11 +1,11 @@
-Ext.define('Macros.view.user.list' ,{
-    extend: 'Ext.grid.Panel',
-    alias : 'widget.userlist',
+Ext.define('Macros.view.folder.tree' ,{
+    extend: 'Ext.tree.Panel',
+    alias : 'widget.foldertree',
     title : 'All Users',
-    store: 'users',
-    model: 'user',
+    store: 'foldertreeStore',
+    model: 'foldertreeModel',
 
-    initComponent: function() {
+ /*   initComponent: function() {
 
         this.columns = [
             {header: 'Name',  dataIndex: 'name',  flex: 1},
@@ -13,4 +13,5 @@ Ext.define('Macros.view.user.list' ,{
         ];
         this.callParent(arguments);
     }
+    */
 });
