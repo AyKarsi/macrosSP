@@ -1,14 +1,8 @@
 Ext.define('Macros.app.Panel', {
     extend: 'Ext.panel.Panel',
     alias:'widget.macrosWindow',
-    width: 1000,
-    height:700,
-    //renderTo: 's4-mainarea',
-    maximize:function(window , eOpts )
-    {
-        alert("mx");
-
-    },
+    layout:'box',
+    height:100,
     initComponent: function () {
 
         Ext.apply(this, {
@@ -16,64 +10,43 @@ Ext.define('Macros.app.Panel', {
                 type: 'vbox',
                 padding: '0 5 5 5' // pad the layout from the window edges
             },
-            items: [{
+            items: [
+                {
                 id: 'app-header',
-                xtype: 'box',
+                xtype: 'container',
                 height: 40,
-                width: 900,
+                width: 600,
                 html: 'Macros SharePoint DMS Integration'
             },
-                {
 
-                    xtype: 'container',
-                    layout: 'border',
-                    height:600,
-                    width: 900,
-                    items :[
-                        {
-                            id: 'app-options',
-                            title: 'Options',
-                            region: 'west',
-                            width: 300,
-                            minWidth: 150,
-                            maxWidth: 400,
-                            split: true,
-                            collapsible: true,
-                            layout: 'accordion',
-                            items: [{
-                                html: '1234',
-                                title:'Search',
-                                xtype:'searchform',
-                                autoScroll: true,
-                                border: false,
-                                iconCls: 'nav'
-                            },{
-                                title:'Navigation',
-                                //xtype:'searchform',
-                                xtype:'treenavigation',
-                                border: false,
-                                autoScroll: true,
-                                iconCls: 'settings'
-                            },{
-                                title:'Settings',
-                                html: '1234',
-                                border: false,
-                                autoScroll: true,
-                                iconCls: 'settings'
-                            }
-                            ]
-                        },
-                        {
-                            xtype:'tabpanel',
-                            id:'app-tabs',
-                            height:700,
-                            width:500,
-                            region: 'center',
-                            title:'tabss.',
-                            items:[]
-                        }
-                    ]
-                }]
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                height:600,
+                items :[
+                        /*{
+                        xtype:'macrosOptions',
+                        //id: 'app-options',
+                        title: 'Options'
+                   /*     region: 'center',
+                        height:600,
+                        width: 500, //0.25 * Ext.getBody().getViewSize().width,
+                        minWidth: 150,
+                        //maxWidth: 400,
+                        //split: true,
+                        //collapsible: true
+                    },*/
+                    {
+                        xtype:'tabpanel',
+                        id:'app-tabs',
+                        height:700,
+                        width: 600, //0.75 * Ext.getBody().getViewSize().width,
+                        region: 'center',
+                        title:'tabss.'/*,
+                        items:[]*/
+                    }
+                ]
+            }]
 
         });
         this.callParent(arguments);
@@ -82,7 +55,39 @@ Ext.define('Macros.app.Panel', {
 
 
 });
-Ext.define('Macros.app.ribbonAction', {
+Ext.define('Macros.app.Panel', {
+    extend: 'Ext.container.Container',
+    alias:'widget.macrosOptions',
+    title: 'Options',
+    layout: 'accordion',
+    initComponent: function () {
+        Ext.apply(this, {
+            items: [{
+                html: '1234',
+                title:'Search',
+                xtype:'searchform',
+                autoScroll: true,
+                border: false,
+                iconCls: 'nav'
+            },{
+                title:'Navigation',
+                //xtype:'searchform',
+                xtype:'treenavigation',
+                border: false,
+                autoScroll: true,
+                iconCls: 'settings'
+            },{
+                title:'Settings',
+                html: '1234',
+                border: false,
+                autoScroll: true,
+                iconCls: 'settings'
+            }
+            ]
+        });
+        this.callParent(arguments);
+    }
+});Ext.define('Macros.app.ribbonAction', {
     extend: 'Ext.Container',
     alias: 'widget.ribbonAction',
     text : "ClickMe",

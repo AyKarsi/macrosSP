@@ -8,9 +8,9 @@ Ext.application({
             layout: 'fit',
             items: [
                 {
-                    xtype: 'panel',
-                    title: 'Users',
-                    html : 'List of users will go here'
+                    xtype: 'userlist'
+
+
                 }
             ]
         });

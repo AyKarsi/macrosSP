@@ -17,14 +17,22 @@ Ext.require([
 ]);
 var mainWin = null;
 Ext.onReady(function(){
+
+
+    $("<div id='macros'></div>").insertBefore("#s4-mainarea");
+    //$('#macros').hide();
+
     Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
 
     //var win = new Window(...);
     //win.restoreState();
-
+/*
     mainWin = Ext.create('Macros.app.Window',
         {
-
+            style: {
+                border: 0,
+                padding: 0
+            },
             //maximizable : true,
             height: 800,
             //width: 1000,
@@ -32,10 +40,12 @@ Ext.onReady(function(){
             items: {  // Let's put an empty grid in just to illustrate fit layout
                 xtype: 'macrosWindow'
             }
-        });
+          });
+  */
+   mainWin = Ext.create('Macros.app.Panel',{renderTo:'macros'});
 
 
-    mainWin.hide();
+    //mainWin.hide();
     var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
 
     //Ext.create('Macros.app.Panel');
@@ -49,14 +59,15 @@ Ext.onReady(function(){
 var macros = {};
 macros.openSearch = function()
 {
-    debugger;
+    //debugger;
     //mainWin.restore();
 
-    mainWin.show();
 
-    mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);
-    //mainWin.setHeight('auto');
-    mainWin.setWidth('auto');
-    mainWin.alignTo("s4-mainarea","tl");
-    main.maximize();
+    mainWin.show();
+    //mainWin.alignTo("s4-mainarea","tl");
+    //mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);
+    //mainWin.setHeight(600);
+    //mainWin.setWidth('auto');
+
+    //main.maximize();
 };

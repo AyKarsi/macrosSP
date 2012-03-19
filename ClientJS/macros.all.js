@@ -75,14 +75,8 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
 });Ext.define('Macros.app.Panel', {
     extend: 'Ext.panel.Panel',
     alias:'widget.macrosWindow',
-    width: 1000,
-    height:700,
-    //renderTo: 's4-mainarea',
-    maximize:function(window , eOpts )
-    {
-        alert("mx");
-
-    },
+    layout:'box',
+    height:100,
     initComponent: function () {
 
         Ext.apply(this, {
@@ -90,64 +84,43 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
                 type: 'vbox',
                 padding: '0 5 5 5' // pad the layout from the window edges
             },
-            items: [{
+            items: [
+                {
                 id: 'app-header',
-                xtype: 'box',
+                xtype: 'container',
                 height: 40,
-                width: 900,
+                width: 600,
                 html: 'Macros SharePoint DMS Integration'
             },
-                {
 
-                    xtype: 'container',
-                    layout: 'border',
-                    height:600,
-                    width: 900,
-                    items :[
-                        {
-                            id: 'app-options',
-                            title: 'Options',
-                            region: 'west',
-                            width: 300,
-                            minWidth: 150,
-                            maxWidth: 400,
-                            split: true,
-                            collapsible: true,
-                            layout: 'accordion',
-                            items: [{
-                                html: '1234',
-                                title:'Search',
-                                xtype:'searchform',
-                                autoScroll: true,
-                                border: false,
-                                iconCls: 'nav'
-                            },{
-                                title:'Navigation',
-                                //xtype:'searchform',
-                                xtype:'treenavigation',
-                                border: false,
-                                autoScroll: true,
-                                iconCls: 'settings'
-                            },{
-                                title:'Settings',
-                                html: '1234',
-                                border: false,
-                                autoScroll: true,
-                                iconCls: 'settings'
-                            }
-                            ]
-                        },
-                        {
-                            xtype:'tabpanel',
-                            id:'app-tabs',
-                            height:700,
-                            width:500,
-                            region: 'center',
-                            title:'tabss.',
-                            items:[]
-                        }
-                    ]
-                }]
+            {
+                xtype: 'panel',
+                layout: 'hbox',
+                height:600,
+                items :[
+                        /*{
+                        xtype:'macrosOptions',
+                        //id: 'app-options',
+                        title: 'Options'
+                   /*     region: 'center',
+                        height:600,
+                        width: 500, //0.25 * Ext.getBody().getViewSize().width,
+                        minWidth: 150,
+                        //maxWidth: 400,
+                        //split: true,
+                        //collapsible: true
+                    },*/
+                    {
+                        xtype:'tabpanel',
+                        id:'app-tabs',
+                        height:700,
+                        width: 600, //0.75 * Ext.getBody().getViewSize().width,
+                        region: 'center',
+                        title:'tabss.'/*,
+                        items:[]*/
+                    }
+                ]
+            }]
 
         });
         this.callParent(arguments);
@@ -156,7 +129,39 @@ var treeNavigationModel = Ext.create('Ext.data.TreeStore', {
 
 
 });
-Ext.define('Macros.app.ribbonAction', {
+Ext.define('Macros.app.Panel', {
+    extend: 'Ext.container.Container',
+    alias:'widget.macrosOptions',
+    title: 'Options',
+    layout: 'accordion',
+    initComponent: function () {
+        Ext.apply(this, {
+            items: [{
+                html: '1234',
+                title:'Search',
+                xtype:'searchform',
+                autoScroll: true,
+                border: false,
+                iconCls: 'nav'
+            },{
+                title:'Navigation',
+                //xtype:'searchform',
+                xtype:'treenavigation',
+                border: false,
+                autoScroll: true,
+                iconCls: 'settings'
+            },{
+                title:'Settings',
+                html: '1234',
+                border: false,
+                autoScroll: true,
+                iconCls: 'settings'
+            }
+            ]
+        });
+        this.callParent(arguments);
+    }
+});Ext.define('Macros.app.ribbonAction', {
     extend: 'Ext.Container',
     alias: 'widget.ribbonAction',
     text : "ClickMe",
@@ -350,14 +355,22 @@ Ext.require([
 ]);
 var mainWin = null;
 Ext.onReady(function(){
+
+
+    $("<div id='macros'></div>").insertBefore("#s4-mainarea");
+    //$('#macros').hide();
+
     Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
 
     //var win = new Window(...);
     //win.restoreState();
-
+/*
     mainWin = Ext.create('Macros.app.Window',
         {
-
+            style: {
+                border: 0,
+                padding: 0
+            },
             //maximizable : true,
             height: 800,
             //width: 1000,
@@ -365,10 +378,12 @@ Ext.onReady(function(){
             items: {  // Let's put an empty grid in just to illustrate fit layout
                 xtype: 'macrosWindow'
             }
-        });
+          });
+  */
+   mainWin = Ext.create('Macros.app.Panel',{renderTo:'macros'});
 
 
-    mainWin.hide();
+    //mainWin.hide();
     var rib = Ext.create('Macros.app.ribbonGroup',{renderTo:'ribbon'});
 
     //Ext.create('Macros.app.Panel');
@@ -382,16 +397,17 @@ Ext.onReady(function(){
 var macros = {};
 macros.openSearch = function()
 {
-    debugger;
+    //debugger;
     //mainWin.restore();
 
-    mainWin.show();
 
-    mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);
-    //mainWin.setHeight('auto');
-    mainWin.setWidth('auto');
-    mainWin.alignTo("s4-mainarea","tl");
-    main.maximize();
+    mainWin.show();
+    //mainWin.alignTo("s4-mainarea","tl");
+    //mainWin.setWidth(Ext.getBody().getViewSize().width);//,Ext.getBody().getViewSize().height);
+    //mainWin.setHeight(600);
+    //mainWin.setWidth('auto');
+
+    //main.maximize();
 };/**
  * Created by JetBrains WebStorm.
  * User: tropper
