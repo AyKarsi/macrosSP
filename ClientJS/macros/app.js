@@ -18,11 +18,46 @@ Ext.application({
 
     launch: function() {
 
-        Ext.create('Ext.container.Viewport', {
-            layout: 'fit',
+        Ext.create('Ext.panel.Panel', {
+
+            renderTo:'s4-mainarea',
+            height:Ext.getBody().getViewSize().height - Ext.get('topDings').getViewSize().height ,
+            layout: {
+                type: 'border',
+                align: 'left'
+            },
             items: [
                 {
-                    xtype: 'foldertree'
+                    xtype:'box',
+                    html:'Macros',
+                    region:'north'
+
+                },
+                {
+                    xtype:'foldertree',
+                    title:'folder',
+                    flex:1,
+                    region:'west',
+                    layout: 'fit',
+                    split: true
+                    //height:'100%'
+                },
+                {
+                    xtype:'tabpanel',
+                    id:'maintabs',
+                    title:'Tabs',
+                    region:'center',
+                    width:400,
+                    flex:1,
+                    height:200,
+                    items:[
+                        {
+                            html:'wreewr',
+                            title:'tanone'
+                        }]
+                    //split: true,
+                    //height:'100%'
+
                 }
             ]
         });

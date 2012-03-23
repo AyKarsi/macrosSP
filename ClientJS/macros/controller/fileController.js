@@ -27,7 +27,7 @@ Ext.define('Macros.controller.file', {
 
         var files = new Macros.store.filesStore();
 
-        files.load();
+        files.loadFromMacros();
 
 
         var view = Ext.widget('filelist', {Model:files});
