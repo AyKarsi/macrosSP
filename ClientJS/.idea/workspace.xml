@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c38a3fac-14ef-4571-a153-901a80f75b74" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/macros/model/fileModel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/macros/store/filesStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/macros/view/file/list.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/jquery.flXHRproxy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.bat" afterPath="$PROJECT_DIR$/build.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/app.js" afterPath="$PROJECT_DIR$/macros/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/controller/fileController.js" afterPath="$PROJECT_DIR$/macros/controller/fileController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/controller/folderController.js" afterPath="$PROJECT_DIR$/macros/controller/folderController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/index.html" afterPath="$PROJECT_DIR$/macros/index.html" />
-    </list>
+    <list default="true" id="c38a3fac-14ef-4571-a153-901a80f75b74" name="Default" comment="" />
     <ignored path="Macros001.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -339,7 +328,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32907662" sideWeight="0.49815497" order="7" side_tool="false" content_ui="tabs" />
