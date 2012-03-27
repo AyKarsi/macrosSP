@@ -3,7 +3,7 @@ Ext.define('Macros.view.folder.tree' ,{
     alias : 'widget.foldertree',
     title : 'All Users',
     store: 'foldertreeStore',
-    model: 'foldertreeModel',
+    model: 'foldertreeModel'
 
  /*   initComponent: function() {
 

@@ -59,7 +59,7 @@ Ext.define('Macros.view.user.edit', {
     alias : 'widget.foldertree',
     title : 'All Users',
     store: 'foldertreeStore',
-    model: 'foldertreeModel',
+    model: 'foldertreeModel'
 
  /*   initComponent: function() {
 
@@ -76,10 +76,9 @@ Ext.define('Macros.view.user.edit', {
     title : 'Files',
     store: 'filesStore',
     model: 'fileModel',
+    closable:true,
 
     initComponent: function() {
-
-
 
         this.columns = [
             {header: 'title',  dataIndex: 'title',  flex: 1},

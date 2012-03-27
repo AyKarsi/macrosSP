@@ -20,8 +20,9 @@ Ext.define('Macros.controller.folder', {
     },
     getFolderFiles: function(grid, record) {
 
+        debugger;
         var fc = this.application.getController('file');
-        fc.list(1);
+        fc.list(1, record.data.text);
 
         //var view = Ext.widget('useredit');
 

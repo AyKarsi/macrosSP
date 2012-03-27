@@ -4,10 +4,9 @@ Ext.define('Macros.view.file.list' ,{
     title : 'Files',
     store: 'filesStore',
     model: 'fileModel',
+    closable:true,
 
     initComponent: function() {
-
-
 
         this.columns = [
             {header: 'title',  dataIndex: 'title',  flex: 1},

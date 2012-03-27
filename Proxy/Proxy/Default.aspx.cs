@@ -23,27 +23,22 @@ namespace Proxy
             if (remoteUrl == null)
                 return;
 
-            AuthData auth = login();
+            AuthCookie auth = login();
         
             //http%3A%2F%2Fwega.mi-m.de%2Fedms%2Fexe%2Feb.exe%3Fcfgs%3D..%2Fcfgs%2Fdmsfolders.cfg%26p%3Dlist%26MaskName%3Dlhitsxml%26folderid%3D10
 
         //only one site accepted
-            //create the web request to get the remote stream
-
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteUrl);
 
+            request.CookieContainer = new CookieContainer();
+            foreach(Cookie c in auth.Cookies)
+                request.CookieContainer.Add(c);
 
-            Uri uri = new Uri(" http://wega.mi-m.de");
 
-            request.Headers.Add("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64; rv:11.0) Gecko/20100101 Firefox/11.0");
-            request.CookieContainer.Add(uri, auth.username);
-            request.CookieContainer.Add(uri,  auth.usernr);
-            request.CookieContainer.Add(uri,  auth.ebsid);
-
-            HttpWebResponse response;
+            HttpWebResponse webResponse;
             try
             {
-                response = (HttpWebResponse)request.GetResponse();
+                webResponse = (HttpWebResponse)request.GetResponse();
             }
             catch (System.Net.WebException we)
             {
@@ -56,12 +51,12 @@ namespace Proxy
             }
             
             
-            Stream receiveStream = response.GetResponseStream();
+            Stream receiveStream = webResponse.GetResponseStream();
 
-            if ((response.ContentType.ToLower().IndexOf("html") >= 0)
-              || (response.ContentType.ToLower().IndexOf("javascript") >= 0))
+            if ((webResponse.ContentType.ToLower().IndexOf("html") >= 0)
+              || (webResponse.ContentType.ToLower().IndexOf("javascript") >= 0))
             {
-                //this response is HTML Content, so we must parse it
+                //this response is HTML Content, so we must Parse it
                 StreamReader readStream = new StreamReader(receiveStream, Encoding.Default);
                 Uri test = new Uri(remoteUrl);
                 string content;
@@ -70,7 +65,7 @@ namespace Proxy
                 //write the updated HTML to the client
                 Response.Write(content);
                 //close streamsreadStream.Close();
-                response.Close();
+                webResponse.Close();
                 Response.End();
             }
             else
@@ -83,8 +78,13 @@ namespace Proxy
                     //Write the stream directly to the client 
                     Response.OutputStream.Write(buff, 0, bytes);
                 }
+
+                Response.ContentType = "text/xml";
+                Response.ContentEncoding = System.Text.Encoding.UTF8;
+
                 //close streams
-                response.Close();
+                webResponse.Close();
+
                 Response.End();
             }
         }
@@ -104,7 +104,7 @@ namespace Proxy
               return html;
         }
 
-        private AuthData login()
+        private AuthCookie login()
         {
 
             string postData = "eblanguage=1&UserName=grombach&password=grombach123&button0=Anmelden&button0command=";
@@ -130,45 +130,56 @@ namespace Proxy
 
             string cookieData = loginResponse.Headers["Set-Cookie"];
 
-            AuthData auth = new AuthData();
-            auth.parse(cookieData);
+            AuthCookie auth = new AuthCookie();
+            auth.Parse(cookieData);
             return auth;
         }
     }
 
-    public class AuthData
+    public class AuthCookie
     {
 
-        public void parse(string cookieInfo)
+
+        public List<Cookie> Cookies = new List<Cookie>(); 
+
+
+        public void Parse(string cookieInfo)
         {
             //cookieInfo = "ebsid=5F078439246A09B778755ED643907585B21399C130E9A89D8F4EFCE442C2DAA0308B8B2A18C9B168; path=/edms/exe;,starturl=cfgs=../cfgs/login.cfg&p=u2; path=/edms/exe;,UserName=grombach; path=/edms/exe;,UserNr=43; path=/edms/exe;,ebsid=5F078439246A09B778755ED6439075...
             string[] vals = cookieInfo.Split(',');
-            string ebs = vals.First(x => x.StartsWith("ebsid="));
-            if (ebs != null)
-                ebsid = ebs.Substring(ebs.IndexOf("=") + 1);
-            string un = vals.First(x => x.StartsWith("UserName="));
-            if (un != null)
-                username = un.Substring(un.IndexOf("=") + 1);
+            foreach(string v in vals)
+            {
+                CookieCopy c = new CookieCopy();
+                c.Parse(v);
+                this.Cookies.Add(c.GetRealCookie());
+            }
+        }
+    }
 
-            string unum = vals.First(x => x.StartsWith("UserNr="));
-            if (unum != null)
-                usernr = unum.Substring(unum.IndexOf("=") + 1);
+    public class CookieCopy
+    {
+        public string Name;
+        public string Value;
+        public string Path;
 
-            if (ebsid.IndexOf(";") > 0)
-                ebsid = ebsid.Substring(0, ebsid.IndexOf(";"));
+        public void Parse(string inputVal)
+        {
 
-
-            if (username.IndexOf(";") > 0)
-                username = username.Substring(0, username.IndexOf(";"));
-
-            if (usernr.IndexOf(";") > 0)
-                usernr = usernr.Substring(0, usernr.IndexOf(";"));
+            Name = inputVal.Substring(0, inputVal.IndexOf("="));
+            inputVal = inputVal.Substring(inputVal.IndexOf("=") + 1);
+            Value = inputVal.Substring(0,inputVal.IndexOf(";"));
+            inputVal = inputVal.Substring(inputVal.IndexOf(";") + 1);
+            Path = inputVal.Substring(inputVal.IndexOf("path=") + 5);
+            Path = Path.Replace(";", "");
 
         }
 
-        public string ebsid { get; set; }
-        public string username { get; set; }
-        public string usernr { get; set; }
+        public Cookie GetRealCookie()
+        {
+            return new Cookie(Name, Value, Path, "wega.mi-m.de");
+
+        }
+
 
     }
 

@@ -514,7 +514,7 @@ jQuery.extend({
 			.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, "]")
 			.replace(/(?:^|:|,)(?:\s*\[)+/g, "")) ) {
 
-			// Try to use the native JSON parser first
+			// Try to use the native JSON Parser first
 			return window.JSON && window.JSON.parse ?
 				window.JSON.parse( data ) :
 				(new Function("return " + data))();
@@ -2981,7 +2981,7 @@ var Expr = Sizzle.selectors = {
 		},
 		CHILD: function(match){
 			if ( match[1] === "nth" ) {
-				// parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+				// Parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
 				var test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
 					match[2] === "even" && "2n" || match[2] === "odd" && "2n+1" ||
 					!/\D/.test( match[2] ) && "0n+" + match[2] || match[2]);
@@ -5061,12 +5061,12 @@ jQuery.extend({
 				var errMsg;
 
 				if ( status === "success" ) {
-					// Watch for, and catch, XML document parse errors
+					// Watch for, and catch, XML document Parse errors
 					try {
 						// process the data (runs the xml through httpData regardless of callback)
 						data = jQuery.httpData( xhr, s.dataType, s );
 					} catch(err) {
-						status = "parsererror";
+						status = "Parsererror";
 						errMsg = err;
 					}
 				}
@@ -5219,8 +5219,8 @@ jQuery.extend({
 			xml = type === "xml" || !type && ct.indexOf("xml") >= 0,
 			data = xml ? xhr.responseXML : xhr.responseText;
 
-		if ( xml && data.documentElement.nodeName === "parsererror" ) {
-			jQuery.error( "parsererror" );
+		if ( xml && data.documentElement.nodeName === "Parsererror" ) {
+			jQuery.error( "Parsererror" );
 		}
 
 		// Allow a pre-filtering function to sanitize the response
@@ -5229,7 +5229,7 @@ jQuery.extend({
 			data = s.dataFilter( data, type );
 		}
 
-		// The filter can actually parse the response
+		// The filter can actually Parse the response
 		if ( typeof data === "string" ) {
 			// Get the JavaScript object, if JSON is used.
 			if ( type === "json" || !type && ct.indexOf("json") >= 0 ) {

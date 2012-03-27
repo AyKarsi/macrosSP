@@ -23,20 +23,21 @@ Ext.define('Macros.controller.file', {
 
         //view.down('form').loadRecord(record);
     },
-    list:function(folderId){
-
-        var files = new Macros.store.filesStore();
-
-        files.loadFromMacros();
+    list:function(folderId, title){
 
 
-        var view = Ext.widget('filelist', {Model:files});
+        var view = Ext.widget('filelist');
+        view.store.load();
+        if (title)
+            view.title = title;
 
         view.show();
-        var tabPanel = Ext.getCmp('maintabs');
-        tabPanel.add(view).setActive(true);
 
-        tabPanel.doLayout();
+        var tabPanel = Ext.getCmp('maintabs');
+        tabPanel.add(view);
+        tabPanel.setActiveTab(view);
+        //tabPanel.doLayout();
+
 
     }
 
@@ -64,8 +65,9 @@ Ext.define('Macros.controller.folder', {
     },
     getFolderFiles: function(grid, record) {
 
+        debugger;
         var fc = this.application.getController('file');
-        fc.list(1);
+        fc.list(1, record.data.text);
 
         //var view = Ext.widget('useredit');
 
