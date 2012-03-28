@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction
+    Id="MacrosRibbon01"
+    Location="CommandUI.Ribbon">
+    <CommandUIExtension>
+      <CommandUIDefinitions>
+        <CommandUIDefinition
+          Location="Ribbon.Tabs._children">
+          <Tab
+            Id="Ribbon.CustomTabExample"
+            Title="My Custom Tab"
+            Description="This holds my custom commands!"
+            Sequence="501">
+            <Scaling
+              Id="Ribbon.CustomTabExample.Scaling">
+              <MaxSize
+                Id="Ribbon.CustomTabExample.MaxSize"
+                GroupId="Ribbon.CustomTabExample.CustomGroupExample"
+                Size="OneLargeTwoMedium"/>
+              <Scale
+                Id="Ribbon.CustomTabExample.Scaling.CustomTabScaling"
+                GroupId="Ribbon.CustomTabExample.CustomGroupExample"
+                Size="OneLargeTwoMedium" />
+            </Scaling>
+            <Groups Id="Ribbon.CustomTabExample.Groups">
+              <Group
+                Id="Ribbon.CustomTabExample.CustomGroupExample"
+                Description="This is a custom group!"
+                Title="Custom Group"
+                Sequence="52"
+                Template="Ribbon.Templates.CustomTemplateExample">
+                <Controls Id="Ribbon.CustomTabExample.CustomGroupExample.Controls">
+                  <Button
+                    Id="Ribbon.CustomTabExample.CustomGroupExample.HelloWorld"
+                    Command="CustomTabExample.HelloWorldCommand"
+                    Sequence="15"
+                    Description="Says hello to the World!"
+                    LabelText="Hello, World!"
+                    TemplateAlias="cust1"/>
+                  <Button
+                    Id="Ribbon.CustomTabExample.CustomGroupExample.GoodbyeWorld"
+                    Command="CustomTabExample.GoodbyeWorldCommand"
+                    Sequence="17"
+                    Description="Says good-bye to the World!"
+                    LabelText="Good-bye, World!"
+                    TemplateAlias="cust2"/>
+                  <Button
+                    Id="Ribbon.CustomTabExample.CustomGroupExample.LoveWorld"
+                    Command="CustomTabExample.LoveWorldCommand"
+                    Sequence="19"
+                    Description="Says I love the World!"
+                    LabelText="I love you, World!"
+                    TemplateAlias="cust3"/>
+                </Controls>
+              </Group>
+            </Groups>
+          </Tab>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.Templates._children">
+          <GroupTemplate Id="Ribbon.Templates.CustomTemplateExample">
+            <Layout
+              Title="OneLargeTwoMedium"
+              LayoutTitle="OneLargeTwoMedium">
+              <Section Alignment="Top" Type="OneRow">
+                <Row>
+                  <ControlRef DisplayMode="Large" TemplateAlias="cust1" />
+                </Row>
+              </Section>
+              <Section Alignment="Top" Type="TwoRow">
+                <Row>
+                  <ControlRef DisplayMode="Medium" TemplateAlias="cust2" />
+                </Row>
+                <Row>
+                  <ControlRef DisplayMode="Medium" TemplateAlias="cust3" />
+                </Row>
+              </Section>
+            </Layout>
+          </GroupTemplate>
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+      <CommandUIHandlers>
+        <CommandUIHandler
+          Command="CustomTabExample.HelloWorldCommand"
+          CommandAction="javascript:alert('Hello, world!');" />
+        <CommandUIHandler
+          Command="CustomTabExample.GoodbyeWorldCommand"
+          CommandAction="javascript:alert('Good-bye, world!');" />
+        <CommandUIHandler
+          Command="CustomTabExample.LoveWorldCommand"
+          CommandAction="javascript:alert('I love you, world!');" />
+      </CommandUIHandlers>
+    </CommandUIExtension>
+  </CustomAction>
+</Elements>
