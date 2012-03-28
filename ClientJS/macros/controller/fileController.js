@@ -27,7 +27,7 @@ Ext.define('Macros.controller.file', {
 
 
         var view = Ext.widget('filelist');
-        view.store.load();
+        view.store.loadById(folderId);
         if (title)
             view.title = title;
 

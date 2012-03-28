@@ -27,7 +27,7 @@ Ext.define('Macros.controller.file', {
 
 
         var view = Ext.widget('filelist');
-        view.store.load();
+        view.store.loadById(folderId);
         if (title)
             view.title = title;
 
@@ -65,9 +65,9 @@ Ext.define('Macros.controller.folder', {
     },
     getFolderFiles: function(grid, record) {
 
-        debugger;
+
         var fc = this.application.getController('file');
-        fc.list(1, record.data.text);
+        fc.list(record.data.id, record.data.text);
 
         //var view = Ext.widget('useredit');
 

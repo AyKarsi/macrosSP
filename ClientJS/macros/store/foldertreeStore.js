@@ -5,33 +5,35 @@ Ext.define('Macros.store.foldertreeStore', {
     root: {
         expanded: true,
         children: [
-            { text: "Ordner", leaf: false,
+            { text: "Ordner",
+                leaf: false,
+                id:"8",
                 children:[
                     { text: "Test", leaf: false,
                         children:[
                             { text: "Test2",
-                                leaf: true,
-                                id:"1000006"
+                                leaf: false,
+                                id:"10"
                             },
                             { text: "Test3",
-                                leaf: true,
-                                id:"1000007"
+                                leaf: false,
+                                id:"11"
                             },
                             { text: "Test4",
-                                leaf: true,
-                                id:"1000008"
+                                leaf: false,
+                                id:"13"
                             },
                             { text: "Test5",
-                                leaf: true,
-                                id:"1000009"
+                                leaf: false,
+                                id:"14"
                             }
                         ]},
                     { text: "Kaufprojekt", leaf: false}
                 ]},
-            { text: "Fonds", expanded: true, children: [
-                { text: "book report", leaf: true },
-                { text: "alegrbra", leaf: true}
-            ] },
+            { text: "Fonds",
+                expanded: true,
+                id:"7"
+            },
             { text: "News", leaf: true },
             { text: "Vorlagen", leaf: true }
         ]

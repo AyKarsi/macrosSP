@@ -176,14 +176,16 @@ Ext.application({
 });Ext.define('Macros.store.filesStore', {
     extend: 'Ext.data.Store',
     model: 'Macros.model.fileModel',
-/*    data: [
-        {name: 'Ed',    email: 'ed@sencha.com'},
-        {name: 'Tommy', email: 'tommy@sencha.com'}
-    ],
-    */
+    entityid: "0",
+
+    loadById: function(entitiyid){
+        this.entityid=entitiyid;
+        this.proxy.url = 'http://localhost:88/Proxy/Default.aspx?entity=folder&id='+this.entityid;
+        this.load();
+    },
 
     proxy: new Ext.data.proxy.Ajax({
-        url : 'http://localhost:88/Proxy/Default.aspx?url=http%3A%2F%2Fwega.mi-m.de%2Fedms%2Fexe%2Feb.exe%3Fcfgs%3D..%2Fcfgs%2Fdmsfolders.cfg%26p%3Dlist%26MaskName%3Dlhitsxml%26folderid%3D10',
+        url:'http://localhost:88/Proxy/Default.aspx?entity=folder&id=0',
         method:'get',
         reader: {
             type: 'xml',
@@ -198,33 +200,35 @@ Ext.define('Macros.store.foldertreeStore', {
     root: {
         expanded: true,
         children: [
-            { text: "Ordner", leaf: false,
+            { text: "Ordner",
+                leaf: false,
+                id:"8",
                 children:[
                     { text: "Test", leaf: false,
                         children:[
                             { text: "Test2",
-                                leaf: true,
-                                id:"1000006"
+                                leaf: false,
+                                id:"10"
                             },
                             { text: "Test3",
-                                leaf: true,
-                                id:"1000007"
+                                leaf: false,
+                                id:"11"
                             },
                             { text: "Test4",
-                                leaf: true,
-                                id:"1000008"
+                                leaf: false,
+                                id:"13"
                             },
                             { text: "Test5",
-                                leaf: true,
-                                id:"1000009"
+                                leaf: false,
+                                id:"14"
                             }
                         ]},
                     { text: "Kaufprojekt", leaf: false}
                 ]},
-            { text: "Fonds", expanded: true, children: [
-                { text: "book report", leaf: true },
-                { text: "alegrbra", leaf: true}
-            ] },
+            { text: "Fonds",
+                expanded: true,
+                id:"7"
+            },
             { text: "News", leaf: true },
             { text: "Vorlagen", leaf: true }
         ]
@@ -265,7 +269,7 @@ Ext.define('Macros.store.foldertreeStore', {
 
 
         var view = Ext.widget('filelist');
-        view.store.load();
+        view.store.loadById(folderId);
         if (title)
             view.title = title;
 
@@ -303,9 +307,9 @@ Ext.define('Macros.controller.folder', {
     },
     getFolderFiles: function(grid, record) {
 
-        debugger;
+
         var fc = this.application.getController('file');
-        fc.list(1, record.data.text);
+        fc.list(record.data.id, record.data.text);
 
         //var view = Ext.widget('useredit');
 
