@@ -43,7 +43,7 @@ Ext.application({
                     //height:'100%'
                 },
                 {
-                    xtype:'tabpanel',
+                    xtype:'tabs',
                     id:'maintabs',
                     title:'Tabs',
                     region:'center',
@@ -67,6 +67,11 @@ Ext.application({
         'user'
 
     ]
+});Ext.define('Macros.view.main.tabPanel' ,{
+    extend: 'Ext.tab.Panel',
+    alias : 'widget.tabs'
+
+
 });Ext.define('Macros.view.user.edit', {
     extend: 'Ext.window.Window',
     alias : 'widget.useredit',
@@ -202,9 +207,11 @@ Ext.define('Macros.store.foldertreeStore', {
         children: [
             { text: "Ordner",
                 leaf: false,
-                id:"8",
+                expanded: true,
                 children:[
                     { text: "Test", leaf: false,
+                        expanded: true,
+                        id:"8",
                         children:[
                             { text: "Test2",
                                 leaf: false,
@@ -267,18 +274,26 @@ Ext.define('Macros.store.foldertreeStore', {
     },
     list:function(folderId, title){
 
-
-        var view = Ext.widget('filelist');
-        view.store.loadById(folderId);
-        if (title)
-            view.title = title;
-
-        view.show();
+        var idKey= 'dmsfolder'+folderId;
 
         var tabPanel = Ext.getCmp('maintabs');
-        tabPanel.add(view);
+        var tabIndex = tabPanel.items.findIndex("key",idKey);
+        var view;
+        if (tabIndex >-1)
+        {
+            debugger;
+            view = tabPanel.items.items[tabIndex];
+        }
+        else
+        {
+            view = Ext.widget('filelist',{key:idKey, title:title});
+            tabPanel.add(view);
+        }
         tabPanel.setActiveTab(view);
-        //tabPanel.doLayout();
+        view.store.loadById(folderId);
+        tabPanel.setActiveTab(view);
+        tabPanel.doLayout();
+
 
 
     }

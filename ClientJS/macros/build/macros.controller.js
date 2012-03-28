@@ -25,18 +25,26 @@ Ext.define('Macros.controller.file', {
     },
     list:function(folderId, title){
 
-
-        var view = Ext.widget('filelist');
-        view.store.loadById(folderId);
-        if (title)
-            view.title = title;
-
-        view.show();
+        var idKey= 'dmsfolder'+folderId;
 
         var tabPanel = Ext.getCmp('maintabs');
-        tabPanel.add(view);
+        var tabIndex = tabPanel.items.findIndex("key",idKey);
+        var view;
+        if (tabIndex >-1)
+        {
+            debugger;
+            view = tabPanel.items.items[tabIndex];
+        }
+        else
+        {
+            view = Ext.widget('filelist',{key:idKey, title:title});
+            tabPanel.add(view);
+        }
         tabPanel.setActiveTab(view);
-        //tabPanel.doLayout();
+        view.store.loadById(folderId);
+        tabPanel.setActiveTab(view);
+        tabPanel.doLayout();
+
 
 
     }

@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c38a3fac-14ef-4571-a153-901a80f75b74" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\About.aspx" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\About.aspx.cs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\About.aspx.designer.cs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\Site.Master" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\Site.Master.cs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\Site.Master.designer.cs" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.suo" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.suo" />
+    <list default="true" id="c38a3fac-14ef-4571-a153-901a80f75b74" name="Default" comment="got loading to work!">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/macros/view/main/tabPanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.dll" afterPath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.dll" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.pdb" afterPath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.pdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterPath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/Proxy.dll" afterPath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/Proxy.dll" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.bat" afterPath="$PROJECT_DIR$/build.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/app.js" afterPath="$PROJECT_DIR$/macros/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/build/macros.controller.js" afterPath="$PROJECT_DIR$/macros/build/macros.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/build/macros.store.js" afterPath="$PROJECT_DIR$/macros/build/macros.store.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/build/macros.views.js" afterPath="$PROJECT_DIR$/macros/build/macros.views.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/controller/fileController.js" afterPath="$PROJECT_DIR$/macros/controller/fileController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/controller/folderController.js" afterPath="$PROJECT_DIR$/macros/controller/folderController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/macros.app.js" afterPath="$PROJECT_DIR$/macros/macros.app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/store/filesStore.js" afterPath="$PROJECT_DIR$/macros/store/filesStore.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/store/foldertreeStore.js" afterPath="$PROJECT_DIR$/macros/store/foldertreeStore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx.cs" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.csproj" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1-vsdoc.js" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1-vsdoc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1.js" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1.js" />
     </list>
     <ignored path="Macros001.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,10 +36,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fileController.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="fileController.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/controller/fileController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="587" selection-end="587" vertical-scroll-proportion="0.65578634">
+            <state line="42" column="36" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tabPanel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/macros/view/main/tabPanel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="25" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -59,7 +57,7 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="36" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.0">
+            <state line="42" column="35" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -74,19 +72,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fileModel.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/macros/model/fileModel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="list.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/view/file/list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="8" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
+            <state line="6" column="18" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -95,10 +84,14 @@
       <file leaf-file-name="macros.app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/macros.app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="0" selection-start="3459" selection-end="3459" vertical-scroll-proportion="0.0">
+            <state line="155" column="0" selection-start="3710" selection-end="3710" vertical-scroll-proportion="0.0">
               <folding>
-                <marker date="1332916902779" expanded="true" signature="4390:4500" placeholder="/*...*/" />
-                <marker date="1332916902779" expanded="true" signature="6041:6097" placeholder="[...]" />
+                <marker date="1332926525243" expanded="true" signature="287:1519" placeholder="{...}" />
+                <marker date="1332926525243" expanded="true" signature="308:1516" placeholder="{&quot;renderTo&quot;: 's4-mainarea'...}" />
+                <marker date="1332926525243" expanded="true" signature="563:1503" placeholder="[...]" />
+                <marker date="1332926525243" expanded="true" signature="998:1491" placeholder="{&quot;id&quot;: 'maintabs'...}" />
+                <marker date="1332926525243" expanded="true" signature="4488:4598" placeholder="/*...*/" />
+                <marker date="1332926525243" expanded="true" signature="6219:6275" placeholder="[...]" />
               </folding>
             </state>
           </provider>
@@ -107,16 +100,16 @@
       <file leaf-file-name="tree.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/view/folder/tree.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="6" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="430" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="foldertreeStore.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="foldertreeStore.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/macros/store/foldertreeStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="39" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
+            <state line="13" column="31" selection-start="418" selection-end="418" vertical-scroll-proportion="0.22700296">
               <folding />
             </state>
           </provider>
@@ -162,22 +155,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/macros/store/foldertree.js" />
         <option value="$PROJECT_DIR$/macros/model/foldertree.js" />
         <option value="$PROJECT_DIR$/macros/controller/mainController.js" />
         <option value="$PROJECT_DIR$/macros/store/files.js" />
-        <option value="$PROJECT_DIR$/build.bat" />
         <option value="$PROJECT_DIR$/resources/jquery.flXHRproxy.js" />
         <option value="$PROJECT_DIR$/macros/macros.app.js" />
         <option value="$PROJECT_DIR$/macros/index.html" />
         <option value="$PROJECT_DIR$/macros/model/fileModel.js" />
         <option value="$PROJECT_DIR$/macros/view/folder/tree.js" />
-        <option value="$PROJECT_DIR$/macros/app.js" />
         <option value="$PROJECT_DIR$/macros/view/file/list.js" />
-        <option value="$PROJECT_DIR$/macros/store/foldertreeStore.js" />
         <option value="$PROJECT_DIR$/macros/controller/folderController.js" />
         <option value="$PROJECT_DIR$/macros/store/filesStore.js" />
+        <option value="$PROJECT_DIR$/macros/app.js" />
+        <option value="$PROJECT_DIR$/build.bat" />
+        <option value="$PROJECT_DIR$/macros/view/main/tabPanel.js" />
         <option value="$PROJECT_DIR$/macros/controller/fileController.js" />
+        <option value="$PROJECT_DIR$/macros/store/foldertreeStore.js" />
       </list>
     </option>
   </component>
@@ -337,7 +330,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="folder" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -359,7 +352,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="file" />
+              <option name="myItemId" value="folder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Macros001" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ClientJS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="macros" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -557,16 +568,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/searchResults.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/ribbonGroup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -605,39 +606,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/macros/macros.app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="0" selection-start="3459" selection-end="3459" vertical-scroll-proportion="0.0">
+        <state line="155" column="0" selection-start="3710" selection-end="3710" vertical-scroll-proportion="0.0">
           <folding>
-            <marker date="1332916902779" expanded="true" signature="4390:4500" placeholder="/*...*/" />
-            <marker date="1332916902779" expanded="true" signature="6041:6097" placeholder="[...]" />
+            <marker date="1332926525243" expanded="true" signature="287:1519" placeholder="{...}" />
+            <marker date="1332926525243" expanded="true" signature="308:1516" placeholder="{&quot;renderTo&quot;: 's4-mainarea'...}" />
+            <marker date="1332926525243" expanded="true" signature="563:1503" placeholder="[...]" />
+            <marker date="1332926525243" expanded="true" signature="998:1491" placeholder="{&quot;id&quot;: 'maintabs'...}" />
+            <marker date="1332926525243" expanded="true" signature="4488:4598" placeholder="/*...*/" />
+            <marker date="1332926525243" expanded="true" signature="6219:6275" placeholder="[...]" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="36" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/view/file/list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="8" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/view/folder/tree.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="6" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/store/foldertreeStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="39" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -655,9 +632,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/macros/view/file/list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="18" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/macros/view/folder/tree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="430" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="0" selection-end="607" vertical-scroll-proportion="0.32789317">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/macros/view/main/tabPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="25" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/macros/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="35" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/macros/controller/fileController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="587" selection-end="587" vertical-scroll-proportion="0.65578634">
+        <state line="42" column="36" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/macros/store/foldertreeStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="31" selection-start="418" selection-end="418" vertical-scroll-proportion="0.22700296">
           <folding />
         </state>
       </provider>

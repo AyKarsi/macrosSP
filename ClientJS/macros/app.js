@@ -43,7 +43,7 @@ Ext.application({
                     //height:'100%'
                 },
                 {
-                    xtype:'tabpanel',
+                    xtype:'tabs',
                     id:'maintabs',
                     title:'Tabs',
                     region:'center',

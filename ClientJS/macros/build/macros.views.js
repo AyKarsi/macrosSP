@@ -1,4 +1,9 @@
-Ext.define('Macros.view.user.edit', {
+Ext.define('Macros.view.main.tabPanel' ,{
+    extend: 'Ext.tab.Panel',
+    alias : 'widget.tabs'
+
+
+});Ext.define('Macros.view.user.edit', {
     extend: 'Ext.window.Window',
     alias : 'widget.useredit',
 

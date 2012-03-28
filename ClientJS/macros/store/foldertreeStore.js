@@ -7,9 +7,11 @@ Ext.define('Macros.store.foldertreeStore', {
         children: [
             { text: "Ordner",
                 leaf: false,
-                id:"8",
+                expanded: true,
                 children:[
                     { text: "Test", leaf: false,
+                        expanded: true,
+                        id:"8",
                         children:[
                             { text: "Test2",
                                 leaf: false,
