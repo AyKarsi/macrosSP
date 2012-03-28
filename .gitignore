@@ -26,10 +26,11 @@
 *.unsuccessfulbuild
 ipch/
 obj/
-[Bb]in
+[Bb]in/
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
 TestResults/
 MVC/temp/
 _ReSharper.Proxy/
+Proxy/Proxy/Proxy.suo

@@ -13,7 +13,7 @@
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
           </ExternalProgram>
-          <StartExternalURL>http://localhost:88/Proxy/Default.aspx?url=http%3A%2F%2Fwega.mi-m.de%2Fedms%2Fexe%2Feb.exe%3Fcfgs%3D..%2Fcfgs%2Fdmsfolders.cfg%26p%3Dlist%26MaskName%3Dlhitsxml%26folderid%3D10</StartExternalURL>
+          <StartExternalURL>http://localhost:88/Proxy/Default.aspx?entity=folder&amp;id=10&amp;_dc=1332925547118&amp;page=1&amp;start=0&amp;limit=25</StartExternalURL>
           <StartCmdLineArguments>
           </StartCmdLineArguments>
           <StartWorkingDirectory>

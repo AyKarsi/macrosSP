@@ -45,16 +45,10 @@ Ext.application({
                 {
                     xtype:'tabs',
                     id:'maintabs',
-                    title:'Tabs',
                     region:'center',
                     width:400,
                     flex:1,
-                    height:200,
-                    items:[
-                        {
-                            html:'wreewr',
-                            title:'tanone'
-                        }]
+                    height:200
                     //split: true,
                     //height:'100%'
 
@@ -214,19 +208,19 @@ Ext.define('Macros.store.foldertreeStore', {
                         id:"8",
                         children:[
                             { text: "Test2",
-                                leaf: false,
+                                leaf: true,
                                 id:"10"
                             },
                             { text: "Test3",
-                                leaf: false,
+                                leaf: true,
                                 id:"11"
                             },
                             { text: "Test4",
-                                leaf: false,
+                                leaf: true,
                                 id:"13"
                             },
                             { text: "Test5",
-                                leaf: false,
+                                leaf: true,
                                 id:"14"
                             }
                         ]},

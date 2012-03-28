@@ -34,19 +34,19 @@ Ext.define('Macros.store.foldertreeStore', {
                         id:"8",
                         children:[
                             { text: "Test2",
-                                leaf: false,
+                                leaf: true,
                                 id:"10"
                             },
                             { text: "Test3",
-                                leaf: false,
+                                leaf: true,
                                 id:"11"
                             },
                             { text: "Test4",
-                                leaf: false,
+                                leaf: true,
                                 id:"13"
                             },
                             { text: "Test5",
-                                leaf: false,
+                                leaf: true,
                                 id:"14"
                             }
                         ]},
