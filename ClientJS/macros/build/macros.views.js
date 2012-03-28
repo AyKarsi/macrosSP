@@ -1,4 +1,35 @@
-Ext.define('Macros.view.main.tabPanel' ,{
+Ext.define('Macros.view.ribbon.ribbonAction', {
+    extend: 'Ext.Container',
+    alias: 'widget.ribbonAction',
+    text : "ClickMe",
+    handler: null,
+    initComponent: function () {
+        Ext.apply(this, {
+                items:[
+                        new Ext.Button( {
+                        text: this.text,
+                        handler: this.handler
+                        })/*,
+                        {
+                            xtype: 'box',
+                            autoEl: {
+                                tag:'a',
+                                href:'#',
+                                html:'link'
+                            }
+                        }*/
+                    ]
+            }
+        );
+        this.callParent(arguments);
+    }});Ext.define('Macros.view.ribbon.ribbonGroup', {
+    extend: 'Ext.Container',
+    alias: 'widget.ribbonGroup',
+    layout:'hbox',
+    initComponent: function () {
+
+        this.callParent(arguments);
+    }});Ext.define('Macros.view.main.tabPanel' ,{
     extend: 'Ext.tab.Panel',
     alias : 'widget.tabs'
 
@@ -57,6 +88,9 @@ Ext.define('Macros.view.main.tabPanel' ,{
             {header: 'Name',  dataIndex: 'name',  flex: 1},
             {header: 'Email', dataIndex: 'email', flex: 1}
         ];
+
+
+
         this.callParent(arguments);
     }
 });Ext.define('Macros.view.folder.tree' ,{

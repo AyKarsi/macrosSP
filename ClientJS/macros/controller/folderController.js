@@ -12,8 +12,8 @@ Ext.define('Macros.controller.folder', {
     ],
     init: function() {
         this.control({
-            'foldertree': {
-                itemdblclick: this.editUser,
+            'foldertree':
+            {
                 itemclick: this.getFolderFiles
             }
         });
@@ -22,17 +22,8 @@ Ext.define('Macros.controller.folder', {
 
 
         var fc = this.application.getController('file');
-        fc.list(record.data.id, record.data.text);
+        fc.getFolderFiles(record.data.id, record.data.text);
 
-        //var view = Ext.widget('useredit');
-
-        //view.down('form').loadRecord(record);
-    },
-    editUser: function(grid, record) {
-        alert("click");
-        //var view = Ext.widget('useredit');
-
-        //view.down('form').loadRecord(record);
     }
 });
 

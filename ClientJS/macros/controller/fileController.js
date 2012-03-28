@@ -12,18 +12,22 @@ Ext.define('Macros.controller.file', {
     ],
     init: function() {
         this.control({
-            'list': {
-                itemdblclick: this.editFile
+            'filelist': {
+                itemdblclick: this.editFile,
+                itemclick: function(){
+                    var ribbon = this.application.getController('ribbon');
+                    ribbon.toggle('file');
+                }
             }
         });
     },
     editFile: function(grid, record) {
-        alert("click");
+        alert("file click");
         //var view = Ext.widget('useredit');
 
         //view.down('form').loadRecord(record);
     },
-    list:function(folderId, title){
+    getFolderFiles:function(folderId, title){
 
         var idKey= 'dmsfolder'+folderId;
 
@@ -32,7 +36,6 @@ Ext.define('Macros.controller.file', {
         var view;
         if (tabIndex >-1)
         {
-            debugger;
             view = tabPanel.items.items[tabIndex];
         }
         else
@@ -45,8 +48,9 @@ Ext.define('Macros.controller.file', {
         tabPanel.setActiveTab(view);
         tabPanel.doLayout();
 
-
-
+        var ribbon = this.application.getController('ribbon');
+        ribbon.toggle('folder');
+        this.init();
     }
 
 });

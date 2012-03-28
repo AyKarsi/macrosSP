@@ -55,10 +55,16 @@ Ext.application({
                 }
             ]
         });
+
+
+
+
     },
     controllers: [
         'folder',
-        'user'
+        'user',
+        'ribbon'
+
 
     ]
 });

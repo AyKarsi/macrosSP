@@ -1,4 +1,4 @@
-Ext.define('Macros.app.ribbonAction', {
+Ext.define('Macros.view.ribbon.ribbonAction', {
     extend: 'Ext.Container',
     alias: 'widget.ribbonAction',
     text : "ClickMe",

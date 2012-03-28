@@ -12,18 +12,22 @@ Ext.define('Macros.controller.file', {
     ],
     init: function() {
         this.control({
-            'list': {
-                itemdblclick: this.editFile
+            'filelist': {
+                itemdblclick: this.editFile,
+                itemclick: function(){
+                    var ribbon = this.application.getController('ribbon');
+                    ribbon.toggle('file');
+                }
             }
         });
     },
     editFile: function(grid, record) {
-        alert("click");
+        alert("file click");
         //var view = Ext.widget('useredit');
 
         //view.down('form').loadRecord(record);
     },
-    list:function(folderId, title){
+    getFolderFiles:function(folderId, title){
 
         var idKey= 'dmsfolder'+folderId;
 
@@ -32,7 +36,6 @@ Ext.define('Macros.controller.file', {
         var view;
         if (tabIndex >-1)
         {
-            debugger;
             view = tabPanel.items.items[tabIndex];
         }
         else
@@ -45,8 +48,9 @@ Ext.define('Macros.controller.file', {
         tabPanel.setActiveTab(view);
         tabPanel.doLayout();
 
-
-
+        var ribbon = this.application.getController('ribbon');
+        ribbon.toggle('folder');
+        this.init();
     }
 
 });
@@ -65,8 +69,8 @@ Ext.define('Macros.controller.folder', {
     ],
     init: function() {
         this.control({
-            'foldertree': {
-                itemdblclick: this.editUser,
+            'foldertree':
+            {
                 itemclick: this.getFolderFiles
             }
         });
@@ -75,19 +79,111 @@ Ext.define('Macros.controller.folder', {
 
 
         var fc = this.application.getController('file');
-        fc.list(record.data.id, record.data.text);
+        fc.getFolderFiles(record.data.id, record.data.text);
 
-        //var view = Ext.widget('useredit');
-
-        //view.down('form').loadRecord(record);
-    },
-    editUser: function(grid, record) {
-        alert("click");
-        //var view = Ext.widget('useredit');
-
-        //view.down('form').loadRecord(record);
     }
 });
+
+Ext.define('Macros.controller.ribbon', {
+    extend: 'Ext.app.Controller',
+/*
+    views: [
+        'file.list'
+    ],
+    stores: [
+        'filesStore'
+    ],
+    models: [
+        'fileModel'
+    ],*/
+
+
+
+    toggle:function(ribbonGroupName){
+
+        for(var i=0;i<this.ribbons.length;i++){
+            var ribbon = this.ribbons[i];
+            if (ribbon.id==ribbonGroupName)
+                ribbon.show();
+            else
+                ribbon.hide();
+        }
+    },
+
+    ribbons:[],
+
+    init: function() {
+
+
+        var startRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
+            id:'start',
+            items:[
+                {
+                    xtype:'ribbonAction',
+                    text: "Suchen",
+                    handler: null
+                }
+            ]
+
+        });
+        this.ribbons.push(startRibbon);
+        var folderRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
+            id:'folder',
+            items:[
+                {
+                    xtype:'ribbonAction',
+                    text: "Anzeigen",
+                    handler: null
+                },
+                {
+                    xtype:'ribbonAction',
+                    text: "Suchen",
+                    handler: null
+                },
+                {
+                    xtype:'ribbonAction',
+                    text: "Unterordner anlegen",
+                    handler: null
+                }
+            ]
+
+        });
+        this.ribbons.push(folderRibbon);
+        var fileRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
+            id:'file',
+            items:[
+                {
+                    xtype:'ribbonAction',
+                    text: "Loeschen",
+                    handler: null
+                },
+                {
+                    xtype:'ribbonAction',
+                    text: "Verschieben",
+                    handler: null
+                },
+                {
+                    xtype:'ribbonAction',
+                    text: "Weitlerleiten",
+                    handler: null
+                }
+            ]
+
+        });
+        this.ribbons.push(fileRibbon);
+
+        this.toggle('start');
+
+
+     /*   this.control({
+            'list': {
+                itemdblclick: this.editFile
+            }
+        });
+        */
+    }
+});
+
 
 Ext.define('Macros.controller.user', {
     extend: 'Ext.app.Controller',

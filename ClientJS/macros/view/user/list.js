@@ -11,6 +11,9 @@ Ext.define('Macros.view.user.list' ,{
             {header: 'Name',  dataIndex: 'name',  flex: 1},
             {header: 'Email', dataIndex: 'email', flex: 1}
         ];
+
+
+
         this.callParent(arguments);
     }
 });

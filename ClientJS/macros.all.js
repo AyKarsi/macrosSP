@@ -161,52 +161,7 @@ Ext.define('Macros.app.Panel', {
         });
         this.callParent(arguments);
     }
-});Ext.define('Macros.app.ribbonAction', {
-    extend: 'Ext.Container',
-    alias: 'widget.ribbonAction',
-    text : "ClickMe",
-    handler: null,
-    initComponent: function () {
-        Ext.apply(this, {
-                items:[
-                        new Ext.Button( {
-                        text: this.text,
-                        handler: this.handler
-                        })/*,
-                        {
-                            xtype: 'box',
-                            autoEl: {
-                                tag:'a',
-                                href:'#',
-                                html:'link'
-                            }
-                        }*/
-                    ]
-            }
-        );
-        this.callParent(arguments);
-    }});Ext.define('Macros.app.ribbonGroup', {
-    extend: 'Ext.Container',
-    alias: 'widget.ribbonGroup',
-    layout:'hbox',
-    initComponent: function () {
-        Ext.apply(this, {
-                items:[
-                    {
-                        xtype:'ribbonAction',
-                        text: "Suchen",
-                        handler: macros.openSearch
-                    },
-                    {
-                        xtype:'ribbonAction',
-                        text: "Hilfe",
-                        handler: macros.openSearch
-                    }
-                ]
-            }
-        );
-        this.callParent(arguments);
-    }});Ext.define('Macros.app.SearchForm', {
+});Ext.define('Macros.app.SearchForm', {
     extend: 'Ext.form.FormPanel',
     //extend: 'Ext.panel.Panel',
     alias: 'widget.searchform',
