@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c38a3fac-14ef-4571-a153-901a80f75b74" name="Default" comment="got loading to work!" />
+    <list default="true" id="c38a3fac-14ef-4571-a153-901a80f75b74" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\About.aspx" afterPath="" />
+      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\About.aspx.cs" afterPath="" />
+      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\About.aspx.designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\Site.Master" afterPath="" />
+      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\Site.Master.cs" afterPath="" />
+      <change type="DELETED" beforePath="C:\Dev\macrosSP\Proxy\Proxy\Site.Master.designer.cs" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.suo" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.suo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.dll" afterPath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.pdb" afterPath="$PROJECT_DIR$/../Proxy/Proxy/bin/Proxy.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterPath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/Proxy.dll" afterPath="$PROJECT_DIR$/../Proxy/Proxy/obj/Debug/Proxy.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/build/macros.controller.js" afterPath="$PROJECT_DIR$/macros/build/macros.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/build/macros.store.js" afterPath="$PROJECT_DIR$/macros/build/macros.store.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/controller/fileController.js" afterPath="$PROJECT_DIR$/macros/controller/fileController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/controller/folderController.js" afterPath="$PROJECT_DIR$/macros/controller/folderController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/macros.app.js" afterPath="$PROJECT_DIR$/macros/macros.app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/store/filesStore.js" afterPath="$PROJECT_DIR$/macros/store/filesStore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/macros/store/foldertreeStore.js" afterPath="$PROJECT_DIR$/macros/store/foldertreeStore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx.cs" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Default.aspx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.csproj" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Proxy.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1-vsdoc.js" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1-vsdoc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1.js" afterPath="$PROJECT_DIR$/../Proxy/Proxy/Scripts/jquery-1.4.1.js" />
+    </list>
     <ignored path="Macros001.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,19 +47,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fileController.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="fileController.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/macros/controller/fileController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="36" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tabPanel.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/macros/view/main/tabPanel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="25" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
+            <state line="29" column="0" selection-start="587" selection-end="587" vertical-scroll-proportion="0.65578634">
               <folding />
             </state>
           </provider>
@@ -43,7 +59,7 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="30" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.0">
+            <state line="48" column="36" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -58,10 +74,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="fileModel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/macros/model/fileModel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="0" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="list.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/view/file/list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="18" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
+            <state line="6" column="8" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -70,8 +95,11 @@
       <file leaf-file-name="macros.app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/macros.app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="149" column="0" selection-start="3508" selection-end="3508" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="143" column="0" selection-start="3459" selection-end="3459" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1332916902779" expanded="true" signature="4390:4500" placeholder="/*...*/" />
+                <marker date="1332916902779" expanded="true" signature="6041:6097" placeholder="[...]" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,16 +107,16 @@
       <file leaf-file-name="tree.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/view/folder/tree.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="430" vertical-scroll-proportion="0.0">
+            <state line="15" column="6" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="foldertreeStore.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="foldertreeStore.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/macros/store/foldertreeStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="30" selection-start="933" selection-end="933" vertical-scroll-proportion="0.44510385">
+            <state line="19" column="39" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -134,22 +162,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/macros/store/foldertree.js" />
         <option value="$PROJECT_DIR$/macros/model/foldertree.js" />
         <option value="$PROJECT_DIR$/macros/controller/mainController.js" />
         <option value="$PROJECT_DIR$/macros/store/files.js" />
+        <option value="$PROJECT_DIR$/build.bat" />
         <option value="$PROJECT_DIR$/resources/jquery.flXHRproxy.js" />
         <option value="$PROJECT_DIR$/macros/macros.app.js" />
         <option value="$PROJECT_DIR$/macros/index.html" />
         <option value="$PROJECT_DIR$/macros/model/fileModel.js" />
         <option value="$PROJECT_DIR$/macros/view/folder/tree.js" />
+        <option value="$PROJECT_DIR$/macros/app.js" />
         <option value="$PROJECT_DIR$/macros/view/file/list.js" />
+        <option value="$PROJECT_DIR$/macros/store/foldertreeStore.js" />
         <option value="$PROJECT_DIR$/macros/controller/folderController.js" />
         <option value="$PROJECT_DIR$/macros/store/filesStore.js" />
-        <option value="$PROJECT_DIR$/build.bat" />
-        <option value="$PROJECT_DIR$/macros/view/main/tabPanel.js" />
         <option value="$PROJECT_DIR$/macros/controller/fileController.js" />
-        <option value="$PROJECT_DIR$/macros/app.js" />
-        <option value="$PROJECT_DIR$/macros/store/foldertreeStore.js" />
       </list>
     </option>
   </component>
@@ -201,7 +229,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -310,28 +337,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Macros001" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientJS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="macros" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="folder" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -396,6 +401,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -412,16 +418,16 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="72" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="701" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="715" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="715" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="701" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="71" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="70" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -471,24 +477,24 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32907662" sideWeight="0.49815497" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44668588" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14479166" sideWeight="0.67146975" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14479166" sideWeight="0.67146975" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32853025" sideWeight="0.50677085" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32853025" sideWeight="0.5046875" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949087" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32180595" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32853025" sideWeight="0.48958334" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32853025" sideWeight="0.49166667" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296875" sideWeight="0.6705091" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44668588" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -529,7 +535,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="tabbing and loading working nicely" />
+    <option name="LAST_COMMIT_MESSAGE" value="got loading to work!" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -546,12 +552,26 @@
     <MESSAGE value="app mvc completed" />
     <MESSAGE value="started loading of folders.." />
     <MESSAGE value="got loading to work!" />
-    <MESSAGE value="tabbing and loading working nicely" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/init.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="0" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/searchResults.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/ribbonGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/searchForm.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="11" selection-start="251" selection-end="367" vertical-scroll-proportion="0.0" />
@@ -571,7 +591,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/searchResultModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="48" selection-start="325" selection-end="325" vertical-scroll-proportion="0.27744806" />
+        <state line="11" column="48" selection-start="325" selection-end="325" vertical-scroll-proportion="0.27744806">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/macros/model/fileModel.js">
@@ -581,63 +603,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.bat">
+    <entry file="file://$PROJECT_DIR$/macros/macros.app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="0" selection-end="607" vertical-scroll-proportion="0.32789317">
-          <folding />
+        <state line="143" column="0" selection-start="3459" selection-end="3459" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1332916902779" expanded="true" signature="4390:4500" placeholder="/*...*/" />
+            <marker date="1332916902779" expanded="true" signature="6041:6097" placeholder="[...]" />
+          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="27" selection-start="382" selection-end="382" vertical-scroll-proportion="0.37833828">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/controller/fileController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="36" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/view/main/tabPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="25" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/macros/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="30" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/store/filesStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="20" selection-start="314" selection-end="314" vertical-scroll-proportion="0.0">
+        <state line="48" column="36" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/macros/view/file/list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="18" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/macros/macros.app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="0" selection-start="3508" selection-end="3508" vertical-scroll-proportion="0.0">
+        <state line="6" column="8" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/macros/view/folder/tree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="430" vertical-scroll-proportion="0.0">
+        <state line="15" column="6" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/macros/store/foldertreeStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="39" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -649,9 +648,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/macros/store/foldertreeStore.js">
+    <entry file="file://$PROJECT_DIR$/macros/store/filesStore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="30" selection-start="933" selection-end="933" vertical-scroll-proportion="0.44510385">
+        <state line="8" column="20" selection-start="314" selection-end="314" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/macros/controller/fileController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="587" selection-end="587" vertical-scroll-proportion="0.65578634">
           <folding />
         </state>
       </provider>
