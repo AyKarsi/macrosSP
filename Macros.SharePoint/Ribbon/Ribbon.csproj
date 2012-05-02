@@ -55,6 +55,20 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlTemplates\Ribbon\RibbonFile.ascx.cs">
+      <DependentUpon>RibbonFile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Ribbon\RibbonFile.ascx.designer.cs">
+      <DependentUpon>RibbonFile.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Ribbon\RibbonFolder.ascx.cs">
+      <DependentUpon>RibbonFolder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Ribbon\RibbonFolder.ascx.designer.cs">
+      <DependentUpon>RibbonFolder.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Ribbon\UCDelegate.ascx.cs">
       <DependentUpon>UCDelegate.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -85,7 +99,15 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="AdditionalMacrosPageHeader\Elements.xml" />
-    <Content Include="ControlTemplates\Ribbon\UCDelegate.ascx" />
+    <Content Include="ControlTemplates\Ribbon\RibbonFile.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Ribbon\RibbonFolder.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Ribbon\UCDelegate.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>

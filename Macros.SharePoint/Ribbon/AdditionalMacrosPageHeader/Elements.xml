@@ -1,3 +1,5 @@
 ﻿<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Control Id="AdditionalPageHead" ControlSrc="~/_controltemplates/Ribbon/UCDelegate.ascx" />
+  <Control Id="AdditionalPageHead" ControlSrc="~/_controltemplates/Ribbon/RibbonFolder.ascx" />
+  <Control Id="AdditionalPageHead" ControlSrc="~/_controltemplates/Ribbon/RibbonFile.ascx" />
 </Elements>
