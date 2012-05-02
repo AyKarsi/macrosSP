@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="795d3384-94fa-4df7-b71b-e1d52f2f4405" solutionId="795d3384-94fa-4df7-b71b-e1d52f2f4405" resetWebServer="false" name="Proxy" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <projectItems>
+    <projectItemReference itemId="b7fee17e-d374-4228-b981-ec803b2ebf85" />
+  </projectItems>
+</package>

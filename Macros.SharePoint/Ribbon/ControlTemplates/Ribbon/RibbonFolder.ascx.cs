@@ -30,22 +30,23 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                 {
                                     Id = "ShowFolder",
                                     Title = "Anzeigen",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
+                                    Image = ImageLibrary.GetStandardImage(7,12)
+                                    ,                                    
+                                    CommandJavaScript = "javascript:SpRibbonBinding.clickSearch();"
                                 },                     
                          new ButtonDefinition()
                                 {
                                     Id = "SearchFolder",
                                     Title = "Im Ordner suchen",
                                     Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
+                                    CommandJavaScript = "javascript:SpRibbonBinding.clickSearch();"
                                 },
                          new ButtonDefinition()
                                 {
                                     Id = "CreateFolder",
                                     Title = "Unterodner anlegen",
                                     Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
+                                    CommandJavaScript = "javascript:SpRibbonBinding.clickSearch();"
                                 }
                     }
                     
