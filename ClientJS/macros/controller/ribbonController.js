@@ -23,10 +23,32 @@ Ext.define('Macros.controller.ribbon', {
                 ribbon.hide();
         }
     },
+    refs :[{
+        selector: '#macrosPanel',
+        ref: 'MacrosArea'}
+    ],
 
     ribbons:[],
 
+    clickSearch : function(){
+        Ext.getCmp("macrosPanel").setVisible(true);
+    },
+
+
+
     init: function() {
+
+        //debugger;
+        //var macrosarea = this.getMacrosArea();
+        //macrosarea.setVisible(false);
+        //Ext.getCmp("macrosPanel").setVisible(false)
+
+
+        if (isInSharePoint)
+        {
+            // ribbon binding is done in sharepoint
+            return;
+        }
 
 
         var startRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
@@ -35,12 +57,13 @@ Ext.define('Macros.controller.ribbon', {
                 {
                     xtype:'ribbonAction',
                     text: "Suchen",
-                    handler: null
+                    handler: this.clickSearch
                 }
             ]
 
         });
         this.ribbons.push(startRibbon);
+
         var folderRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
             id:'folder',
             items:[

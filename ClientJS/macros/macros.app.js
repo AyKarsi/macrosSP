@@ -1,7 +1,18 @@
 Ext.onReady(function(){
-    //Ext.Loader.setConfig({enabled:true});
+    Ext.Loader.setConfig({enabled:true});
 });
+
+
+$(document).ready(function(){
+
+    $("#s4-mainarea").after("<div id='macrosarea'></div>");
+
+});
+
+
+var macrosApp = {};
 Ext.application({
+//var Macros = Ext.create('Ext.app.Application',{
     name: 'Macros',
 
     stores:[
@@ -15,13 +26,12 @@ Ext.application({
         'foldertreeModel'
 
     ],
-
+    mainPanel:null,
     launch: function() {
-
-        Ext.create('Ext.panel.Panel', {
-
-            renderTo:'s4-mainarea',
-            height:Ext.getBody().getViewSize().height - Ext.get('topDings').getViewSize().height ,
+        this.mainPanel= Ext.create('Ext.panel.Panel', {
+            id:"macrosPanel",
+            renderTo:'macrosarea',
+            height:Ext.getBody().getViewSize().height - Ext.get('s4-ribbonrow').getViewSize().height ,
             layout: {
                 type: 'border',
                 align: 'left'
@@ -56,6 +66,9 @@ Ext.application({
             ]
         });
 
+        this.mainPanel.setVisible(false);
+        // this reference is needed for the ribbonbindings
+        macrosApp = this;
 
 
 
@@ -67,7 +80,37 @@ Ext.application({
 
 
     ]
-});Ext.define('Macros.view.ribbon.ribbonAction', {
+});var SpRibbonBinding =
+{
+        initialized: false,
+        init:function(){
+            if (this.initialized)
+                return;
+            $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
+            this.initialized = true;
+        },
+    
+        clickSearch : function() {
+            this.init();
+            macrosApp.getController("ribbon").clickSearch();
+            $("#s4-mainarea").hide();
+        },
+
+        hideApp: function() {
+            this.init();
+            Ext.getCmp("macrosPanel").setVisible(false);
+            $("#s4-mainarea").show();
+        },
+        hideSPMainContent: function() {
+            this.init();
+            $("#s4-mainarea").hide();
+        }
+
+
+}
+
+
+Ext.define('Macros.view.ribbon.ribbonAction', {
     extend: 'Ext.Container',
     alias: 'widget.ribbonAction',
     text : "ClickMe",
@@ -219,12 +262,13 @@ Ext.application({
 
     loadById: function(entitiyid){
         this.entityid=entitiyid;
-        this.proxy.url = 'http://localhost:88/Proxy/Default.aspx?entity=folder&id='+this.entityid;
+        this.proxy.url = proxyUrl+'?entity=folder&id='+this.entityid;
+
         this.load();
     },
 
     proxy: new Ext.data.proxy.Ajax({
-        url:'http://localhost:88/Proxy/Default.aspx?entity=folder&id=0',
+        url:proxyUrl+'?entity=folder&id=0',
         method:'get',
         reader: {
             type: 'xml',
@@ -392,10 +436,32 @@ Ext.define('Macros.controller.ribbon', {
                 ribbon.hide();
         }
     },
+    refs :[{
+        selector: '#macrosPanel',
+        ref: 'MacrosArea'}
+    ],
 
     ribbons:[],
 
+    clickSearch : function(){
+        Ext.getCmp("macrosPanel").setVisible(true);
+    },
+
+
+
     init: function() {
+
+        //debugger;
+        //var macrosarea = this.getMacrosArea();
+        //macrosarea.setVisible(false);
+        //Ext.getCmp("macrosPanel").setVisible(false)
+
+
+        if (isInSharePoint)
+        {
+            // ribbon binding is done in sharepoint
+            return;
+        }
 
 
         var startRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
@@ -404,12 +470,13 @@ Ext.define('Macros.controller.ribbon', {
                 {
                     xtype:'ribbonAction',
                     text: "Suchen",
-                    handler: null
+                    handler: this.clickSearch
                 }
             ]
 
         });
         this.ribbons.push(startRibbon);
+
         var folderRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
             id:'folder',
             items:[
