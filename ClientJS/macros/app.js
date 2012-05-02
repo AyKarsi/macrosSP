@@ -1,7 +1,18 @@
 Ext.onReady(function(){
-    //Ext.Loader.setConfig({enabled:true});
+    Ext.Loader.setConfig({enabled:true});
 });
+
+
+$(document).ready(function(){
+
+    $("#s4-mainarea").after("<div id='macrosarea'></div>");
+
+});
+
+
+var macrosApp = {};
 Ext.application({
+//var Macros = Ext.create('Ext.app.Application',{
     name: 'Macros',
 
     stores:[
@@ -15,13 +26,12 @@ Ext.application({
         'foldertreeModel'
 
     ],
-
+    mainPanel:null,
     launch: function() {
-
-        Ext.create('Ext.panel.Panel', {
-
-            renderTo:'s4-mainarea',
-            height:Ext.getBody().getViewSize().height - Ext.get('topDings').getViewSize().height ,
+        this.mainPanel= Ext.create('Ext.panel.Panel', {
+            id:"macrosPanel",
+            renderTo:'macrosarea',
+            height:Ext.getBody().getViewSize().height - Ext.get('s4-ribbonrow').getViewSize().height ,
             layout: {
                 type: 'border',
                 align: 'left'
@@ -56,6 +66,9 @@ Ext.application({
             ]
         });
 
+        this.mainPanel.setVisible(false);
+        // this reference is needed for the ribbonbindings
+        macrosApp = this;
 
 
 

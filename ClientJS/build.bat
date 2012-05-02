@@ -9,5 +9,5 @@ type macros\view\ribbon\*.js,macros\view\main\*.js,macros\view\user\*.js,macros\
 type macros\model\*.js > macros\build\macros.model.js
 type macros\store\*.js > macros\build\macros.store.js
 
-type macros\app.js,macros\build\macros.views.js,macros\build\macros.model.js,macros\build\macros.store.js,macros\build\macros.controller.js > macros\macros.app.js
+type macros\app.js,macros\Sp.RibbonBinding.js,macros\build\macros.views.js,macros\build\macros.model.js,macros\build\macros.store.js,macros\build\macros.controller.js > macros\macros.app.js
 
