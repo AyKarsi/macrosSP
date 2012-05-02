@@ -26,11 +26,14 @@
 *.unsuccessfulbuild
 ipch/
 obj/
-[Bb]in/
+[Bb]in
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
 TestResults/
 MVC/temp/
-_ReSharper.Proxy/
-Proxy/Proxy/Proxy.suo
+_ReSharper.*/
+workspace.xml
+
+MVC/.idea/workspace.xml
+MVC/.idea/workspace.xml.orig
