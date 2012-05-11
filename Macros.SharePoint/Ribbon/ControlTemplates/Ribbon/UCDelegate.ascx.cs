@@ -15,7 +15,7 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
         {
             return new TabDefinition()
             {
-                Id = "CommonTasks",
+                Id = "MarcosMain",
                 Title = "Macros DMS",
                 Groups = new GroupDefinition[]
             {
@@ -30,8 +30,9 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                 {
                                     Id = "SearchButton",
                                     Title = "Search Documents",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
+                                    Image = ImageLibrary.GetStandardImage(7,12)
+                                    ,
+                                    CommandJavaScript = "javascript:SpRibbonBinding.clickSearch();"
                                 }                     
                     }
                     

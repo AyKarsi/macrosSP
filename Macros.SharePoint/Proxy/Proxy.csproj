@@ -4,11 +4,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E7C0D2C4-1AE0-4B03-901F-DCE5E1767436}</ProjectGuid>
+    <ProjectGuid>{A566498E-7753-4794-A795-5E11B4A740DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Macros.SharePoint.Ribbon</RootNamespace>
-    <AssemblyName>Macros.SharePoint.Ribbon</AssemblyName>
+    <RootNamespace>Proxy</RootNamespace>
+    <AssemblyName>Proxy</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -40,13 +40,11 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentRibbon">
-      <HintPath>..\ReferencedAssemblies\FluentRibbon.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
@@ -55,64 +53,36 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlTemplates\Ribbon\RibbonFile.ascx.cs">
-      <DependentUpon>RibbonFile.ascx</DependentUpon>
+    <Compile Include="AuthCookie.cs" />
+    <Compile Include="Layouts\Macros.Proxy\Proxy.aspx.cs">
+      <DependentUpon>Proxy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ControlTemplates\Ribbon\RibbonFile.ascx.designer.cs">
-      <DependentUpon>RibbonFile.ascx.cs</DependentUpon>
+    <Compile Include="Layouts\Macros.Proxy\Proxy.aspx.designer.cs">
+      <DependentUpon>Proxy.aspx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlTemplates\Ribbon\RibbonFolder.ascx.cs">
-      <DependentUpon>RibbonFolder.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlTemplates\Ribbon\RibbonFolder.ascx.designer.cs">
-      <DependentUpon>RibbonFolder.ascx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ControlTemplates\Ribbon\UCDelegate.ascx.cs">
-      <DependentUpon>UCDelegate.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlTemplates\Ribbon\UCDelegate.ascx.designer.cs">
-      <DependentUpon>UCDelegate.ascx.cs</DependentUpon>
-    </Compile>
+    <Compile Include="MacrosController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AdditionalMacrosPageHeader\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{86d7c700-9046-4687-b572-d5707b4d60a2}</SharePointProjectItemId>
-    </None>
-    <None Include="ControlTemplates\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{86737dee-e8ce-46f2-b216-531ba70bf912}</SharePointProjectItemId>
-    </None>
-    <None Include="Features\Feature1\Feature1.feature">
-      <FeatureId>{b3b106ff-05e9-4e49-951c-e6cd38d771fa}</FeatureId>
-    </None>
     <None Include="key.snk" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b7fee17e-d374-4228-b981-ec803b2ebf85}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
-      <PackageId>{3eac0503-21b6-420c-ae48-eaed4a42976a}</PackageId>
+      <PackageId>{795d3384-94fa-4df7-b71b-e1d52f2f4405}</PackageId>
     </None>
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="AdditionalMacrosPageHeader\Elements.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ControlTemplates\Ribbon\RibbonFile.ascx">
+    <Content Include="Layouts\Macros.Proxy\Proxy.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\Ribbon\RibbonFolder.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="ControlTemplates\Ribbon\UCDelegate.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="Features\Feature1\Feature1.Template.xml">
-      <DependentUpon>Feature1.feature</DependentUpon>
-    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
