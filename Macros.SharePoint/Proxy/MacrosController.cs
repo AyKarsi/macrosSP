@@ -10,38 +10,46 @@ namespace Proxy
     public class MacrosController
     {
 
-        public static AuthCookie Login()
+        public static Uri MarcosServerUri = new Uri("http://wega.mi-m.de");
+
+        //private static CookieCollection _cookies = new CookieCollection();
+        public static CookieCollection Login()
         {
 
+
+            var cookieJar = new CookieContainer();
+            var request = (HttpWebRequest)WebRequest.Create(MarcosServerUri.ToString() + "edms/exe/eb.exe?cfgs=../cfgs/Login.cfg&p=u2");
+            request.Method = "POST";
+            request.CookieContainer = cookieJar;
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            // encode the post data
             string postData = "eblanguage=1&UserName=grombach&password=grombach123&button0=Anmelden&button0command=";
-            ASCIIEncoding encoding = new ASCIIEncoding();
+            var encoding = new ASCIIEncoding();
             byte[] data = encoding.GetBytes(postData);
 
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://wega.mi-m.de/edms/exe/eb.exe?cfgs=../cfgs/Login.cfg&p=u2");
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
+            // write the post data
             request.ContentLength = data.Length;
             Stream requestStream = request.GetRequestStream();
             requestStream.Write(data, 0, data.Length);
             requestStream.Close();
 
-            HttpWebResponse loginResponse = (HttpWebResponse)request.GetResponse();
-            string cookieData = loginResponse.Headers["Set-Cookie"];
-
-            AuthCookie auth = new AuthCookie();
-            auth.Parse(cookieData);
-            return auth;
+            using (var loginResponse = (HttpWebResponse)request.GetResponse())
+            {
+                var cookies = cookieJar.GetCookies(request.RequestUri);
+                return cookies;
+            }
         }
 
 
-        public static HttpWebResponse GetUrl(string remoteUrl)
+        public static void GetUrl(string remoteUrl)
         {
 
-            AuthCookie auth = Login();
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteUrl);
+            var cookies = Login();
+            var request = (HttpWebRequest)WebRequest.Create(remoteUrl);
             request.CookieContainer = new CookieContainer();
-            foreach (Cookie c in auth.Cookies)
+
+            foreach (Cookie c in cookies)
                 request.CookieContainer.Add(c);
 
             HttpWebResponse webResponse;
@@ -56,7 +64,7 @@ namespace Proxy
                 HttpContext.Current.Response.StatusDescription = "Not Found";
                 HttpContext.Current.Response.Write("<h2>Page not found</h2>");
                 HttpContext.Current.Response.End();
-                return null;
+                return;
             }
 
             Stream receiveStream = webResponse.GetResponseStream();
@@ -90,14 +98,13 @@ namespace Proxy
                 HttpContext.Current.Response.End();
             }
 
-            return webResponse;
         }
 
 
         public static void GetFiles(string folderId)
         {
 
-            string remoteUrl = "http://wega.mi-m.de/edms/exe/eb.exe?cfgs=../cfgs/dmsfolders.cfg&p=list&MaskName=lhitsxml&folderid={0}";
+            string remoteUrl = MarcosServerUri.ToString() + "edms/exe/eb.exe?cfgs=../cfgs/dmsfolders.cfg&p=list&MaskName=lhitsxml&folderid={0}";
             remoteUrl = String.Format(remoteUrl, folderId);
             GetUrl(remoteUrl);
 
