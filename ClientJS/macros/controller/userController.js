@@ -1,4 +1,4 @@
-Ext.define('Macros.controller.user', {
+Ext.define('Macros.controller.userController', {
     extend: 'Ext.app.Controller',
 
     views: [

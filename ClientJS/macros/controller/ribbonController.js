@@ -1,4 +1,4 @@
-Ext.define('Macros.controller.ribbon', {
+Ext.define('Macros.controller.ribbonController', {
     extend: 'Ext.app.Controller',
 /*
     views: [
@@ -13,12 +13,15 @@ Ext.define('Macros.controller.ribbon', {
 
 
 
-    toggle:function(ribbonGroupName){
+    toggle:function(ribbonGroupName, objectData){
 
         for(var i=0;i<this.ribbons.length;i++){
             var ribbon = this.ribbons[i];
-            if (ribbon.id==ribbonGroupName)
+            if (ribbon.id==ribbonGroupName){
                 ribbon.show();
+                if (objectData != null)
+                    ribbon.objectData = objectData;
+            }
             else
                 ribbon.hide();
         }
@@ -86,17 +89,23 @@ Ext.define('Macros.controller.ribbon', {
 
         });
         this.ribbons.push(folderRibbon);
-        var fileRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
+        var fileRibbon = Ext.widget('ribbonGroup',{
+            //that: this,
+            renderTo:'ribbon',
             id:'file',
             items:[
                 {
                     xtype:'ribbonAction',
-                    text: "Loeschen",
-                    handler: null
+                    text: "Attribute anzeigen",
+                    ribbonGroup:fileRibbon,
+                    handler: function(){
+                             debugger;
+                        alert("attribute anzeigen " + this.scope.id);
+                    }
                 },
                 {
                     xtype:'ribbonAction',
-                    text: "Verschieben",
+                    text: "Reattributen",
                     handler: null
                 },
                 {

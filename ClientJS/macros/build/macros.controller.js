@@ -15,7 +15,7 @@ Ext.define('Macros.controller.file', {
             'filelist': {
                 itemdblclick: this.editFile,
                 itemclick: function(){
-                    var ribbon = this.application.getController('ribbon');
+                    var ribbon = this.application.getController('ribbonController');
                     ribbon.toggle('file');
                 }
             }
@@ -48,7 +48,7 @@ Ext.define('Macros.controller.file', {
         tabPanel.setActiveTab(view);
         tabPanel.doLayout();
 
-        var ribbon = this.application.getController('ribbon');
+        var ribbon = this.application.getController('ribbonController');
         ribbon.toggle('folder');
         this.init();
     }
@@ -78,7 +78,7 @@ Ext.define('Macros.controller.folder', {
     getFolderFiles: function(grid, record) {
 
 
-        var fc = this.application.getController('file');
+        var fc = this.application.getController('fileController');
         fc.getFolderFiles(record.data.id, record.data.text);
 
     }

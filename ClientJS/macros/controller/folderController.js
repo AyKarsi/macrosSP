@@ -1,4 +1,4 @@
-Ext.define('Macros.controller.folder', {
+Ext.define('Macros.controller.folderController', {
     extend: 'Ext.app.Controller',
 
     views: [
@@ -21,7 +21,7 @@ Ext.define('Macros.controller.folder', {
     getFolderFiles: function(grid, record) {
 
 
-        var fc = this.application.getController('file');
+        var fc = this.application.getController('fileController');
         fc.getFolderFiles(record.data.id, record.data.text);
 
     }

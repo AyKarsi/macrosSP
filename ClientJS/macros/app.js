@@ -1,6 +1,15 @@
+Ext.Loader.setConfig({enabled:true});
+Ext.Loader.setPath('Macros', '/macros');
+Ext.require('Macros.view.ribbon.ribbonGroup');
+Ext.require('Macros.view.ribbon.ribbonAction');
+Ext.require('Macros.view.main.tabPanel');
+
 Ext.onReady(function(){
-    Ext.Loader.setConfig({enabled:true});
+
+
 });
+
+
 
 
 $(document).ready(function(){
@@ -14,7 +23,7 @@ var macrosApp = {};
 Ext.application({
 //var Macros = Ext.create('Ext.app.Application',{
     name: 'Macros',
-
+    appFolder: '/macros',
     stores:[
         'users',
         'foldertreeStore'
@@ -74,9 +83,9 @@ Ext.application({
 
     },
     controllers: [
-        'folder',
-        'user',
-        'ribbon'
+        'folderController',
+        'userController',
+        'ribbonController'
 
 
     ]

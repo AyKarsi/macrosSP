@@ -10,7 +10,7 @@ var SpRibbonBinding =
     
         clickSearch : function() {
             this.init();
-            macrosApp.getController("ribbon").clickSearch();
+            macrosApp.getController("ribbonController").clickSearch();
             $("#s4-mainarea").hide();
         },
 

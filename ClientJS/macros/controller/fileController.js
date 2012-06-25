@@ -1,4 +1,4 @@
-Ext.define('Macros.controller.file', {
+Ext.define('Macros.controller.fileController', {
     extend: 'Ext.app.Controller',
 
     views: [
@@ -15,7 +15,7 @@ Ext.define('Macros.controller.file', {
             'filelist': {
                 itemdblclick: this.editFile,
                 itemclick: function(){
-                    var ribbon = this.application.getController('ribbon');
+                    var ribbon = this.application.getController('ribbonController');
                     ribbon.toggle('file');
                 }
             }
@@ -48,7 +48,7 @@ Ext.define('Macros.controller.file', {
         tabPanel.setActiveTab(view);
         tabPanel.doLayout();
 
-        var ribbon = this.application.getController('ribbon');
+        var ribbon = this.application.getController('ribbonController');
         ribbon.toggle('folder');
         this.init();
     }
