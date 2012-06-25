@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
+using HtmlAgilityPack;
 
 namespace Proxy
 {
@@ -77,7 +80,8 @@ namespace Proxy
                 StreamReader readStream = new StreamReader(receiveStream, Encoding.Default);
                 Uri test = new Uri(remoteUrl);
                 string content = ParseHtmlResponse(readStream.ReadToEnd(), HttpContext.Current.Request.ApplicationPath);
-                HttpContext.Current.Response.Write(content);
+                var updatedContent = ExtractLinks(content);
+                HttpContext.Current.Response.Write(updatedContent);
                 webResponse.Close();
                 HttpContext.Current.Response.End();
             }
@@ -102,10 +106,72 @@ namespace Proxy
         }
 
 
+        /// <summary>
+        /// method for extracting all URL's from the data being
+        /// passed to the method. The data being passed will be all
+        /// the data from a provided string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string ExtractLinks(string str)
+        {
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(str);
+
+            foreach (HtmlNode script in doc.DocumentNode.SelectNodes("//script"))
+            {
+                HtmlAttribute att = script.Attributes["src"];
+                if (att != null)
+                    att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
+            }
+
+            foreach (HtmlNode script in doc.DocumentNode.SelectNodes("//link"))
+            {
+                HtmlAttribute att = script.Attributes["href"];
+                if (att != null)
+                    att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
+            }
+
+            foreach (HtmlNode script in doc.DocumentNode.SelectNodes("//img"))
+            {
+                HtmlAttribute att = script.Attributes["src"];
+                if (att != null)
+                    att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
+            }
+
+            foreach (HtmlNode script in doc.DocumentNode.SelectNodes("//form"))
+            {
+                HtmlAttribute att = script.Attributes["action"];
+                if (att != null)
+                    att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
+            }
+
+            string html = "";
+
+            using (var memoryStream = new MemoryStream())
+            {
+                doc.Save(memoryStream);
+                using (TextReader reader = new StreamReader(memoryStream, Encoding.ASCII))
+                {
+                    string text = Encoding.UTF8.GetString(memoryStream.GetBuffer(),0, (int)memoryStream.Length);
+                    return text;
+                }
+                            
+            }
+
+            
+
+
+        }
+
+
+
+
         public static void GetFiles(string folderId)
         {
 
-            string remoteUrl = MarcosServerUri.ToString()+"/edms/exe/eb.exe?cfgs=../cfgs/dmsfolders.cfg&p=list&MaskName=lhitsxml&folderid={0}";
+            string remoteUrl = MarcosServerUri.ToString()+"edms/exe/eb.exe?cfgs=../cfgs/dmsfolders.cfg&p=list&MaskName=lhitsxml&folderid={0}";
             remoteUrl = String.Format(remoteUrl, folderId);
             GetUrl(remoteUrl);
 
@@ -128,6 +194,30 @@ namespace Proxy
             return html;
         }
 
+        public static void GetHtml(string url)
+        {
 
+
+            string remoteUrl = MarcosServerUri.ToString() + "edms/" + url;
+            GetUrl(remoteUrl);
+
+
+        }
+
+
+        public static void GetFileAttributes(string fileId)
+        {
+            string remoteUrl = MarcosServerUri.ToString() + "edms/exe/eb.exe?cfgs=../cfgs/docops.cfg&p=form&MaskName=fviewattr&fileid={0}&docclass=1&attrclass=3";
+            remoteUrl = string.Format(remoteUrl, fileId);
+            GetUrl(remoteUrl);
+        }
+
+        public static void EditFileAttributes(string fileId)
+        {
+            string remoteUrl = MarcosServerUri.ToString() +
+                               "edms/exe/eb.exe?cfgs=../cfgs/docops.cfg&p=form&MaskName=freattr&fileid={0}&adddata=&docclass=1&attrclass=3";
+            remoteUrl = string.Format(remoteUrl, fileId);
+            GetUrl(remoteUrl);
+        }
     }
 }

@@ -22,12 +22,23 @@ namespace Proxy
             if (entity == null && id== null)
                 return;
 
-            switch (entity)
+            entity = entity.ToLower();
+
+            switch (entity) 
             {
                 case "folder":
                     MacrosController.GetFiles(id);
                     break;
-                    
+                case "getfileattr":
+                    MacrosController.GetFileAttributes(id);
+                    break;
+                case "editfileattr":
+                    MacrosController.EditFileAttributes(id);
+                    break;
+                break;
+                case "gethtml":
+                    MacrosController.GetHtml(id);
+                    break;
                 default:
                     break;
             }

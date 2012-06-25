@@ -1,17 +1,5 @@
 Ext.define('Macros.controller.ribbonController', {
     extend: 'Ext.app.Controller',
-/*
-    views: [
-        'file.list'
-    ],
-    stores: [
-        'filesStore'
-    ],
-    models: [
-        'fileModel'
-    ],*/
-
-
 
     toggle:function(ribbonGroupName, objectData){
 
@@ -37,14 +25,18 @@ Ext.define('Macros.controller.ribbonController', {
         Ext.getCmp("macrosPanel").setVisible(true);
     },
 
+    openFileAttributes: function() {
 
+        var ctrl = macrosApp.getController("fileController");
+        return ctrl.openFileAttributes();
+    },
+    editFileAttributes : function() {
+        var ctrl = macrosApp.getController("fileController");
+        return ctrl.editFileAttributes();
+
+    },
 
     init: function() {
-
-        //debugger;
-        //var macrosarea = this.getMacrosArea();
-        //macrosarea.setVisible(false);
-        //Ext.getCmp("macrosPanel").setVisible(false)
 
 
         if (isInSharePoint)
@@ -52,7 +44,6 @@ Ext.define('Macros.controller.ribbonController', {
             // ribbon binding is done in sharepoint
             return;
         }
-
 
         var startRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
             id:'start',
@@ -73,7 +64,9 @@ Ext.define('Macros.controller.ribbonController', {
                 {
                     xtype:'ribbonAction',
                     text: "Anzeigen",
-                    handler: null
+                    handler: function() {
+                        alert("click");
+                    }
                 },
                 {
                     xtype:'ribbonAction',
@@ -98,15 +91,12 @@ Ext.define('Macros.controller.ribbonController', {
                     xtype:'ribbonAction',
                     text: "Attribute anzeigen",
                     ribbonGroup:fileRibbon,
-                    handler: function(){
-                             debugger;
-                        alert("attribute anzeigen " + this.scope.id);
-                    }
+                    handler: this.openFileAttributes
                 },
                 {
                     xtype:'ribbonAction',
                     text: "Reattributen",
-                    handler: null
+                    handler: this.editFileAttributes
                 },
                 {
                     xtype:'ribbonAction',

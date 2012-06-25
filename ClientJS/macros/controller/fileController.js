@@ -10,11 +10,13 @@ Ext.define('Macros.controller.fileController', {
     models: [
         'fileModel'
     ],
+    currentFile: null,
     init: function() {
         this.control({
             'filelist': {
                 itemdblclick: this.editFile,
-                itemclick: function(){
+                itemclick: function(grid, record){
+                    this.currentFile = record;
                     var ribbon = this.application.getController('ribbonController');
                     ribbon.toggle('file');
                 }
@@ -51,7 +53,50 @@ Ext.define('Macros.controller.fileController', {
         var ribbon = this.application.getController('ribbonController');
         ribbon.toggle('folder');
         this.init();
+    },
+    openFileAttributes:function() {
+
+        var title = this.currentFile.get('title');
+        var id = title;
+        var tabPanel = Ext.getCmp('maintabs');
+        var tabIndex = tabPanel.items.findIndex("key",id);
+        var view;
+        if (tabIndex >-1)
+        {
+            view = tabPanel.items.items[tabIndex];
+        }
+        else
+        {
+            view = Ext.widget('fileattributes',{title:title});
+
+            tabPanel.add(view);
+        }
+
+        tabPanel.setActiveTab(view);
+        tabPanel.doLayout();
+    },
+    editFileAttributes : function() {
+        var title = this.currentFile.get('title');
+        var id = title;
+        var tabPanel = Ext.getCmp('maintabs');
+        var tabIndex = tabPanel.items.findIndex("key",id);
+        var view;
+        if (tabIndex >-1)
+        {
+            view = tabPanel.items.items[tabIndex];
+        }
+        else
+        {
+            view = Ext.widget('fileeditattributes',{title:title});
+
+            tabPanel.add(view);
+        }
+
+        tabPanel.setActiveTab(view);
+        tabPanel.doLayout();
+
     }
+
 
 });
 
