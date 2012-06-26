@@ -6,6 +6,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ribbon", "Ribbon\Ribbon.csproj", "{E7C0D2C4-1AE0-4B03-901F-DCE5E1767436}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy\Proxy.csproj", "{A566498E-7753-4794-A795-5E11B4A740DA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E7C0D2C4-1AE0-4B03-901F-DCE5E1767436} = {E7C0D2C4-1AE0-4B03-901F-DCE5E1767436}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macros.Common", "..\Proxy\Macros.Common\Macros.Common.csproj", "{69936EE7-4C45-4A45-AF65-CB62A11DDE8E}"
 EndProject
