@@ -33,7 +33,7 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                     Image = ImageLibrary.GetStandardImage(7,12)
                                     ,
                                     CommandJavaScript = "javascript:SpRibbonBinding.clickSearch();"
-                                }                     
+                                },                     
                     }
                     
                 }

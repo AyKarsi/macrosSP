@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace Macros.Common
 {
-    public partial class ProxyBasePage : System.Web.UI.Page
+    public class ProxyBasePage 
     {
-        protected void Page_Load(object sender, EventArgs e)
+        public static void Page_Load(object sender, EventArgs e)
         {
 
             MacrosController.MarcosServerUri = new Uri("http://wega.mi-m.de");
 
             System.Net.ServicePointManager.Expect100Continue = false;
-            string entity = Request.QueryString["entity"];
-            string id = Request.QueryString["id"];
+            string entity = HttpContext.Current.Request.QueryString["entity"];
+            string id = HttpContext.Current.Request.QueryString["id"];
 
             if (entity == null && id == null)
                 return;
