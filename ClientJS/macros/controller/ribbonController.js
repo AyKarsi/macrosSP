@@ -36,6 +36,12 @@ Ext.define('Macros.controller.ribbonController', {
 
     },
 
+    openFile: function() {
+        var ctrl = macrosApp.getController("fileController");
+        return ctrl.openFile();
+
+    },
+
     init: function() {
 
 
@@ -92,6 +98,12 @@ Ext.define('Macros.controller.ribbonController', {
                     text: "Attribute anzeigen",
                     ribbonGroup:fileRibbon,
                     handler: this.openFileAttributes
+                },
+                {
+                    xtype:'ribbonAction',
+                    text: "Document öffnen",
+                    ribbonGroup:fileRibbon,
+                    handler: this.openFile
                 },
                 {
                     xtype:'ribbonAction',

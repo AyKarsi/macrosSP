@@ -4,3 +4,7 @@ http://wega.mi-m.de/edms/exe/eb.exe?cfgs=../cfgs/searchall.cfg&p=menu&MaskName=m
 
 Doc Attributes
 http://wega.mi-m.de/edms/exe/eb.exe?cfgs=../cfgs/docops.cfg&p=form&MaskName=fviewattr&fileid=f522f5d02-6f71-11e1-86e6-f0c99bbca093&docclass=1&attrclass=3
+
+
+OpenFile
+http://wega.mi-m.de/edms/exe/miidoccgi.exe?getfile&dokid=d522f5d01%2D6f71%2D11e1%2D86e6%2Df0c99bbca093&arbeitsmittel=1

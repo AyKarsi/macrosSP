@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy.csproj", "{CB7C212D-3C82-4B01-BE0B-A564C10C92C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macros.Common", "..\Macros.Common\Macros.Common.csproj", "{69936EE7-4C45-4A45-AF65-CB62A11DDE8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{CB7C212D-3C82-4B01-BE0B-A564C10C92C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB7C212D-3C82-4B01-BE0B-A564C10C92C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB7C212D-3C82-4B01-BE0B-A564C10C92C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69936EE7-4C45-4A45-AF65-CB62A11DDE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69936EE7-4C45-4A45-AF65-CB62A11DDE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69936EE7-4C45-4A45-AF65-CB62A11DDE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69936EE7-4C45-4A45-AF65-CB62A11DDE8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

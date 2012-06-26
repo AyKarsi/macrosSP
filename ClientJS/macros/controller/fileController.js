@@ -29,6 +29,21 @@ Ext.define('Macros.controller.fileController', {
 
         //view.down('form').loadRecord(record);
     },
+
+    openFile: function(){
+        var url = "http://wega.mi-m.de/edms/exe/miidoccgi.exe?getfile&dokid=d522f5d01%2D6f71%2D11e1%2D86e6%2Df0c99bbca093&arbeitsmittel=1";
+        try{
+            objAppl = GetObject("","Word.Application");
+            objAppl.Documents.open(url);
+        }
+        catch(exception){
+            objAppl = new ActiveXObject("Word.Application");
+            objAppl.Visible = true;
+            objAppl.Documents.open(url);
+        }
+        objAppl = null;
+        alert("openFile");
+    },
     getFolderFiles:function(folderId, title){
 
         var idKey= 'dmsfolder'+folderId;

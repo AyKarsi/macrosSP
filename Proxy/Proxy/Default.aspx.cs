@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Macros.Common;
 
 namespace Proxy
 {
@@ -14,6 +15,8 @@ namespace Proxy
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            MacrosController.MarcosServerUri = new Uri("http://wega.mi-m.de");
 
             System.Net.ServicePointManager.Expect100Continue = false;
             string entity = Request.QueryString["entity"];
