@@ -4,12 +4,14 @@ using Microsoft.SharePoint.WebControls;
 using System.Web;
 using Macros.Common;
 
-namespace Proxy.Layouts.Macros.Proxy
+namespace Macros.Proxy.Layouts.Macros.Proxy
 {
-    public partial class Proxy : ProxyBasePage
+    public partial class Proxy : LayoutsPageBase
     {
-        //protected void Page_Load(object sender, EventArgs e)
-        //{
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            ProxyBasePage.Page_Load(sender, e);
 
         //    System.Net.ServicePointManager.Expect100Continue = false;
         //    string entity = Request.QueryString["entity"];
@@ -31,6 +33,6 @@ namespace Proxy.Layouts.Macros.Proxy
 
         //    var schmarrn = "rertret";
 
-        //}
+        }
     }
 }

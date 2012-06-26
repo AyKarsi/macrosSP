@@ -31,28 +31,21 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                     Id = "OpenFile",
                                     Title = "Öffnen",
                                     Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
+                                    CommandJavaScript = "javascript:SpRibbonBinding.fileOpen();"
                                 },                     
                          new ButtonDefinition()
                                 {
-                                    Id = "DeleteFile",
-                                    Title = "Löschen",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
+                                    Id = "EditAttributes",
+                                    Title = "Reattributieren",
+                                    Image = ImageLibrary.GetStandardImage(8,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.fileEditAttributes();"
                                 },
                          new ButtonDefinition()
                                 {
-                                    Id = "MoveFile",
-                                    Title = "Verschieben",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
-                                },
-                          new ButtonDefinition()
-                                {
-                                    Id = "ForwardFile",
-                                    Title = "Weiterleiten",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:macros.openSearch();"
+                                    Id = "ViewAttributes",
+                                    Title = "Attribute ansehen",
+                                    Image = ImageLibrary.GetStandardImage(9,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.fileViewAttributes();"
                                 }
                     }
                     

@@ -7,8 +7,8 @@
     <ProjectGuid>{A566498E-7753-4794-A795-5E11B4A740DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Proxy</RootNamespace>
-    <AssemblyName>Proxy</AssemblyName>
+    <RootNamespace>Macros.Proxy</RootNamespace>
+    <AssemblyName>Macros.Proxy</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -67,6 +67,9 @@
     <None Include="key.snk" />
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b7fee17e-d374-4228-b981-ec803b2ebf85}</SharePointProjectItemId>
+    </None>
+    <None Include="Macros.Proxy\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{15f54ae4-ba78-4471-80ee-978111708f61}</SharePointProjectItemId>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{795d3384-94fa-4df7-b71b-e1d52f2f4405}</PackageId>

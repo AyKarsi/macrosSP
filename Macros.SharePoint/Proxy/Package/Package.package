@@ -1,6 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="795d3384-94fa-4df7-b71b-e1d52f2f4405" solutionId="795d3384-94fa-4df7-b71b-e1d52f2f4405" resetWebServer="false" name="Proxy" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="Macros.Proxy.dll" deploymentTarget="GlobalAssemblyCache">
+      <safeControls>
+        <safeControl namespaceName="Macros.Proxy" typeName="*" isSafeAgainstScript="true" />
+        <safeControl namespaceName="Macros.Proxy.Layouts" typeName="*" isSafeAgainstScript="false" />
+        <safeControl namespaceName="Macros.Proxy.Layouts.Macros.Proxy" typeName="*" isSafeAgainstScript="false" />
+      </safeControls>
+      <classResources>
+        <classResource sourcePath="bin\Debug\Macros.Common.dll" location="Macros.Common.dll" />
+      </classResources>
+    </projectOutputAssembly>
+  </assemblies>
   <projectItems>
     <projectItemReference itemId="b7fee17e-d374-4228-b981-ec803b2ebf85" />
+    <projectItemReference itemId="15f54ae4-ba78-4471-80ee-978111708f61" />
   </projectItems>
 </package>
