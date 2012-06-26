@@ -97,12 +97,38 @@ Ext.application({
     ]
 });var SpRibbonBinding =
 {
+
+
+
+
+
     initialized: false,
     init:function(){
         if (this.initialized)
             return;
         $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
         this.initialized = true;
+    },
+
+    toggle: function(ribbonGroup){
+
+        var spRibbonName;
+        switch(ribbonGroup)       {
+            case "file":
+                spRibbonName = "Ribbon.MacrosFile";
+                break;
+            case "folder":
+                spRibbonName = "Ribbon.MacrosFolder";
+                break;
+            case "main":
+                spRibbonName = "Ribbon.MacrosMain";
+                break;
+        }
+        if (spRibbonName)
+            SelectRibbonTab(spRibbonName, true);
+        else
+            console.log("unkown ribbonGroup " + ribbonGroup);
+
     },
 
     clickSearch : function() {
@@ -695,6 +721,12 @@ Ext.define('Macros.controller.ribbonController', {
     extend: 'Ext.app.Controller',
 
     toggle:function(ribbonGroupName, objectData){
+
+
+        if (isInSharePoint){
+
+            SpRibbonBinding.toggle(ribbonGroupName);
+        }
 
         for(var i=0;i<this.ribbons.length;i++){
             var ribbon = this.ribbons[i];
