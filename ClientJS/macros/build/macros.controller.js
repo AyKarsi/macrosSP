@@ -1,4 +1,4 @@
-Ext.define('Macros.controller.file', {
+Ext.define('Macros.controller.fileController', {
     extend: 'Ext.app.Controller',
 
     views: [
@@ -10,11 +10,13 @@ Ext.define('Macros.controller.file', {
     models: [
         'fileModel'
     ],
+    currentFile: null,
     init: function() {
         this.control({
             'filelist': {
                 itemdblclick: this.editFile,
-                itemclick: function(){
+                itemclick: function(grid, record){
+                    this.currentFile = record;
                     var ribbon = this.application.getController('ribbonController');
                     ribbon.toggle('file');
                 }
@@ -26,6 +28,21 @@ Ext.define('Macros.controller.file', {
         //var view = Ext.widget('useredit');
 
         //view.down('form').loadRecord(record);
+    },
+
+    openFile: function(){
+        var url = "http://wega.mi-m.de/edms/exe/miidoccgi.exe?getfile&dokid=d522f5d01%2D6f71%2D11e1%2D86e6%2Df0c99bbca093&arbeitsmittel=1";
+        try{
+            objAppl = GetObject("","Word.Application");
+            objAppl.Documents.open(url);
+        }
+        catch(exception){
+            objAppl = new ActiveXObject("Word.Application");
+            objAppl.Visible = true;
+            objAppl.Documents.open(url);
+        }
+        objAppl = null;
+        alert("openFile");
     },
     getFolderFiles:function(folderId, title){
 
@@ -51,11 +68,54 @@ Ext.define('Macros.controller.file', {
         var ribbon = this.application.getController('ribbonController');
         ribbon.toggle('folder');
         this.init();
+    },
+    openFileAttributes:function() {
+
+        var title = this.currentFile.get('title');
+        var id = title;
+        var tabPanel = Ext.getCmp('maintabs');
+        var tabIndex = tabPanel.items.findIndex("key",id);
+        var view;
+        if (tabIndex >-1)
+        {
+            view = tabPanel.items.items[tabIndex];
+        }
+        else
+        {
+            view = Ext.widget('fileattributes',{title:title});
+
+            tabPanel.add(view);
+        }
+
+        tabPanel.setActiveTab(view);
+        tabPanel.doLayout();
+    },
+    editFileAttributes : function() {
+        var title = this.currentFile.get('title');
+        var id = title;
+        var tabPanel = Ext.getCmp('maintabs');
+        var tabIndex = tabPanel.items.findIndex("key",id);
+        var view;
+        if (tabIndex >-1)
+        {
+            view = tabPanel.items.items[tabIndex];
+        }
+        else
+        {
+            view = Ext.widget('fileeditattributes',{title:title});
+
+            tabPanel.add(view);
+        }
+
+        tabPanel.setActiveTab(view);
+        tabPanel.doLayout();
+
     }
+
 
 });
 
-Ext.define('Macros.controller.folder', {
+Ext.define('Macros.controller.folderController', {
     extend: 'Ext.app.Controller',
 
     views: [
@@ -84,27 +144,18 @@ Ext.define('Macros.controller.folder', {
     }
 });
 
-Ext.define('Macros.controller.ribbon', {
+Ext.define('Macros.controller.ribbonController', {
     extend: 'Ext.app.Controller',
-/*
-    views: [
-        'file.list'
-    ],
-    stores: [
-        'filesStore'
-    ],
-    models: [
-        'fileModel'
-    ],*/
 
-
-
-    toggle:function(ribbonGroupName){
+    toggle:function(ribbonGroupName, objectData){
 
         for(var i=0;i<this.ribbons.length;i++){
             var ribbon = this.ribbons[i];
-            if (ribbon.id==ribbonGroupName)
+            if (ribbon.id==ribbonGroupName){
                 ribbon.show();
+                if (objectData != null)
+                    ribbon.objectData = objectData;
+            }
             else
                 ribbon.hide();
         }
@@ -120,14 +171,24 @@ Ext.define('Macros.controller.ribbon', {
         Ext.getCmp("macrosPanel").setVisible(true);
     },
 
+    openFileAttributes: function() {
 
+        var ctrl = macrosApp.getController("fileController");
+        return ctrl.openFileAttributes();
+    },
+    editFileAttributes : function() {
+        var ctrl = macrosApp.getController("fileController");
+        return ctrl.editFileAttributes();
+
+    },
+
+    openFile: function() {
+        var ctrl = macrosApp.getController("fileController");
+        return ctrl.openFile();
+
+    },
 
     init: function() {
-
-        //debugger;
-        //var macrosarea = this.getMacrosArea();
-        //macrosarea.setVisible(false);
-        //Ext.getCmp("macrosPanel").setVisible(false)
 
 
         if (isInSharePoint)
@@ -135,7 +196,6 @@ Ext.define('Macros.controller.ribbon', {
             // ribbon binding is done in sharepoint
             return;
         }
-
 
         var startRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
             id:'start',
@@ -156,7 +216,9 @@ Ext.define('Macros.controller.ribbon', {
                 {
                     xtype:'ribbonAction',
                     text: "Anzeigen",
-                    handler: null
+                    handler: function() {
+                        alert("click");
+                    }
                 },
                 {
                     xtype:'ribbonAction',
@@ -172,18 +234,27 @@ Ext.define('Macros.controller.ribbon', {
 
         });
         this.ribbons.push(folderRibbon);
-        var fileRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
+        var fileRibbon = Ext.widget('ribbonGroup',{
+            //that: this,
+            renderTo:'ribbon',
             id:'file',
             items:[
                 {
                     xtype:'ribbonAction',
-                    text: "Loeschen",
-                    handler: null
+                    text: "Attribute anzeigen",
+                    ribbonGroup:fileRibbon,
+                    handler: this.openFileAttributes
                 },
                 {
                     xtype:'ribbonAction',
-                    text: "Verschieben",
-                    handler: null
+                    text: "Document öffnen",
+                    ribbonGroup:fileRibbon,
+                    handler: this.openFile
+                },
+                {
+                    xtype:'ribbonAction',
+                    text: "Reattributen",
+                    handler: this.editFileAttributes
                 },
                 {
                     xtype:'ribbonAction',
@@ -208,7 +279,7 @@ Ext.define('Macros.controller.ribbon', {
 });
 
 
-Ext.define('Macros.controller.user', {
+Ext.define('Macros.controller.userController', {
     extend: 'Ext.app.Controller',
 
     views: [

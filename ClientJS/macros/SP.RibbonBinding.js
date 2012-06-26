@@ -1,30 +1,45 @@
 var SpRibbonBinding =
 {
-        initialized: false,
-        init:function(){
-            if (this.initialized)
-                return;
-            $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
-            this.initialized = true;
-        },
-    
-        clickSearch : function() {
-            this.init();
-            macrosApp.getController("ribbonController").clickSearch();
-            $("#s4-mainarea").hide();
-        },
+    initialized: false,
+    init:function(){
+        if (this.initialized)
+            return;
+        $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
+        this.initialized = true;
+    },
 
-        hideApp: function() {
-            this.init();
-            Ext.getCmp("macrosPanel").setVisible(false);
-            $("#s4-mainarea").show();
-        },
-        hideSPMainContent: function() {
-            this.init();
-            $("#s4-mainarea").hide();
-        }
+    clickSearch : function() {
+        this.init();
+        macrosApp.getController("ribbonController").clickSearch();
+        $("#s4-mainarea").hide();
+    },
+
+    fileViewAttributes : function() {
+        this.init();
+        macrosApp.getController("fileController").openFileAttributes();
+        $("#s4-mainarea").hide();
+    },
+    fileEditAttributes : function() {
+        this.init();
+        macrosApp.getController("fileController").editFileAttributes();
+        $("#s4-mainarea").hide();
+    },
+    fileOpen: function() {
+        this.init();
+        macrosApp.getController("fileController").openFile();
+        $("#s4-mainarea").hide();
+    },
+    hideApp: function() {
+        this.init();
+        Ext.getCmp("macrosPanel").setVisible(false);
+        $("#s4-mainarea").show();
+    },
+    hideSPMainContent: function() {
+        this.init();
+        $("#s4-mainarea").hide();
+    }
 
 
-}
+};
 
 
