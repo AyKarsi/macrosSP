@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using HtmlAgilityPack;
 
+
 namespace Macros.Common
 {
     public class MacrosController
