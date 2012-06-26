@@ -2,6 +2,7 @@
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.WebControls;
 using System.Web;
+using Macros.Common;
 
 namespace Proxy.Layouts.Macros.Proxy
 {
