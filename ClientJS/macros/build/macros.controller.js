@@ -149,6 +149,12 @@ Ext.define('Macros.controller.ribbonController', {
 
     toggle:function(ribbonGroupName, objectData){
 
+
+        if (isInSharePoint){
+
+            SpRibbonBinding.toggle(ribbonGroupName);
+        }
+
         for(var i=0;i<this.ribbons.length;i++){
             var ribbon = this.ribbons[i];
             if (ribbon.id==ribbonGroupName){
