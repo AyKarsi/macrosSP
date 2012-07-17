@@ -15,8 +15,8 @@ namespace Macros.Common
 {
     public class MacrosController
     {
-        public static string ServerUrl = "http://wega.mi-m.de";
-        public static Uri MarcosServerUri = new Uri(ServerUrl);
+
+        public static Uri MarcosServerUri = new Uri("http://wega.mi-m.de");
 
         //private static CookieCollection _cookies = new CookieCollection();
         public static CookieCollection Login()
@@ -147,7 +147,7 @@ namespace Macros.Common
             {
                 HtmlAttribute att = script.Attributes["src"];
                 if (att != null)
-                    att.Value = ServerUrl+"/edms/exe/" + att.Value;
+                    att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
             }
 
             var links = doc.DocumentNode.SelectNodes("//link");
@@ -157,7 +157,7 @@ namespace Macros.Common
                 {
                     HtmlAttribute att = script.Attributes["href"];
                     if (att != null)
-                    att.Value = ServerUrl+"/edms/exe/" + att.Value;
+                        att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
                 }
             }
 
@@ -171,7 +171,7 @@ namespace Macros.Common
                     HtmlAttribute att = script.Attributes["src"];
 
                     if (att != null)
-                        att.Value = ServerUrl + "/edms/exe/" + att.Value;
+                        att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
                 }
             }
 
@@ -182,7 +182,7 @@ namespace Macros.Common
             //    {
             //        HtmlAttribute att = form.Attributes["action"];
             //        if (att != null)
-                        att.Value = ServerUrl + "/edms/exe/" + att.Value;
+            //            att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
 
             //        var idAttr = form.Attributes["id"];
             //        if (idAttr == null)

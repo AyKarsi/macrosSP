@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -48,7 +47,7 @@ namespace Macros.Common
         }
 
 
-        public static void GetUrl(string remoteUrl,bool rebaseBody = false)
+        public static void GetUrl(string remoteUrl)
         {
 
             var cookies = Login();
@@ -79,11 +78,10 @@ namespace Macros.Common
               || (webResponse.ContentType.ToLower().IndexOf("javascript") >= 0))
             {
                 //this response is HTML Content, so we must Parse it
-                StreamReader readStream = new StreamReader(receiveStream, Encoding.ASCII);
+                StreamReader readStream = new StreamReader(receiveStream, Encoding.Default);
                 Uri test = new Uri(remoteUrl);
-                //string content = ParseHtmlResponse(readStream.ReadToEnd(), HttpContext.Current.Request.ApplicationPath);
-                //var updatedContent = ExtractLinks(content,rebaseBody);
-                var updatedContent = ExtractLinks(readStream.ReadToEnd(), rebaseBody);
+                string content = ParseHtmlResponse(readStream.ReadToEnd(), HttpContext.Current.Request.ApplicationPath);
+                var updatedContent = ExtractLinks(content);
                 HttpContext.Current.Response.Write(updatedContent);
                 webResponse.Close();
                 HttpContext.Current.Response.End();
@@ -116,32 +114,11 @@ namespace Macros.Common
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string ExtractLinks(string str, bool rebaseBody)
+        public static string ExtractLinks(string str)
         {
 
-
-            //sstr = str.Replace(@"<input type=""hidden"" name=""message"" value>", @"<input type=""hidden"" name=""message"" value/>" )
-            ;
-            
-
             HtmlDocument doc = new HtmlDocument();
-            /* doc.OptionAutoCloseOnEnd = false;
-            doc.OptionCheckSyntax = false;
-            doc.OptionFixNestedTags = true;
-            doc.OptionExtractErrorSourceText = true;
-            doc.OptionWriteEmptyNodes = true;*/
-
-            
-            String matchpattern = @"\<input (?<attr>.*)\>";
-            String replacementpattern = @"<input ${attr} />";
-            str = Regex.Replace(str, matchpattern, replacementpattern, RegexOptions.Multiline);
-
-            str=str.Replace("eb.exe?", "default.aspx?entity=eb.exe&");
-
             doc.LoadHtml(str);
-
-
-
 
             foreach (HtmlNode script in doc.DocumentNode.SelectNodes("//script"))
             {
@@ -150,15 +127,11 @@ namespace Macros.Common
                     att.Value = ServerUrl+"/edms/exe/" + att.Value;
             }
 
-            var links = doc.DocumentNode.SelectNodes("//link");
-            if (links != null)
+            foreach (HtmlNode script in doc.DocumentNode.SelectNodes("//link"))
             {
-                foreach (HtmlNode script in links) 
-                {
-                    HtmlAttribute att = script.Attributes["href"];
-                    if (att != null)
+                HtmlAttribute att = script.Attributes["href"];
+                if (att != null)
                     att.Value = ServerUrl+"/edms/exe/" + att.Value;
-                }
             }
 
             var imgNodes = doc.DocumentNode.SelectNodes("//img");
@@ -175,49 +148,42 @@ namespace Macros.Common
                 }
             }
 
-            //var formNodes = doc.DocumentNode.SelectNodes("//form");
-            //if (formNodes != null)
-            //{
-            //    foreach (HtmlNode form in doc.DocumentNode.SelectNodes("//form"))
-            //    {
-            //        HtmlAttribute att = form.Attributes["action"];
-            //        if (att != null)
+            var formNodes = doc.DocumentNode.SelectNodes("//form");
+            if (formNodes != null)
+            {
+                foreach (HtmlNode form in doc.DocumentNode.SelectNodes("//form"))
+                {
+                    HtmlAttribute att = form.Attributes["action"];
+                    if (att != null)
                         att.Value = ServerUrl + "/edms/exe/" + att.Value;
 
-            //        var idAttr = form.Attributes["id"];
-            //        if (idAttr == null)
-            //        {
-            //            var nameAttr = form.Attributes["name"];
-            //            form.Attributes.Add("id", nameAttr.Value);
-            //        }
+                    var idAttr = form.Attributes["id"];
+                    if (idAttr == null)
+                    {
+                        var nameAttr = form.Attributes["name"];
+                        form.Attributes.Add("id", nameAttr.Value);
+                    }
 
-            //        //// query could be wrong
-            //        ////var messageNodes = form.SelectNodes("//[message]");
-            //        //var newMessageNode = new HtmlNode(HtmlNodeType.Element, doc, -1);
-            //        //newMessageNode.InnerHtml = "<input type='hidden' name='message' value>";
-            //        //form.AppendChild(newMessageNode);
+                    // query could be wrong
+                    //var messageNodes = form.SelectNodes("//[message]");
+                    var newMessageNode = new HtmlNode(HtmlNodeType.Element, doc, -1);
+                    newMessageNode.InnerHtml = "<input type='hidden' name='message' value>";
+                    form.AppendChild(newMessageNode);
 
-            //        //var newtreecodeNode = new HtmlNode(HtmlNodeType.Element, doc, -1);
-            //        //newtreecodeNode.InnerHtml = "<input type='hidden' name='treecode' value>";
-            //        //form.AppendChild(newtreecodeNode);
-
-
+                    var newtreecodeNode = new HtmlNode(HtmlNodeType.Element, doc,-1);
+                    newtreecodeNode.InnerHtml = "<input type='hidden' name='treecode' value>";
+                    form.AppendChild(newtreecodeNode);
 
 
-            //    }
-            //}
-            //string html = "";
 
-            //// remove body
-            HtmlDocument newDoc;
-            newDoc = doc;
- 
-            
+
+                }
+            }
+            string html = "";
 
             using (var memoryStream = new MemoryStream())
             {
-                newDoc.Save(memoryStream);
-                memoryStream.Position = 0;
+                doc.Save(memoryStream);
                 using (TextReader reader = new StreamReader(memoryStream, Encoding.ASCII))
                 {
                     string text = Encoding.UTF8.GetString(memoryStream.GetBuffer(),0, (int)memoryStream.Length);
@@ -283,20 +249,7 @@ namespace Macros.Common
             string remoteUrl = MarcosServerUri.ToString() +
                                "edms/exe/eb.exe?cfgs=../cfgs/docops.cfg&p=form&MaskName=freattr&fileid={0}&adddata=&docclass=1&attrclass=3";
             remoteUrl = string.Format(remoteUrl, fileId);
-            GetUrl(remoteUrl,true);
-        }
-
-        public static void EbexeForward(NameValueCollection queryString)
-        {
-
-            string remoteUrl = MarcosServerUri.ToString() +
-                               "edms/exe/eb.exe?" + queryString.ToString();
-
-            GetUrl(remoteUrl, true);
-
-
-
-
+            GetUrl(remoteUrl);
         }
     }
 }

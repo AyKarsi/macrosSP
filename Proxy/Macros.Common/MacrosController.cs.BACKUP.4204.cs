@@ -153,12 +153,18 @@ namespace Macros.Common
             var links = doc.DocumentNode.SelectNodes("//link");
             if (links != null)
             {
+<<<<<<< HEAD
                 foreach (HtmlNode script in links) 
                 {
                     HtmlAttribute att = script.Attributes["href"];
                     if (att != null)
-                    att.Value = ServerUrl+"/edms/exe/" + att.Value;
+                        att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
                 }
+=======
+                HtmlAttribute att = script.Attributes["href"];
+                if (att != null)
+                    att.Value = ServerUrl+"/edms/exe/" + att.Value;
+>>>>>>> 5d4bc6e5326353be4922f7162e84138973b78914
             }
 
             var imgNodes = doc.DocumentNode.SelectNodes("//img");
@@ -175,6 +181,7 @@ namespace Macros.Common
                 }
             }
 
+<<<<<<< HEAD
             //var formNodes = doc.DocumentNode.SelectNodes("//form");
             //if (formNodes != null)
             //{
@@ -182,7 +189,17 @@ namespace Macros.Common
             //    {
             //        HtmlAttribute att = form.Attributes["action"];
             //        if (att != null)
+            //            att.Value = "http://wega.mi-m.de/edms/exe/" + att.Value;
+=======
+            var formNodes = doc.DocumentNode.SelectNodes("//form");
+            if (formNodes != null)
+            {
+                foreach (HtmlNode form in doc.DocumentNode.SelectNodes("//form"))
+                {
+                    HtmlAttribute att = form.Attributes["action"];
+                    if (att != null)
                         att.Value = ServerUrl + "/edms/exe/" + att.Value;
+>>>>>>> 5d4bc6e5326353be4922f7162e84138973b78914
 
             //        var idAttr = form.Attributes["id"];
             //        if (idAttr == null)
