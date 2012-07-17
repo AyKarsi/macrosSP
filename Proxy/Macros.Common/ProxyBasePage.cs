@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Macros.Common
 {
-    public class ProxyBasePage 
+    public class ProxyBasePage : System.Web.UI.Page
     {
         public static void Page_Load(object sender, EventArgs e)
         {
@@ -32,6 +32,10 @@ namespace Macros.Common
                     break;
                 case "editfileattr":
                     MacrosController.EditFileAttributes(id);
+                    break;
+                    break;
+                case "eb.exe":
+                    MacrosController.EbexeForward(HttpContext.Current.Request.QueryString);
                     break;
                     break;
                 case "gethtml":

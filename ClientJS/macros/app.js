@@ -34,24 +34,33 @@ Ext.application({
     ],
     mainPanel:null,
     launch: function() {
+        // alert(Ext.get('s4-ribbonrow').getViewSize().height);
+        var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
+        ribbonHeight += Ext.get('ribbon').getViewSize().height;
+
         this.mainPanel= Ext.create('Ext.panel.Panel', {
             id:"macrosPanel",
             renderTo:'macrosarea',
-            height:Ext.getBody().getViewSize().height - Ext.get('s4-ribbonrow').getViewSize().height ,
+            height:Ext.getBody().getViewSize().height - ribbonHeight ,
             layout: {
                 type: 'border',
                 align: 'left'
             },
+            adjustHeight: function() {
+                var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
+                ribbonHeight += Ext.get('ribbon').getViewSize().height;
+                this.height = Ext.getBody().getViewSize().height - ribbonHeight;
+            },
             items: [
                 {
                     xtype:'box',
-                    html:'Macros',
+                    html:'Macros DMS',
                     region:'north'
 
                 },
                 {
                     xtype:'foldertree',
-                    title:'folder',
+                    title:'',
                     flex:1,
                     region:'west',
                     layout: 'fit',
@@ -86,4 +95,9 @@ Ext.application({
 
 
     ]
+});
+
+Ext.EventManager.onWindowResize(function () {
+    macrosApp.mainPanel.adjustHeight();
+    macrosApp.mainPanel.doLayout();
 });

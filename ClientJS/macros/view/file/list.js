@@ -10,7 +10,8 @@ Ext.define('Macros.view.file.list' ,{
 
         this.columns = [
             {header: 'title',  dataIndex: 'title',  flex: 1},
-            {header: 'author', dataIndex: 'author', flex: 1}
+            {header: 'author', dataIndex: 'author', flex: 1},
+            {header: 'fileid', dataIndex: 'fileid', flex: 1}
         ];
         this.callParent(arguments);
     }

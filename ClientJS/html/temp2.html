@@ -1,0 +1,546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body
+        OnLoad="if (document.formular.title) document.formular.title.focus();if(parent.ShowFrame) parent.ShowFrame(2,1)">
+<script language='JavaScript'>
+    var cancelbutton=0;
+    var buttonwarning='';
+    var submitbutton=null;
+    var enableimage='';
+    var enablestyle='';
+    var submitblocked = '';
+    function CallAllCpfs ()
+    {
+    if (submitbutton)
+    {
+    submitbutton.disabled=true;
+    DisableOtherButtons (submitbutton,true);
+    }
+    if (ajaxrunning==1 && cancelbutton==0)
+    {
+    DisableButtons (true);
+    setTimeout ("HasAjaxFinished()", 1000);
+    if (submitblocked.length == 0)
+    submitblocked = 'button0';
+    return false;
+    }
+    submitblocked = '';
+    var allmess='';
+    var errmess='';
+    var okay=true;
+    document.formular.message.value="";
+    errmess = check_notnull (document.formular.docclass,'Dokumentklasse&nbsp;&nbsp;&nbsp;');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = check_notnull (document.formular.title,'Titel');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = cpfmaxlen (document.formular.pcomment,'maxlen=1000 execute=exitmask name=Kommentar');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = cpftreecode (document.formular.treecodelist,'execute=exitmask');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = check_notnull (document.formular.pstatus,'Status');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = to_date (document.formular.validdate,'dd#.#mm#.#yyyy');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = check_notnull (document.formular.attrclass,'Attributklasse');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = check_notnull (document.formular.numberfield3,'Dokumenttyp');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    errmess = CheckFolderidvalid (document.formular.folderidvalid,'Sie haben den Zielordner geÃ¤ndert, drÃ¼cken sie danach bitte Pfad prÃ¼fen');
+    if (errmess != "")
+    {
+    allmess += errmess + "\\r\\n";
+    }
+    if (allmess != '' && cancelbutton == 0)
+    {
+    alert(allmess);
+    document.formular.message.value="";
+    buttonwarning='';
+    if (submitbutton)
+    {
+    DisableOtherButtons (submitbutton,false);
+    submitbutton.disabled=false;
+    if (enableimage.length>0)
+    submitbutton.src=enableimage;
+    if (enablestyle.length>0)
+    submitbutton.className=enablestyle;
+    submitbutton=null;
+    enableimage='';
+    enablestyle='';
+    }
+    return false;
+    }
+    cancelbutton = 0;
+    if (buttonwarning=='')
+    {
+    if (submitbutton)
+    {
+    document.formular.action += "&" + submitbutton.name + "=1";
+    }
+    return true;
+    }
+    else
+    {
+    fret = confirm(buttonwarning);
+    buttonwarning='';
+    if (fret && submitbutton)
+    document.formular.action += "&" + submitbutton.name + "=1";
+    if (!fret && submitbutton)
+    {
+    DisableOtherButtons (submitbutton,false);
+    submitbutton.disabled=false;
+    if (enableimage.length>0)
+    submitbutton.src=enableimage;
+    if (enablestyle.length>0)
+    submitbutton.className=enablestyle;
+    submitbutton=null;
+    enableimage='';
+    enablestyle='';
+    }
+    return fret;
+    }
+    }
+</script>
+<form name="formular" prname="user" method=Post action="eb.exe?cfgs=..%2Fcfgs%2Fdocops.cfg&p=form&adddata=" autocomplete="off" onSubmit="return CallAllCpfs ();">
+<input type="hidden" name="MaskName" value="freattr">
+<input type="hidden" name="fileid" value="fca2f6d04-7821-11e1-86e6-f0c99bbca093">
+<input type="hidden" name="eblanguage" id="eblanguage" value="1">
+<table class="FormMainTable">
+<tr><td class="FormHeaderTD">
+      <span class="FormHeader">
+<img src="../images/d_reattr.gif" border="0" align="absmiddle" style="background-color:white">
+      &nbsp;Dokument reattributieren
+</span></td></tr>
+<tr><td>
+    <table class="FormFieldTable" style="width:700px">
+        <input type="hidden" name="filenameorg" value="">
+        <tr ><td class="FormLabelTD">
+            <span class="MandatoryField">*</span><span class="FormLabel">Dokumenttyp</span>
+        </td>
+            <td class="FormFieldTD">
+                <input type="hidden" name="numberfield3"  value="6">
+                <table cellpadding="0" cellspacing="0" border="0"><tr><td>
+                    <input type="text" size=20 maxlength=100 name="numberfield3short"  value="Brief"
+
+                           class="FormFieldStyle"
+                           onFocus="CheckAndOutputError()" onChange="document.formular.numberfield3.value='';if (!CheckSynonymIFrame('numberfield3',42,0,'','',true))  return;;CallAjax ('eb.exe?cfgs=../cfgs/searchall.cfg&p=list&MaskName=ldoctypes1&attrclass_old=3&docclasses=1&folderid=10&doctypename=','encodeMe(document.formular.numberfield3short.value)',42,'rowset','internal');">
+                </td><td><a href="javascript:PopUpSynonym('numberfield3',42,'');"
+                            onClick="document.formular.synonymstatus42.value=0; CheckAndOpenSynonymIFrame('numberfield3',42,'eb.exe?cfgs=../cfgs/searchall.cfg&p=d&MaskName=ddoctype&attrclass_old=3&docclasses=1&folderid=10&doctypename=',0,'','');">
+                    <img src="../images/expand.gif" name="numberfield3image" class="ButtonsStyle"></a>
+                </td><td><input type="text" size="49" maxlength="150" name="numberfield3long"  value="Schriftverkehr - Brief"
+                                class="FormFieldStyle" disabled>
+                </td></tr></table>
+                <div id="numberfield3d" style="position:absolute;top:0;left:0;visibility:hidden;z-index:100">
+                    <iframe name="numberfield3i" width="520" height="470" align="left" frameborder="1" style="display:none"> nix iframe</iframe>
+                </div>
+                <input type="hidden" name="numberfield3On" value=0>
+                <input type="hidden" name="synonymstatus42" value=0>
+                <script language='JavaScript'>
+                    numberfield3E=new Image();
+                    numberfield3S=new Image();
+                    numberfield3E.src="../images/expand.gif";
+                    numberfield3S.src="../images/expand.gif";
+                </script>
+            </td>
+        </tr>
+        <tr ><td class="FormLabelTD">
+            <span class="MandatoryField">*</span><span class="FormLabel">Attributklasse</span>
+        </td>
+            <td class="FormFieldTD">
+                <span class="FormFieldStyle"> Standardattribute mit Status </span>
+                <input type="hidden" name="attrclass" value="Standardattribute mit Status(3)">
+            </td>
+        </tr>
+        <tr ><td class="FormLabelTD">
+            <span class="MandatoryField">*</span><span class="FormLabel">Dokumentklasse&nbsp;&nbsp;&nbsp;</span>
+        </td>
+            <td class="FormFieldTD">
+                <select name='docclass'
+                        class="FormFieldStyle" style="width:468px;"
+                        onFocus="CheckAndOutputError()"
+                        onChange="" size=1>
+                    <option  selected  value="Versionsdokument(1)">Versionsdokument </option>
+                </select>
+            </td>
+        </tr>
+        <tr ><td class="FormLabelTD">
+            <span class="MandatoryField">*</span><span class="FormLabel">Referenz auf</span>
+        </td>
+            <td class="FormFieldTD">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            <input type=radio name='storemode1' checked value='Zu scannendes Dokument(3)'
+                                   onFocus="CheckAndOutputError()"
+                                   Disabled style="vertical-align:middle">
+                            <span class="FormFieldStyle" style="vertical-align:middle" nowrap>Zu scannendes Dokument</span>
+                        </td>
+                        <td>
+                            <input type=radio name='storemode1' value='Sonstiger Ablageort(0)'
+                                   onFocus="CheckAndOutputError()"
+                                   Disabled style="vertical-align:middle">
+                            <span class="FormFieldStyle" style="vertical-align:middle" nowrap>Sonstiger Ablageort</span>
+                        </td></tr>
+                    <tr>
+                        <td>
+                            <input type=radio name='storemode1' value='Web-Seite (URL)(2)'
+                                   onFocus="CheckAndOutputError()"
+                                   Disabled style="vertical-align:middle">
+                            <span class="FormFieldStyle" style="vertical-align:middle" nowrap>Web-Seite (URL)</span>
+                        </td>
+                        <td>
+                            <input type=radio name='storemode1' value='Datei (UNC-Pfad)(1)'
+                                   onFocus="CheckAndOutputError()"
+                                   Disabled style="vertical-align:middle">
+                            <span class="FormFieldStyle" style="vertical-align:middle" nowrap>Datei (UNC-Pfad)</span>
+                        </td></tr>
+                </table>
+            </td>
+        </tr>
+        <input type="hidden" name="hint" value="">
+        <tr ><td width=130px>
+            <span class="MandatoryField">*</span><span class="FormLabel">Titel</span>
+        </td>
+            <td class="FormFieldTD">
+                <input type="text" size=75 maxlength=150 name="title"
+                       value="Blabla"
+                       class="FormFieldStyle"
+                       onFocus="CheckAndOutputError()">
+            </td>
+        </tr>
+        <tr ><td class="FormLabelTD">
+            <span class="FormLabel">Dateiname</span>
+        </td>
+            <td class="FormFieldTD">
+                <input type="hidden" name="filename" value="">
+                <span class="FormFieldStyle">  </span>
+            </td>
+        </tr>
+    </table></td></tr>
+<tr><td><table class="FormFieldTable" style="width:700px">
+    <tr ><td width=130px>
+        <span class="FormLabel">Eingestellt</span>
+    </td>
+        <td width=120px>
+            <input type="hidden" name="createdat" value="27.03.2012 17:30">
+            <span class="FormFieldStyle"> 27.03.2012 17:30 </span>
+        </td>
+        <td width=40px>
+            <span class="FormLabel">von</span>
+        </td>
+        <td class="FormFieldTD">
+            <span class="FormFieldStyle"> Grombach, Karsten </span>
+            <input type="hidden" name="createdby" value="Grombach, Karsten(grombach)">
+        </td>
+    </tr>
+    <tr ><td class="FormLabelTD">
+        <span class="FormLabel">GeÃ¤ndert am</span>
+    </td>
+        <td class="FormFieldTD">
+            <input type="hidden" name="lastmodifiedat" value="27.03.2012 17:30">
+            <span class="FormFieldStyle"> 27.03.2012 17:30 </span>
+        </td>
+        <td class="FormLabelTD">
+            <span class="FormLabel">von</span>
+        </td>
+        <td class="FormFieldTD">
+            <span class="FormFieldStyle"> Grombach, Karsten </span>
+            <input type="hidden" name="lastmodifiedby" value="Grombach, Karsten(grombach)">
+        </td>
+    </tr>
+</table></td></tr>
+<tr><td><table class="FormFieldTable" style="width:700px">
+    <tr ><td width=130px>
+        <span class="FormLabel">Ausgecheckt von&nbsp;&nbsp;</span>
+    </td>
+        <td class="FormFieldTD">
+            <span class="FormFieldStyle">  </span>
+            <input type="hidden" name="checkedoutby" value="">
+        </td>
+    </tr>
+    <tr ><td width=130px>
+        <span class="FormLabel">VerknÃ¼pfungen</span>
+    </td>
+        <td class="FormFieldTD">
+            <input type="hidden" name="links" value="">
+            <span class="FormFieldStyle">  </span>
+        </td>
+    </tr>
+    <input type="hidden" name="circulars" value="">
+    <input type="hidden" name="hint21" value="">
+    <tr ><td class="FormLabelTD">
+        <span class="FormLabel">Autor</span>
+    </td>
+        <td class="FormFieldTD">
+            <nobr><input type=text size='20' maxlength=50 name='authoredit'
+                         onKeyup="AutoCheckOption(document.formular.author.name, false,event)"
+
+                         class="FormFieldStyle"
+                         onFocus="CheckAndOutputError()">
+                <select name='author'
+                        class="FormFieldStyle" style="width:325px;"
+                        onFocus="CheckAndOutputError()" size=1>
+                    <option  value="Ehring, Thomas">Ehring, Thomas </option>
+                    <option  selected  value="Grombach, Karsten">Grombach, Karsten </option>
+                    <option  value="Install, User">Install, User </option>
+                    <option  value="Klinker, Monika">Klinker, Monika </option>
+                    <option  value="Macht, Werner">Macht, Werner </option>
+                    <option  value="mii, Gast">mii, Gast </option>
+                    <option  value="System, Administrator">System, Administrator </option>
+                </select>
+            </nobr>
+        </td>
+    </tr>
+    <tr ><td width="130px">
+        <span class="FormLabel">Kommentar</span>
+    </td>
+        <td class="FormFieldTD">
+            <textarea name="pcomment" rows=2 cols=74 wrap=virtual
+                      class="StyleTextArea"
+                      onBlur="document.formular.message.value=cpfmaxlen(this,'maxlen=1000 execute=exitfield name=Kommentar');document.formular.messageobject.value=this.name"
+                      onFocus="CheckAndOutputError()"></textarea>
+        </td>
+    </tr>
+</table></td></tr>
+<tr><td><table class="FormFieldTable" style="width:700px">
+    <tr >  <td width="130px"><span class="FormLabel">Branchen</span>
+    </td>
+        <td class="FormFieldTD"><input type="hidden" name="treecode" value="">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr><td>
+                    <select name="treecodelist" size=3 multiple
+                            class="FormFieldStyle" style="width:468px;"
+                            onChange="HandleListChange(document.formular.treecode.name)"
+                            onBlur="document.formular.message.value=cpftreecode(this,'execute=exitfield');document.formular.messageobject.value=this.name"
+                            onFocus="CheckAndOutputError()">
+                    </select>
+                </td>
+                    <td height="100%">
+                        <table border="0" cellspacing="0" cellpadding="0" height="100%">
+                            <tr height="100%"><td height="100%" style="vertical-align:top">
+
+                                <a  class="FormFieldStyle"
+                                    href="javascript:HandleInputClickURLP3(document.formular.treecode.name,26,'width=220,height=280,resizeable=yes','eb.exe?cfgs=../cfgs/searchall.cfg&p=form&MaskName=fsearchtreecodes','')">
+                                    <img src="../images/expand.gif" name="treecodeimage" border="0"></a>
+                                <div id="treecoded" style="position:absolute;top:0;left:0;visibility:hidden;z-index:100">
+                                    <iframe name="treecodei" width="500" height="400" align="left" frameborder="1"
+                                            style="display:none">
+                                        nix iframe
+                                    </iframe>
+                                </div>
+                                <script language='JavaScript'>
+                                    treecodeE=new Image();
+                                    treecodeS=new Image();
+                                    treecodeT=new Image();
+                                    treecodeE.src="../images/expand.gif";
+                                    treecodeS.src="../images/shrink.gif";
+                                    treecodeT.src="../images/take.gif";
+                                </script>
+                            </td></tr>
+                            <tr height="100%">
+                                <td height="100%" style="vertical-align:bottom">
+                                    <a href="javascript:HandleDeleteClick(document.formular.treecode.name)">
+                                        <img src="../images/edeleted.gif" border="0"></a>
+                                </td></tr></table>
+                    </td></tr></table>
+        </td>
+    </tr>
+    <tr ><td width="130px">
+        <span class="FormLabel">GeschÃ¤ftsbereich</span>
+    </td>
+        <td class="FormFieldTD">
+            <select name='businessarea'
+                    class="FormFieldStyle" style="width:468px;"
+                    onFocus="CheckAndOutputError()" size=1>
+                <option  value=""> </option>
+                <option  value="Zentrale Dienste(1)">Zentrale Dienste </option>
+                <option  value="Leitung(2)">Leitung </option>
+                <option  value="Marketing(3)">Marketing </option>
+                <option  value="Vertrieb(4)">Vertrieb </option>
+                <option  value="Entwicklung(5)">Entwicklung </option>
+            </select>
+        </td>
+    </tr>
+    <tr ><td class="FormLabelTD">
+        <span class="FormLabel">Infotyp</span>
+    </td>
+        <td class="FormFieldTD">
+            <select name='infotype'
+                    class="FormFieldStyle" style="width:468px;"
+                    onFocus="CheckAndOutputError()" size=1>
+                <option  value=""> </option>
+                <option  value="Artikel(18)">Artikel </option>
+                <option  value="Basics(25)">Basics </option>
+                <option  value="Bericht(3)">Bericht </option>
+                <option  value="Betriebsvereinbarung(19)">Betriebsvereinbarung </option>
+                <option  value="Branchenstudie(10)">Branchenstudie </option>
+                <option  value="CD-ROM(14)">CD-ROM </option>
+                <option  value="Dienstanweisung(6)">Dienstanweisung </option>
+                <option  value="Fachbuch(12)">Fachbuch </option>
+                <option  value="FÃ¶rderprogramm(9)">FÃ¶rderprogramm </option>
+                <option  value="Formular(5)">Formular </option>
+                <option  value="GeschÃ¤ftsbericht(11)">GeschÃ¤ftsbericht </option>
+                <option  value="GeschÃ¤ftsbrief(16)">GeschÃ¤ftsbrief </option>
+                <option  value="Interna(26)">Interna </option>
+                <option  value="Newsletter(21)">Newsletter </option>
+                <option  value="Pressemitteillung(20)">Pressemitteillung </option>
+                <option  value="Recherche(4)">Recherche </option>
+                <option  value="Seminarunterlagen(8)">Seminarunterlagen </option>
+                <option  selected  value="Standard(15)">Standard </option>
+                <option  value="Statistik(23)">Statistik </option>
+                <option  value="Streng Vertraulich(27)">Streng Vertraulich </option>
+                <option  value="Termine(24)">Termine </option>
+                <option  value="Vermerk(17)">Vermerk </option>
+                <option  value="Vertrag(2)">Vertrag </option>
+                <option  value="Vorlage(1)">Vorlage </option>
+                <option  value="Zeitschrift/Zeitung(13)">Zeitschrift/Zeitung </option>
+            </select>
+        </td>
+    </tr>
+    <tr >  <td class="FormLabelTD"><span class="FormLabel">Schlagworte</span>
+    </td>
+        <td class="FormFieldTD">
+            <nobr>
+                <input type="text" name="keywordstext" size=75 maxlength=40
+                       class="FormFieldStyle"
+
+                       onBlur="if (this.value.length > 0 ) CallAjax ('eb.exe?cfgs=../cfgs/folderops.cfg&p=list&MaskName=lcheckkeywords&keyword_de=','encodeMe(document.formular.keywordstext.value)',29,'rowset','internal');"
+                       onFocus="CheckAndOutputError()"
+                       onKeypress="if (this.value.length > 0) return Check4EnterIfAjax (event);" >
+                <a id="keywordsslink"  class="ButtonsStyle"
+                   href="javascript:HandleInputClickURLP(document.formular.keywords.name,29,'width=220,height=280,resizeable=yes','eb.exe?cfgs=../cfgs/folderops.cfg&p=d&MaskName=dgetkeywords&keyword_de='+encodeMe(document.formular.keywordstext.value),'',false)"
+                   onClick="if (ajaxrunning == 1 && receiver == 29) receiver = -1;">
+                    <img src="../images/expand.gif" name="keywordsimage" border="0"></a>
+                <div id="keywordsd" style="position:absolute;top:0;left:0;visibility:hidden;z-index:100">
+                    <iframe name="keywordsi" width="520" height="400" align="left" frameborder="1"
+                            style="display:none" src="../html/blank.html">
+                        nix iframe
+                    </iframe>
+                </div>
+
+                <a id="keywordstake"   class="ButtonsStyle"
+                   onClick="selecteditfield=true;">
+                    <img src="../images/take.gif" border="0"></a>
+                <script language='JavaScript'>
+                    keywordsE=new Image();
+                    keywordsS=new Image();
+                    keywordsT=new Image();
+                    keywordsE.src="../images/expand.gif";
+                    keywordsS.src="../images/shrink.gif";
+                    keywordsT.src="../images/take.gif";
+                </script>
+            </nobr>
+            <br>
+            <input type="hidden" name="keywords" value="">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr><td>
+                    <select name="keywordslist" size=5 multiple
+                            class="FormFieldStyle" style="width:468px;"
+                            onChange="HandleListChange(document.formular.keywords.name)"
+                            onFocus="CheckAndOutputError()">
+                    </select>
+                </td>
+                    <td height="100%" style="vertical-align:bottom">
+                        <a href="javascript:HandleDeleteClick(document.formular.keywords.name)">
+                            <img src="../images/edeleted.gif" border="0"></a>
+                    </td></tr></table>
+        </td>
+    </tr>
+    <tr ><td class="FormLabelTD">
+        <span class="MandatoryField">*</span><span class="FormLabel">Status</span>
+    </td>
+        <td class="FormFieldTD">
+            <select name='pstatus'
+                    class="FormFieldStyle" style="width:468px;"
+                    onFocus="CheckAndOutputError()" size=1>
+                <option  value=""> </option>
+                <option  value="im Aufbau(1)">im Aufbau </option>
+                <option  value="im Test(2)">im Test </option>
+                <option  value="im Probeeinsatz(3)">im Probeeinsatz </option>
+                <option  value="zum Einsatz freigegeben(4)">zum Einsatz freigegeben </option>
+                <option  value="auÃŸer Gebrauch(5)">auÃŸer Gebrauch </option>
+            </select>
+        </td>
+    </tr>
+    <tr ><td class="FormLabelTD">
+        <span class="FormLabel">GÃ¼ltig bis</span>
+    </td>
+        <td class="FormFieldTD">
+            <nobr><input type="text" size=10 maxlength=10 name="validdate"
+                         value="06.04.2012"
+                         class="FormFieldStyle"
+                         onBlur="document.formular.message.value=to_date(this,'dd#.#mm#.#yyyy');document.formular.messageobject.value=this.name"
+                         onFocus="CheckAndOutputError()"
+                         readonly>
+                <select name='validscope'
+                        class="FormFieldStyle" style="width:115px;"
+                        onFocus="CheckAndOutputError()"
+                        onChange="cpfSetValidDate(this,'validdate')" size=1>
+                    <option  value="10 Tage(10)">10 Tage </option>
+                    <option  value="1 Monat(30)">1 Monat </option>
+                    <option  value="1,5 Jahre(547)">1,5 Jahre </option>
+                    <option  value="6 Jahre(2190)">6 Jahre </option>
+                    <option  selected  value="unbegrenzt(0)">unbegrenzt </option>
+                </select>
+            </nobr></td>
+    </tr>
+    <tr ><td class="FormLabelTD">
+        <span class="FormLabel">danach</span>
+    </td>
+        <td class="FormFieldTD">
+            <select name='validmode'
+                    class="FormFieldStyle" style="width:200px;"
+                    onFocus="CheckAndOutputError()" size=1>
+                <option  value="LÃ¶schen(0)">LÃ¶schen </option>
+                <option  value="auf Wiedervorlage(1)">auf Wiedervorlage </option>
+                <option  selected  value=""> </option>
+            </select>
+        </td>
+    </tr>
+    <input type="hidden" name="nextmask" value="">
+    <input type="hidden" name="changeurl" value="eb.exe?cfgs=../cfgs/docops.cfg&p=form&MaskName=freattr&fileid=fca2f6d04-7821-11e1-86e6-f0c99bbca093&changed=1">
+</table>
+</td></tr>
+</table>
+<input type=submit name=button0 value="Dokument reattributieren" onClick="submitbutton=this;submitblocked=this.name" class="ButtonsStyle">
+<input type=hidden name=button0command value='change;((EBWildcardTrigger18;|[[EBLocalVariable7]]EB))EBeb.exe?cfgs=../cfgs/docops.cfg&p=statusline&MaskName=slreattrok&fileid=((EBPQValuefileid=text))EB'>
+<input type=button name=button1 value="Abbrechen" onClick="window.parent.ShowFrame(1,2)" class="ButtonsStyle">
+<script language="JavaScript">
+    var buttons2disable = new Array ('button0','button1');
+    var disableimages = new Array ('','');
+    var disablestyles = new Array ('','');
+</script>
+<script language="JavaScript">
+    var otherbuttons2disable = new Array ('button0','button1');
+    var otherdisableimages = new Array ('','');
+    var otherdisablestyles = new Array ('','');
+</script>
+<input type=hidden name=message value="">
+<input type=hidden name=messageobject value="">
+</form>
+</body></html>

@@ -47,7 +47,6 @@ Ext.define('Macros.controller.fileController', {
     getFolderFiles:function(folderId, title){
 
         var idKey= 'dmsfolder'+folderId;
-
         var tabPanel = Ext.getCmp('maintabs');
         var tabIndex = tabPanel.items.findIndex("key",idKey);
         var view;
@@ -82,7 +81,7 @@ Ext.define('Macros.controller.fileController', {
         }
         else
         {
-            view = Ext.widget('fileattributes',{title:title});
+            view = Ext.widget('fileattributes',{title:title, fileid: this.currentFile.data.fileid});
 
             tabPanel.add(view);
         }
@@ -102,7 +101,7 @@ Ext.define('Macros.controller.fileController', {
         }
         else
         {
-            view = Ext.widget('fileeditattributes',{title:title});
+            view = Ext.widget('fileeditattributes',{title:title, fileid: this.currentFile.data.fileid});
 
             tabPanel.add(view);
         }

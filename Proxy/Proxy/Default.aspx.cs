@@ -11,8 +11,12 @@ using Macros.Common;
 
 namespace Proxy
 {
-    public partial class _Default : ProxyBasePage
+    public partial class _Default : System.Web.UI.Page
     {
+        public void Page_Load(object sender, EventArgs e)
+        {
+            ProxyBasePage.Page_Load(sender,e);
+        }
         
     }
 

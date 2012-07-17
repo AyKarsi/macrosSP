@@ -54,7 +54,9 @@
     <Compile Include="Class1.cs" />
     <Compile Include="MacrosController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyBasePage.cs" />
+    <Compile Include="ProxyBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="key.snk" />
