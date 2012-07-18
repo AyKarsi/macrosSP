@@ -44,6 +44,19 @@ Ext.define('Ext.ux.SimpleIFrame', {
     initComponent: function(){
         this.updateHTML();
         this.callParent(arguments);
+
+    },
+    afterLayout:function() {
+        //alert("afterRender");
+
+        //var iframe = this.getDocument();
+        ///debugger;
+        $("#iframe-"+this.id).load(function() {
+          //alert("the iframe is being loaded..");
+          this.onFrameContentChange();
+        });
+
+
     },
     updateHTML: function() {
         this.html='<iframe id="iframe-'+this.id+'"'+
@@ -52,8 +65,14 @@ Ext.define('Ext.ux.SimpleIFrame', {
             ' src="'+this.src+'"'+
             '></iframe>';
     },
+    onFrameContentChange:function() {
+
+        alert("onFrameContentChange");
+    },
     reload: function() {
         this.setSrc(this.src);
+
+
     },
     reset: function() {
         var iframe=this.getDOM();

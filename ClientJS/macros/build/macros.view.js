@@ -2,13 +2,14 @@ Ext.define('Macros.view.file.attributes' ,{
     extend: 'Ext.ux.SimpleIFrame',
     alias : 'widget.fileattributes',
     title : 'File Attributes',
+    fileid: '',
     closable:true,
 
 
     initComponent: function() {
 
-        var fileId = 'f522f5d02-6f71-11e1-86e6-f0c99bbca093';
-        var url = proxyUrl+'?entity=getfileattr&id='+ fileId;
+        //var fileId = 'f522f5d02-6f71-11e1-86e6-f0c99bbca093';
+        var url = proxyUrl+'?entity=getfileattr&id='+ this.fileid;
         this.src = url;
 
         this.callParent(arguments);
@@ -28,13 +29,16 @@ Ext.define('Macros.view.file.attributes' ,{
     alias : 'widget.fileeditattributes',
     title : 'Edit File Attributes',
     closable:true,
+    fileid:'',
 
 
     initComponent: function() {
 
         var fileId = 'f522f5d02-6f71-11e1-86e6-f0c99bbca093';
-        var url = proxyUrl+'?entity=editfileattr&id='+ fileId;
-        this.src = url;
+        var url = proxyUrl+'?entity=editfileattr&id='+ this.fileid;
+        //this.src = url;
+        this.src = macrosExeServerUrl + "eb.exe?cfgs=../cfgs/docops.cfg&p=form&MaskName=freattr&fileid={0}&adddata=&docclass=1&attrclass=3";
+        this.src = this.src.replace("{0}", this.fileid);
 
         this.callParent(arguments);
         this.reload();
@@ -60,7 +64,8 @@ Ext.define('Macros.view.file.attributes' ,{
 
         this.columns = [
             {header: 'title',  dataIndex: 'title',  flex: 1},
-            {header: 'author', dataIndex: 'author', flex: 1}
+            {header: 'author', dataIndex: 'author', flex: 1},
+            {header: 'fileid', dataIndex: 'fileid', flex: 1}
         ];
         this.callParent(arguments);
     }
@@ -69,33 +74,41 @@ Ext.define('Macros.view.file.attributes' ,{
     alias : 'widget.foldertree',
     title : 'All Users',
     store: 'foldertreeStore',
-    model: 'foldertreeModel'
+    model: 'foldertreeModel',
 
- /*   initComponent: function() {
+    initComponent: function() {
 
-        this.columns = [
-            {header: 'Name',  dataIndex: 'name',  flex: 1},
-            {header: 'Email', dataIndex: 'email', flex: 1}
-        ];
+       //this.on("itemclick", this.itemclick);
+
         this.callParent(arguments);
+    },
+
+   itemclick:function(node,opts){
+    //debugger;
+       var id = opts.data.id;
+       this.store.loadChildren(id);
+       alert("expand "+node.id);
     }
-    */
 });Ext.define('Macros.view.folder.tree' ,{
     extend: 'Ext.tree.Panel',
     alias : 'widget.foldertree',
     title : 'All Users',
     store: 'foldertreeStore',
-    model: 'foldertreeModel'
+    model: 'foldertreeModel',
 
- /*   initComponent: function() {
+    initComponent: function() {
 
-        this.columns = [
-            {header: 'Name',  dataIndex: 'name',  flex: 1},
-            {header: 'Email', dataIndex: 'email', flex: 1}
-        ];
+       //this.on("itemclick", this.itemclick);
+
         this.callParent(arguments);
+    },
+
+   itemclick:function(node,opts){
+    //debugger;
+       var id = opts.data.id;
+       this.store.loadChildren(id);
+       alert("expand "+node.id);
     }
-    */
 });Ext.define('Macros.view.main.tabPanel' ,{
     extend: 'Ext.tab.Panel',
     alias : 'widget.tabs'

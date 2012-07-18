@@ -182,7 +182,7 @@ namespace Macros.Common
             //    {
             //        HtmlAttribute att = form.Attributes["action"];
             //        if (att != null)
-                        att.Value = ServerUrl + "/edms/exe/" + att.Value;
+                       // att.Value = ServerUrl + "/edms/exe/" + att.Value;
 
             //        var idAttr = form.Attributes["id"];
             //        if (idAttr == null)
@@ -230,7 +230,16 @@ namespace Macros.Common
 
 
         }
+        public static void GetFolderTree(string folderId)
+        {
 
+            string remoteUrl = MarcosServerUri.ToString() +
+                               "edms/exe/eb.exe?cfgs=../cfgs/dmsfolders.cfg&p=list&MaskName=lfoldersxml&folderid={0}";
+            remoteUrl = String.Format(remoteUrl, folderId);
+            GetUrl(remoteUrl);
+
+
+        }
 
 
 

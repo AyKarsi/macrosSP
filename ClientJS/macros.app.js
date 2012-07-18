@@ -1,4 +1,5 @@
 var proxyUrl  = "http://localhost:88/Proxy/Default.aspx";
+var macrosExeServerUrl = "http://wega.mi-m.de/edms/exe/";
 var isInSharePoint = false;
 
 Ext.Loader.setConfig({enabled:true});
@@ -43,24 +44,33 @@ Ext.application({
     ],
     mainPanel:null,
     launch: function() {
+        // alert(Ext.get('s4-ribbonrow').getViewSize().height);
+        var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
+        ribbonHeight += Ext.get('ribbon').getViewSize().height;
+
         this.mainPanel= Ext.create('Ext.panel.Panel', {
             id:"macrosPanel",
             renderTo:'macrosarea',
-            height:Ext.getBody().getViewSize().height - Ext.get('s4-ribbonrow').getViewSize().height ,
+            height:Ext.getBody().getViewSize().height - ribbonHeight ,
             layout: {
                 type: 'border',
                 align: 'left'
             },
+            adjustHeight: function() {
+                var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
+                ribbonHeight += Ext.get('ribbon').getViewSize().height;
+                this.height = Ext.getBody().getViewSize().height - ribbonHeight;
+            },
             items: [
                 {
                     xtype:'box',
-                    html:'Macros',
+                    html:'Macros DMS',
                     region:'north'
 
                 },
                 {
                     xtype:'foldertree',
-                    title:'folder',
+                    title:'',
                     flex:1,
                     region:'west',
                     layout: 'fit',
@@ -95,6 +105,11 @@ Ext.application({
 
 
     ]
+});
+
+Ext.EventManager.onWindowResize(function () {
+    macrosApp.mainPanel.adjustHeight();
+    macrosApp.mainPanel.doLayout();
 });var SpRibbonBinding =
 {
 
@@ -212,6 +227,19 @@ Ext.define('Ext.ux.SimpleIFrame', {
     initComponent: function(){
         this.updateHTML();
         this.callParent(arguments);
+
+    },
+    afterLayout:function() {
+        //alert("afterRender");
+
+        //var iframe = this.getDocument();
+        ///debugger;
+        $("#iframe-"+this.id).load(function() {
+          //alert("the iframe is being loaded..");
+          this.onFrameContentChange();
+        });
+
+
     },
     updateHTML: function() {
         this.html='<iframe id="iframe-'+this.id+'"'+
@@ -220,8 +248,14 @@ Ext.define('Ext.ux.SimpleIFrame', {
             ' src="'+this.src+'"'+
             '></iframe>';
     },
+    onFrameContentChange:function() {
+
+        alert("onFrameContentChange");
+    },
     reload: function() {
         this.setSrc(this.src);
+
+
     },
     reset: function() {
         var iframe=this.getDOM();
@@ -290,13 +324,14 @@ Ext.define('Ext.ux.SimpleIFrame', {
     extend: 'Ext.ux.SimpleIFrame',
     alias : 'widget.fileattributes',
     title : 'File Attributes',
+    fileid: '',
     closable:true,
 
 
     initComponent: function() {
 
-        var fileId = 'f522f5d02-6f71-11e1-86e6-f0c99bbca093';
-        var url = proxyUrl+'?entity=getfileattr&id='+ fileId;
+        //var fileId = 'f522f5d02-6f71-11e1-86e6-f0c99bbca093';
+        var url = proxyUrl+'?entity=getfileattr&id='+ this.fileid;
         this.src = url;
 
         this.callParent(arguments);
@@ -316,13 +351,16 @@ Ext.define('Ext.ux.SimpleIFrame', {
     alias : 'widget.fileeditattributes',
     title : 'Edit File Attributes',
     closable:true,
+    fileid:'',
 
 
     initComponent: function() {
 
         var fileId = 'f522f5d02-6f71-11e1-86e6-f0c99bbca093';
-        var url = proxyUrl+'?entity=editfileattr&id='+ fileId;
-        this.src = url;
+        var url = proxyUrl+'?entity=editfileattr&id='+ this.fileid;
+        //this.src = url;
+        this.src = macrosExeServerUrl + "eb.exe?cfgs=../cfgs/docops.cfg&p=form&MaskName=freattr&fileid={0}&adddata=&docclass=1&attrclass=3";
+        this.src = this.src.replace("{0}", this.fileid);
 
         this.callParent(arguments);
         this.reload();
@@ -348,7 +386,8 @@ Ext.define('Ext.ux.SimpleIFrame', {
 
         this.columns = [
             {header: 'title',  dataIndex: 'title',  flex: 1},
-            {header: 'author', dataIndex: 'author', flex: 1}
+            {header: 'author', dataIndex: 'author', flex: 1},
+            {header: 'fileid', dataIndex: 'fileid', flex: 1}
         ];
         this.callParent(arguments);
     }
@@ -357,33 +396,41 @@ Ext.define('Ext.ux.SimpleIFrame', {
     alias : 'widget.foldertree',
     title : 'All Users',
     store: 'foldertreeStore',
-    model: 'foldertreeModel'
+    model: 'foldertreeModel',
 
- /*   initComponent: function() {
+    initComponent: function() {
 
-        this.columns = [
-            {header: 'Name',  dataIndex: 'name',  flex: 1},
-            {header: 'Email', dataIndex: 'email', flex: 1}
-        ];
+       //this.on("itemclick", this.itemclick);
+
         this.callParent(arguments);
+    },
+
+   itemclick:function(node,opts){
+    //debugger;
+       var id = opts.data.id;
+       this.store.loadChildren(id);
+       alert("expand "+node.id);
     }
-    */
 });Ext.define('Macros.view.folder.tree' ,{
     extend: 'Ext.tree.Panel',
     alias : 'widget.foldertree',
     title : 'All Users',
     store: 'foldertreeStore',
-    model: 'foldertreeModel'
+    model: 'foldertreeModel',
 
- /*   initComponent: function() {
+    initComponent: function() {
 
-        this.columns = [
-            {header: 'Name',  dataIndex: 'name',  flex: 1},
-            {header: 'Email', dataIndex: 'email', flex: 1}
-        ];
+       //this.on("itemclick", this.itemclick);
+
         this.callParent(arguments);
+    },
+
+   itemclick:function(node,opts){
+    //debugger;
+       var id = opts.data.id;
+       this.store.loadChildren(id);
+       alert("expand "+node.id);
     }
-    */
 });Ext.define('Macros.view.main.tabPanel' ,{
     extend: 'Ext.tab.Panel',
     alias : 'widget.tabs'
@@ -484,10 +531,68 @@ Ext.define('Ext.ux.SimpleIFrame', {
     }
 });Ext.define('Macros.model.fileModel', {
     extend: 'Ext.data.Model',
-    fields: ['title', 'author']
+    fields: ['title', 'author', 'fileid']
 
-});Ext.define('Macros.model.foldertreeModel', {
-    extend: 'Ext.data.Model',
+});
+
+/*
+<results>
+
+  <record>
+    <title>Eine Referenz in in Test</title>
+    <pcomment></pcomment>
+    <lastmodifiedat>28.03.2012 08:12</lastmodifiedat>
+    <createdat>28.03.2012 08:12</createdat>
+    <author>Ehring, Thomas</author>
+    <infotype>Standard</infotype>
+    <keywords></keywords>
+    <filename></filename>
+    <businessarea></businessarea>
+    <treecode></treecode>
+    <version_maj>0.1</version_maj>
+    <fileid>f0fef700c-789d-11e1-86e6-f0c99bbca093</fileid>
+    <objectdescription></objectdescription>
+    <documentnr></documentnr>
+    <remarks></remarks>
+    <pstatus>im Probeeinsatz</pstatus>
+    <docclass>Versionsdokument</docclass>
+    <attrclass>Objektverwaltung</attrclass>
+    <createdby>Grombach, Karsten</createdby>
+    <createdbyproxy></createdbyproxy>
+    <lastmodifiedby>Grombach, Karsten</lastmodifiedby>
+    <lastmodifiedbyproxy></lastmodifiedbyproxy>
+    <checkedoutby></checkedoutby>
+    <checkedoutbyproxy></checkedoutbyproxy>
+    <archivedat></archivedat>
+    <archivedby></archivedby>
+    <validdate>07.04.2012</validdate>
+    <validmode></validmode>
+    <numberfield1></numberfield1>
+    <numberfield2></numberfield2>
+    <numberfield3>Objektverwaltung</numberfield3>
+    <eurofield1></eurofield1>
+    <businesspartner></businesspartner>
+    <textfield1></textfield1>
+    <textfield2></textfield2>
+    <textfield3></textfield3>
+    <memofield1></memofield1>
+    <multifield1></multifield1>
+    <date1></date1>
+    <date2></date2>
+    <date3></date3>
+    <checkbox1></checkbox1>
+    <checkbox2></checkbox2>
+    <createdat2></createdat2>
+    <releasedat></releasedat>
+    <releasedby></releasedby>
+    <releasedbyproxy></releasedbyproxy>
+    <movedat></movedat>
+    <movedby></movedby>
+    <movedbyproxy></movedbyproxy>
+  </record>
+</results>
+*/Ext.define('Macros.model.foldertreeModel', {
+    extend: 'Ext.data.NodeInterface',
     fields: [
         { name: 'id', type: 'int', mapping: 'Id' },
         { name: 'text', type: 'string', mapping: 'Text' },
@@ -521,7 +626,58 @@ Ext.define('Ext.ux.SimpleIFrame', {
             record: 'record'
         }
     })
+});Ext.define('Macros.store.__foldertreeStore', {
+    extend: 'Ext.data.TreeStore',
+    model: 'Macros.model.foldertreeModel',
+    //entityid: "10",
+    autoLoad:false,
+    defaultRootId: "8",
+    root: {
+        expanded: true,
+        text: "Ordner",
+        id: "8",
+        leaf: false,
+        expanded:false
+    },
+         listeners: {
+
+                // Each demo.UserModel instance will be automatically
+                // decorated with methods/properties of Ext.data.NodeInterface
+                // (i.e., a "node"). Whenever a UserModel node is appended
+                // to the tree, this TreeStore will fire an "append" event.
+                append: function( thisNode, newChildNode, index, eOpts ) {
+                    alert("appending");
+                    debugger;
+                    // If the node that's being appended isn't a root node, then we can
+                    // assume it's one of our UserModel instances that's been "dressed
+                    // up" as a node
+                    if( !newChildNode.isRoot() ) {
+
+                    }
+                    else {
+                        //this.appendChild(newChildNode);
+                    }
+                }
+          }
+        ,
+/*
+    loadChildren: function(parentId){
+        this.proxy.url = proxyUrl+'?entity=foldertree&id='+parentId;
+        this.load();
+    },*/
+    proxy: new Ext.data.proxy.Ajax({
+        url:proxyUrl+'?entity=foldertree&id=8',
+        method:'get',
+        reader: {
+            type: 'xml',
+            rootProperty : 'results',
+            record: 'record',
+            idProperty: 'id'
+        }
+    })
 });
+
+
 Ext.define('Macros.store.foldertreeStore', {
     extend: 'Ext.data.TreeStore',
     //model:'Macros.model.foldertreeModel',
@@ -603,24 +759,14 @@ Ext.define('Macros.controller.fileController', {
         //view.down('form').loadRecord(record);
     },
 
-    openFile: function(){
-        var url = "http://wega.mi-m.de/edms/exe/miidoccgi.exe?getfile&dokid=d522f5d01%2D6f71%2D11e1%2D86e6%2Df0c99bbca093&arbeitsmittel=1";
-        try{
-            objAppl = GetObject("","Word.Application");
-            objAppl.Documents.open(url);
-        }
-        catch(exception){
-            objAppl = new ActiveXObject("Word.Application");
-            objAppl.Visible = true;
-            objAppl.Documents.open(url);
-        }
-        objAppl = null;
-        alert("openFile");
+    openFile: function(fileId){
+        var fileid = this.currentFile.data.fileid;
+        var url = macrosExeServerUrl + "miidoccgi.exe?getfile&dokid="+fileId+"&arbeitsmittel=1";
+        window.open(url,'Download');
     },
     getFolderFiles:function(folderId, title){
 
         var idKey= 'dmsfolder'+folderId;
-
         var tabPanel = Ext.getCmp('maintabs');
         var tabIndex = tabPanel.items.findIndex("key",idKey);
         var view;
@@ -655,7 +801,7 @@ Ext.define('Macros.controller.fileController', {
         }
         else
         {
-            view = Ext.widget('fileattributes',{title:title});
+            view = Ext.widget('fileattributes',{title:title, fileid: this.currentFile.data.fileid});
 
             tabPanel.add(view);
         }
@@ -675,7 +821,7 @@ Ext.define('Macros.controller.fileController', {
         }
         else
         {
-            view = Ext.widget('fileeditattributes',{title:title});
+            view = Ext.widget('fileeditattributes',{title:title, fileid: this.currentFile.data.fileid});
 
             tabPanel.add(view);
         }
@@ -701,6 +847,7 @@ Ext.define('Macros.controller.folderController', {
         'foldertreeModel'
     ],
     init: function() {
+
         this.control({
             'foldertree':
             {
@@ -726,6 +873,7 @@ Ext.define('Macros.controller.ribbonController', {
         if (isInSharePoint){
 
             SpRibbonBinding.toggle(ribbonGroupName);
+            return;
         }
 
         for(var i=0;i<this.ribbons.length;i++){

@@ -11,6 +11,7 @@ Ext.define('Macros.controller.folderController', {
         'foldertreeModel'
     ],
     init: function() {
+
         this.control({
             'foldertree':
             {

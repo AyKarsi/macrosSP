@@ -1,5 +1,5 @@
 Ext.define('Macros.model.foldertreeModel', {
-    extend: 'Ext.data.Model',
+    extend: 'Ext.data.NodeInterface',
     fields: [
         { name: 'id', type: 'int', mapping: 'Id' },
         { name: 'text', type: 'string', mapping: 'Text' },

@@ -30,24 +30,14 @@ Ext.define('Macros.controller.fileController', {
         //view.down('form').loadRecord(record);
     },
 
-    openFile: function(){
-        var url = "http://wega.mi-m.de/edms/exe/miidoccgi.exe?getfile&dokid=d522f5d01%2D6f71%2D11e1%2D86e6%2Df0c99bbca093&arbeitsmittel=1";
-        try{
-            objAppl = GetObject("","Word.Application");
-            objAppl.Documents.open(url);
-        }
-        catch(exception){
-            objAppl = new ActiveXObject("Word.Application");
-            objAppl.Visible = true;
-            objAppl.Documents.open(url);
-        }
-        objAppl = null;
-        alert("openFile");
+    openFile: function(fileId){
+        var fileid = this.currentFile.data.fileid;
+        var url = macrosExeServerUrl + "miidoccgi.exe?getfile&dokid="+fileId+"&arbeitsmittel=1";
+        window.open(url,'Download');
     },
     getFolderFiles:function(folderId, title){
 
         var idKey= 'dmsfolder'+folderId;
-
         var tabPanel = Ext.getCmp('maintabs');
         var tabIndex = tabPanel.items.findIndex("key",idKey);
         var view;
@@ -82,7 +72,7 @@ Ext.define('Macros.controller.fileController', {
         }
         else
         {
-            view = Ext.widget('fileattributes',{title:title});
+            view = Ext.widget('fileattributes',{title:title, fileid: this.currentFile.data.fileid});
 
             tabPanel.add(view);
         }
@@ -102,7 +92,7 @@ Ext.define('Macros.controller.fileController', {
         }
         else
         {
-            view = Ext.widget('fileeditattributes',{title:title});
+            view = Ext.widget('fileeditattributes',{title:title, fileid: this.currentFile.data.fileid});
 
             tabPanel.add(view);
         }
@@ -128,6 +118,7 @@ Ext.define('Macros.controller.folderController', {
         'foldertreeModel'
     ],
     init: function() {
+
         this.control({
             'foldertree':
             {
@@ -153,6 +144,7 @@ Ext.define('Macros.controller.ribbonController', {
         if (isInSharePoint){
 
             SpRibbonBinding.toggle(ribbonGroupName);
+            return;
         }
 
         for(var i=0;i<this.ribbons.length;i++){

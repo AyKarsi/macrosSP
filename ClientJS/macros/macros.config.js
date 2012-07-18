@@ -1,4 +1,5 @@
 var proxyUrl  = "http://localhost:88/Proxy/Default.aspx";
+var macrosExeServerUrl = "http://wega.mi-m.de/edms/exe/";
 var isInSharePoint = false;
 
 Ext.Loader.setConfig({enabled:true});

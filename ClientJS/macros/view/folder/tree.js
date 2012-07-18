@@ -3,15 +3,19 @@ Ext.define('Macros.view.folder.tree' ,{
     alias : 'widget.foldertree',
     title : 'All Users',
     store: 'foldertreeStore',
-    model: 'foldertreeModel'
+    model: 'foldertreeModel',
 
- /*   initComponent: function() {
+    initComponent: function() {
 
-        this.columns = [
-            {header: 'Name',  dataIndex: 'name',  flex: 1},
-            {header: 'Email', dataIndex: 'email', flex: 1}
-        ];
+       //this.on("itemclick", this.itemclick);
+
         this.callParent(arguments);
+    },
+
+   itemclick:function(node,opts){
+    //debugger;
+       var id = opts.data.id;
+       this.store.loadChildren(id);
+       alert("expand "+node.id);
     }
-    */
 });

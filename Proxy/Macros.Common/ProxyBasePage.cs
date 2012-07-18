@@ -27,6 +27,9 @@ namespace Macros.Common
                 case "folder":
                     MacrosController.GetFiles(id);
                     break;
+                case "foldertree":
+                    MacrosController.GetFolderTree(id);
+                    break;
                 case "getfileattr":
                     MacrosController.GetFileAttributes(id);
                     break;
