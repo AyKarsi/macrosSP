@@ -41,8 +41,17 @@ Ext.application({
     mainPanel:null,
     launch: function() {
         // alert(Ext.get('s4-ribbonrow').getViewSize().height);
-        var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
-        ribbonHeight += Ext.get('ribbon').getViewSize().height;
+
+        var adjustHeight = function(){
+            var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
+            var otherRibbon = Ext.get('ribbon');
+            if (otherRibbon != null)
+                ribbonHeight += otherRibbon.getViewSize().height;
+            return ribbonHeight;
+        };
+
+        var ribbonHeight = adjustHeight();
+
 
         this.mainPanel= Ext.create('Ext.panel.Panel', {
             id:"macrosPanel",
@@ -54,9 +63,11 @@ Ext.application({
             },
             adjustHeight: function() {
                 var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
-                ribbonHeight += Ext.get('ribbon').getViewSize().height;
-                this.height = Ext.getBody().getViewSize().height - ribbonHeight;
-            },
+                var otherRibbon = Ext.get('ribbon');
+                if (otherRibbon != null)
+                    ribbonHeight += otherRibbon.getViewSize().height;
+                this,ribbonHeight;
+                },
             items: [
                 {
                     xtype:'box',
@@ -104,6 +115,9 @@ Ext.application({
 });
 
 Ext.EventManager.onWindowResize(function () {
+
+    if (macrosApp.mainPanel == null)
+        return;
     macrosApp.mainPanel.adjustHeight();
     macrosApp.mainPanel.doLayout();
 });var SpRibbonBinding =

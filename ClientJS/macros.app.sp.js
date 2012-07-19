@@ -1,5 +1,6 @@
 var proxyUrl  = "http://46.137.82.174/sites/macros/_layouts/macros.proxy/Proxy.aspx";
 var isInSharePoint = true;
+var macrosExeServerUrl = "http://wega.mi-m.de/edms/exe/";
 Ext.Loader.setConfig({enabled:false});
 
 
@@ -39,8 +40,17 @@ Ext.application({
     mainPanel:null,
     launch: function() {
         // alert(Ext.get('s4-ribbonrow').getViewSize().height);
-        var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
-        ribbonHeight += Ext.get('ribbon').getViewSize().height;
+
+        var adjustHeight = function(){
+            var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
+            var otherRibbon = Ext.get('ribbon');
+            if (otherRibbon != null)
+                ribbonHeight += otherRibbon.getViewSize().height;
+            return ribbonHeight;
+        };
+
+        var ribbonHeight = adjustHeight();
+
 
         this.mainPanel= Ext.create('Ext.panel.Panel', {
             id:"macrosPanel",
@@ -52,9 +62,11 @@ Ext.application({
             },
             adjustHeight: function() {
                 var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
-                ribbonHeight += Ext.get('ribbon').getViewSize().height;
-                this.height = Ext.getBody().getViewSize().height - ribbonHeight;
-            },
+                var otherRibbon = Ext.get('ribbon');
+                if (otherRibbon != null)
+                    ribbonHeight += otherRibbon.getViewSize().height;
+                this,ribbonHeight;
+                },
             items: [
                 {
                     xtype:'box',
@@ -102,6 +114,9 @@ Ext.application({
 });
 
 Ext.EventManager.onWindowResize(function () {
+
+    if (macrosApp.mainPanel == null)
+        return;
     macrosApp.mainPanel.adjustHeight();
     macrosApp.mainPanel.doLayout();
 });var SpRibbonBinding =

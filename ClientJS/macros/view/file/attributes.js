@@ -14,14 +14,10 @@ Ext.define('Macros.view.file.attributes' ,{
 
         this.callParent(arguments);
         this.reload();
-
-
     },
 
     load:function()
     {
         var self = this;
-
-
-    }
+ }
 });
