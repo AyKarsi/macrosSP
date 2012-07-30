@@ -1,5 +1,15 @@
 Ext.define('Macros.controller.ribbonController', {
     extend: 'Ext.app.Controller',
+    initialized: false,
+    init:function(){
+        if (this.initialized)
+            return;
+        $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
+        this.initialized = true;
+
+        //$("[id^='Ribbon.Macros']").append("<li class='macrosLogo' style='float:right'><img src='https://macros-sp-dev.s3.amazonaws.com/MacrosSP/macrosLogo.gif' /></li>");
+
+    },
 
     toggle:function(ribbonGroupName, objectData){
 
@@ -16,6 +26,12 @@ Ext.define('Macros.controller.ribbonController', {
                 ribbon.show();
                 if (objectData != null)
                     ribbon.objectData = objectData;
+
+                if(ribbonGroupName == "file"){
+                    var fc = this.application.getController('fileController');
+                    ribbon.loadFileRibbonMenu(fc.currentFile.data.fileid);
+                }
+
             }
             else
                 ribbon.hide();
@@ -28,26 +44,16 @@ Ext.define('Macros.controller.ribbonController', {
 
     ribbons:[],
 
+
+
     clickSearch : function(){
+        //debugger;
+        //this.init();
         Ext.getCmp("macrosPanel").setVisible(true);
+        $("#s4-mainarea").hide();
     },
 
-    openFileAttributes: function() {
 
-        var ctrl = macrosApp.getController("fileController");
-        return ctrl.openFileAttributes();
-    },
-    editFileAttributes : function() {
-        var ctrl = macrosApp.getController("fileController");
-        return ctrl.editFileAttributes();
-
-    },
-
-    openFile: function() {
-        var ctrl = macrosApp.getController("fileController");
-        return ctrl.openFile();
-
-    },
 
     init: function() {
 
@@ -64,11 +70,16 @@ Ext.define('Macros.controller.ribbonController', {
                 {
                     xtype:'ribbonAction',
                     text: "Suchen",
-                    handler: this.clickSearch
+                    handler: this.clickSearch,
+                    spRibbonName : "Ribbon.MacrosFile",
+                    ribbonSelector : "Ribbon\\\\.MacrosFile"
                 }
             ]
-
         });
+
+
+
+
         this.ribbons.push(startRibbon);
 
         var folderRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
@@ -95,47 +106,13 @@ Ext.define('Macros.controller.ribbonController', {
 
         });
         this.ribbons.push(folderRibbon);
-        var fileRibbon = Ext.widget('ribbonGroup',{
-            //that: this,
-            renderTo:'ribbon',
-            id:'file',
-            items:[
-                {
-                    xtype:'ribbonAction',
-                    text: "Attribute anzeigen",
-                    ribbonGroup:fileRibbon,
-                    handler: this.openFileAttributes
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Document öffnen",
-                    ribbonGroup:fileRibbon,
-                    handler: this.openFile
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Reattributen",
-                    handler: this.editFileAttributes
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Weitlerleiten",
-                    handler: null
-                }
-            ]
 
-        });
-        this.ribbons.push(fileRibbon);
+        var docRibbon = Ext.create('Macros.view.ribbon.documentRibbon',{id:'file',renderTo:'ribbon'});
+        this.ribbons.push(docRibbon);
 
         this.toggle('start');
 
 
-     /*   this.control({
-            'list': {
-                itemdblclick: this.editFile
-            }
-        });
-        */
     }
 });
 

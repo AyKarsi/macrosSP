@@ -4,6 +4,9 @@ Ext.define('Macros.view.ribbon.ribbonAction', {
     text : "ClickMe",
     ribbonGroup: null,
     handler: null,
+    btn : function(){
+        return this.items.items[0];
+    },
     initComponent: function () {
         Ext.apply(this, {
                 items:[

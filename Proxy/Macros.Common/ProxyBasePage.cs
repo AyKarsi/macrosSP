@@ -16,6 +16,9 @@ namespace Macros.Common
             System.Net.ServicePointManager.Expect100Continue = false;
             string entity = HttpContext.Current.Request.QueryString["entity"];
             string id = HttpContext.Current.Request.QueryString["id"];
+            string node = HttpContext.Current.Request.QueryString["node"];
+
+            
 
             if (entity == null && id == null)
                 return;
@@ -24,11 +27,14 @@ namespace Macros.Common
 
             switch (entity)
             {
+                case "documentmenu":
+                    MacrosController.GetDocumentMenu(id);
+                    break;
                 case "folder":
                     MacrosController.GetFiles(id);
                     break;
                 case "foldertree":
-                    MacrosController.GetFolderTree(id);
+                    MacrosController.GetFolderTree(node);
                     break;
                 case "getfileattr":
                     MacrosController.GetFileAttributes(id);

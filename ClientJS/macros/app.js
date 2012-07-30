@@ -1,24 +1,13 @@
-
-
-
 Ext.onReady(function(){
 
 
 });
-
-
-
-
 $(document).ready(function(){
-
     $("#s4-mainarea").after("<div id='macrosarea'></div>");
-
 });
-
 
 var macrosApp = {};
 Ext.application({
-//var Macros = Ext.create('Ext.app.Application',{
     name: 'Macros',
     appFolder: '/macros',
     stores:[
@@ -67,7 +56,7 @@ Ext.application({
             items: [
                 {
                     xtype:'box',
-                    html:'Macros DMS',
+                    html:'<div style="padding-right:10px;font-size:18px; padding-top:10px;padding-bottom:10px;background-color:white">myDMS</div>',
                     region:'north'
 
                 },

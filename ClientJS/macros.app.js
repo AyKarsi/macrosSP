@@ -13,7 +13,7 @@ Ext.require('Macros.view.main.tabPanel');
 
 Ext.onReady(function(){
 
-
+    $("#s4-mainarea").after("<div id='macrosarea'></div>");
 });
 
 
@@ -21,13 +21,13 @@ Ext.onReady(function(){
 
 $(document).ready(function(){
 
-    $("#s4-mainarea").after("<div id='macrosarea'></div>");
 
-});
+
+
 
 
 var macrosApp = {};
-Ext.application({
+var macrosApp = Ext.application({
 //var Macros = Ext.create('Ext.app.Application',{
     name: 'Macros',
     appFolder: '/macros',
@@ -46,12 +46,17 @@ Ext.application({
     launch: function() {
         // alert(Ext.get('s4-ribbonrow').getViewSize().height);
 
+        // this reference is needed for the ribbonbindings
+        //macrosApp = this;
+        console.log("app initialized..");
+
+
         var adjustHeight = function(){
             var ribbonHeight = Ext.get('s4-ribbonrow').getViewSize().height;
             var otherRibbon = Ext.get('ribbon');
             if (otherRibbon != null)
                 ribbonHeight += otherRibbon.getViewSize().height;
-            return ribbonHeight;
+            return 150;
         };
 
         var ribbonHeight = adjustHeight();
@@ -70,12 +75,14 @@ Ext.application({
                 var otherRibbon = Ext.get('ribbon');
                 if (otherRibbon != null)
                     ribbonHeight += otherRibbon.getViewSize().height;
-                this,ribbonHeight;
+                ribbonHeight = 135;
+                this.height = Ext.getBody().getViewSize().height - ribbonHeight;
+                //this.height = $("body").height() - ribbonHeight +;
                 },
             items: [
                 {
                     xtype:'box',
-                    html:'Macros DMS',
+                    html:'<div style="padding-right:10px;font-size:18px; padding-top:10px;padding-bottom:10px;background-color:white">myDMS</div>',
                     region:'north'
 
                 },
@@ -103,8 +110,6 @@ Ext.application({
         });
 
         this.mainPanel.setVisible(false);
-        // this reference is needed for the ribbonbindings
-        macrosApp = this;
 
 
 
@@ -137,26 +142,39 @@ Ext.EventManager.onWindowResize(function () {
             return;
         $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
         this.initialized = true;
+
+        //$("[id^='Ribbon.Macros']").append("<li class='macrosLogo' style='float:right'><img src='https://macros-sp-dev.s3.amazonaws.com/MacrosSP/macrosLogo.gif' /></li>");
+
     },
 
     toggle: function(ribbonGroup){
 
         var spRibbonName;
+        var ribbonSelector;
         switch(ribbonGroup)       {
             case "file":
                 spRibbonName = "Ribbon.MacrosFile";
+                ribbonSelector = "Ribbon\\\\.MacrosFile";
                 break;
             case "folder":
                 spRibbonName = "Ribbon.MacrosFolder";
+                ribbonSelector = "Ribbon\\\\.MacrosFolder";
                 break;
             case "main":
                 spRibbonName = "Ribbon.MacrosMain";
+                ribbonSelector = "Ribbon\\\\.MacrosMain";
                 break;
         }
         if (spRibbonName)
             SelectRibbonTab(spRibbonName, true);
         else
             console.log("unkown ribbonGroup " + ribbonGroup);
+/*
+        if ($("[id='"+spRibbonName+"'] li.macrosLogo").length == 0) {
+            $("[id='"+spRibbonName+"']").append("<li class='macrosLogo' style='float:right'><li>lll</li>");
+        }
+*/
+
 
     },
 
@@ -350,16 +368,12 @@ Ext.define('Ext.ux.SimpleIFrame', {
 
         this.callParent(arguments);
         this.reload();
-
-
     },
 
     load:function()
     {
         var self = this;
-
-
-    }
+ }
 });Ext.define('Macros.view.file.editattributes' ,{
     extend: 'Ext.ux.SimpleIFrame',
     alias : 'widget.fileeditattributes',
@@ -399,8 +413,10 @@ Ext.define('Ext.ux.SimpleIFrame', {
     initComponent: function() {
 
         this.columns = [
-            {header: 'title',  dataIndex: 'title',  flex: 1},
-            {header: 'author', dataIndex: 'author', flex: 1},
+            {header: 'Titel',  dataIndex: 'title',  flex: 1},
+            {header: 'Geändert am', dataIndex: 'lastmodifiedat', flex: 1},
+            {header: 'Erstellt am am', dataIndex: 'createdat', flex: 1},
+            {header: 'Autor', dataIndex: 'author', flex: 1},
             {header: 'fileid', dataIndex: 'fileid', flex: 1}
         ];
         this.callParent(arguments);
@@ -411,7 +427,10 @@ Ext.define('Ext.ux.SimpleIFrame', {
     title : 'All Users',
     store: 'foldertreeStore',
     model: 'foldertreeModel',
-
+    style: {
+                fontSize: "25px"
+    },
+    cls:'macrosTree',
     initComponent: function() {
 
        //this.on("itemclick", this.itemclick);
@@ -431,7 +450,10 @@ Ext.define('Ext.ux.SimpleIFrame', {
     title : 'All Users',
     store: 'foldertreeStore',
     model: 'foldertreeModel',
-
+    style: {
+                fontSize: "25px"
+    },
+    cls:'macrosTree',
     initComponent: function() {
 
        //this.on("itemclick", this.itemclick);
@@ -545,7 +567,7 @@ Ext.define('Ext.ux.SimpleIFrame', {
     }
 });Ext.define('Macros.model.fileModel', {
     extend: 'Ext.data.Model',
-    fields: ['title', 'author', 'fileid']
+    fields: ['title', 'author', 'fileid', 'createdat','lastmodifiedat' ]
 
 });
 
@@ -775,7 +797,8 @@ Ext.define('Macros.controller.fileController', {
 
     openFile: function(fileId){
         var fileid = this.currentFile.data.fileid;
-        var url = macrosExeServerUrl + "miidoccgi.exe?getfile&dokid="+fileId+"&arbeitsmittel=1";
+        //var url = macrosExeServerUrl + "miidoccgi.exe?getfile&dokid="+fileId+"&arbeitsmittel=1";
+        var url = macrosExeServerUrl + "ebcheckout.exe?getserverfile&fileid="+fileId+"&readonly=1"
         window.open(url,'Download');
     },
     getFolderFiles:function(folderId, title){
@@ -1046,4 +1069,6 @@ Ext.define('Macros.controller.userController', {
 
         view.down('form').loadRecord(record);
     }
+});
+
 });

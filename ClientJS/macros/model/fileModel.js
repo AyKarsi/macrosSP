@@ -1,6 +1,6 @@
 Ext.define('Macros.model.fileModel', {
     extend: 'Ext.data.Model',
-    fields: ['title', 'author', 'fileid']
+    fields: ['title', 'author', 'fileid', 'createdat','lastmodifiedat' ]
 
 });
 

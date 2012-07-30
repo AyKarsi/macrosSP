@@ -9,8 +9,10 @@ Ext.define('Macros.view.file.list' ,{
     initComponent: function() {
 
         this.columns = [
-            {header: 'title',  dataIndex: 'title',  flex: 1},
-            {header: 'author', dataIndex: 'author', flex: 1},
+            {header: 'Titel',  dataIndex: 'title',  flex: 1},
+            {header: 'Geändert am', dataIndex: 'lastmodifiedat', flex: 1},
+            {header: 'Erstellt am am', dataIndex: 'createdat', flex: 1},
+            {header: 'Autor', dataIndex: 'author', flex: 1},
             {header: 'fileid', dataIndex: 'fileid', flex: 1}
         ];
         this.callParent(arguments);

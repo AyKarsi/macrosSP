@@ -14,16 +14,12 @@ Ext.define('Macros.view.file.attributes' ,{
 
         this.callParent(arguments);
         this.reload();
-
-
     },
 
     load:function()
     {
         var self = this;
-
-
-    }
+ }
 });Ext.define('Macros.view.file.editattributes' ,{
     extend: 'Ext.ux.SimpleIFrame',
     alias : 'widget.fileeditattributes',
@@ -63,8 +59,10 @@ Ext.define('Macros.view.file.attributes' ,{
     initComponent: function() {
 
         this.columns = [
-            {header: 'title',  dataIndex: 'title',  flex: 1},
-            {header: 'author', dataIndex: 'author', flex: 1},
+            {header: 'Titel',  dataIndex: 'title',  flex: 1},
+            {header: 'Geändert am', dataIndex: 'lastmodifiedat', flex: 1},
+            {header: 'Erstellt am am', dataIndex: 'createdat', flex: 1},
+            {header: 'Autor', dataIndex: 'author', flex: 1},
             {header: 'fileid', dataIndex: 'fileid', flex: 1}
         ];
         this.callParent(arguments);
@@ -75,7 +73,10 @@ Ext.define('Macros.view.file.attributes' ,{
     title : 'All Users',
     store: 'foldertreeStore',
     model: 'foldertreeModel',
-
+    style: {
+                fontSize: "25px"
+    },
+    cls:'macrosTree',
     initComponent: function() {
 
        //this.on("itemclick", this.itemclick);
@@ -95,7 +96,10 @@ Ext.define('Macros.view.file.attributes' ,{
     title : 'All Users',
     store: 'foldertreeStore',
     model: 'foldertreeModel',
-
+    style: {
+                fontSize: "25px"
+    },
+    cls:'macrosTree',
     initComponent: function() {
 
        //this.on("itemclick", this.itemclick);

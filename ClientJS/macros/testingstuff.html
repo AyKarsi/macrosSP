@@ -1,0 +1,153 @@
+<html>
+<head>
+    <title>Account Manager</title>
+
+    <link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css">
+
+
+    <script type="text/javascript" src="../ext-all-dev.js"></script>
+
+    <script type="text/javascript" src="ux/SimpleIFrame.js"></script>
+    <script type="text/javascript" src="../resources/jquery.min.js"></script>
+    <!-- script type="text/javascript" src="../resources/flXHR/flensed.js"></script-->
+    <!-- script type="text/javascript" src="../resources/flXHR/flXHR.js"></script -->
+    <!-- script type="text/javascript" src="../resources/jquery.flXHRproxy.js"></script -->
+
+
+    <script type="text/javascript" src="macros.config.js"></script>
+
+
+    <script>
+        Ext.define('Macros.model.foldertreeModel', {
+        extend: 'Ext.data.Model',
+        fields: [
+        { name: 'id', type: 'string', mapping: 'id' },
+        { name: 'text', type: 'string', mapping: 'path' }
+        ]
+        });
+        Ext.define('Macros.store.foldertreeStore', {
+            extend: 'Ext.data.TreeStore',
+            model: 'Macros.model.foldertreeModel',
+            //autoLoad:true,
+            rootVisible: true,
+            defaultRootId: "0",
+            proxy: new Ext.data.proxy.Ajax({
+                url:proxyUrl+'?entity=foldertree&id=0',
+                method:'get',
+                reader: {
+                    type: 'xml',
+                    rootProperty : 'results',
+                    record: 'record'
+                }
+            }),
+            root: {
+                expanded: true,
+                text: "Ordner",
+                leaf:false,
+                loaded:true,
+                id: "0"
+            },
+            listeners: {
+
+                load: function() {
+                    console.log("load");
+                },
+                // Each demo.UserModel instance will be automatically
+                // decorated with methods/properties of Ext.data.NodeInterface
+                // (i.e., a "node"). Whenever a UserModel node is appended
+                // to the tree, this TreeStore will fire an "append" event.
+                append: function( thisNode, newChildNode, index, eOpts ) {
+                    console.log("appending");
+                }
+            }
+            ,
+            loadChildren: function(parentId){
+                debugger;
+                this.proxy.url = proxyUrl+'?entity=foldertree&id='+parentId;
+                this.load();
+            }
+        }
+        );
+
+        Ext.define('Macros.view.folder.tree' ,{
+            extend: 'Ext.tree.Panel',
+            alias : 'widget.foldertree',
+            title : 'All Users',
+            store: 'foldertreeStore',
+            initComponent: function() {
+                this.on("itemclick", this.itemclick);
+                this.callParent(arguments);
+            },
+
+            itemclick:function(view, record, item, index, event){
+                debugger;
+                var id = record.data.id;
+                this.store.loadChildren(id);
+                console.log("expand "+id);
+            }
+        });
+
+        var macrosApp = {};
+        Ext.application({
+
+            name: 'Macros',
+            appFolder: '/macros',
+            stores:[
+            'foldertreeStore'
+             ],
+
+            models:[
+            'foldertreeModel'
+
+            ],
+            mainPanel:null,
+            launch: function() {
+                // alert(Ext.get('s4-ribbonrow').getViewSize().height);
+
+
+            height:500,
+
+            this.mainPanel= Ext.create('Ext.panel.Panel', {
+                id:"macrosPanel",
+                renderTo:'test',
+                height:500,
+                items : [{
+                    xtype:'foldertree',
+                    title:'',
+                    flex:1,
+                    region:'west',
+                    layout: 'fit',
+                    split: true
+                    //height:'100%'
+                }
+
+
+                ]
+            });
+
+            this.mainPanel.setVisible(true);
+            macrosApp = this;
+        },
+        controllers: [
+        'folderController'
+        ]
+        });
+
+
+
+    </script>
+
+
+</head>
+<body>
+<div id="s4-ribbonrow">Topnav Platzhalter</div>
+<div align="" id="ribbon">
+</div>
+<div></div>
+<div id="s4-mainarea"></div>
+<div id="test"></div>
+
+
+<span id="app-msg" style="display:none;"></span>
+</body>
+</html>

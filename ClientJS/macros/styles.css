@@ -1,0 +1,44 @@
+/** tree styling */
+
+.macrosFoldertree .x-grid-view{
+    background-color:#eaeaea;
+}
+.x-panel.macrosFoldertree .x-panel-header
+{
+
+    padding: 5px 5px 5px 8px;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+}
+.x-panel.macrosFoldertree .x-panel-header-text
+{
+    color:#959595;
+}
+.x-panel.macrosFoldertree .x-panel-body
+{
+    border: none;
+    padding: 0 10px;
+}
+.macrosFoldertree .x-grid-cell
+{
+    background-color: #eaeaea;
+    padding: 0px 8px;
+    margin-bottom:1px;
+}
+.macrosFoldertree .x-grid-cell .x-tree-expander
+{
+    /* background:none; */
+}
+.macrosFoldertree .x-grid-cell .x-tree-icon
+{
+    background:none;
+}
+.macrosFoldertree .x-grid-cell .x-grid-cell-inner
+{
+    margin-left: -10px;
+}
+
+.subitem {
+    color:green;
+}

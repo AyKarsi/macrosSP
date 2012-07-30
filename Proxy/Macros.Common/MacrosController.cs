@@ -302,10 +302,15 @@ namespace Macros.Common
                                "edms/exe/eb.exe?" + queryString.ToString();
 
             GetUrl(remoteUrl, true);
+        }
 
-
-
-
+        public static void GetDocumentMenu(string fileId)
+        {
+            ////http://wega.mi-m.de/
+            string remoteUrl = MarcosServerUri.ToString() +
+                   "edms/exe/eb.exe?cfgs=../cfgs/searchall.cfg&p=list&MaskName=lrefmenu&fileid={0}";
+            remoteUrl = string.Format(remoteUrl, fileId);
+            GetUrl(remoteUrl, true);
         }
     }
 }

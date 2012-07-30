@@ -32,7 +32,8 @@ Ext.define('Macros.controller.fileController', {
 
     openFile: function(fileId){
         var fileid = this.currentFile.data.fileid;
-        var url = macrosExeServerUrl + "miidoccgi.exe?getfile&dokid="+fileId+"&arbeitsmittel=1";
+        //var url = macrosExeServerUrl + "miidoccgi.exe?getfile&dokid="+fileId+"&arbeitsmittel=1";
+        var url = macrosExeServerUrl + "ebcheckout.exe?getserverfile&fileid="+fileId+"&readonly=1"
         window.open(url,'Download');
     },
     getFolderFiles:function(folderId, title){
