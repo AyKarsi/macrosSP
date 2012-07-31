@@ -28,25 +28,76 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                     {
                         new ButtonDefinition()
                                 {
-                                    Id = "OpenFile",
-                                    Title = "Öffnen",
+                                    Id = "doctemplate",
+                                    Title = "doctemplate",
                                     Image = ImageLibrary.GetStandardImage(7,12),
-                                    CommandJavaScript = "javascript:SpRibbonBinding.fileOpen();"
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','doctemplate');"
                                 },                     
                          new ButtonDefinition()
                                 {
-                                    Id = "EditAttributes",
-                                    Title = "Reattributieren",
-                                    Image = ImageLibrary.GetStandardImage(8,12),
-                                    CommandJavaScript = "javascript:SpRibbonBinding.fileEditAttributes();"
-                                },
+                                    Id = "projectdata",
+                                    Title = "projectdata",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','projectdata');"
+                                },                     
+                    
                          new ButtonDefinition()
                                 {
-                                    Id = "ViewAttributes",
-                                    Title = "Attribute ansehen",
-                                    Image = ImageLibrary.GetStandardImage(9,12),
-                                    CommandJavaScript = "javascript:SpRibbonBinding.fileViewAttributes();"
-                                }
+                                    Id = "display",
+                                    Title = "display",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','display');"
+                                },                                         
+                         new ButtonDefinition()
+                                {
+                                    Id = "displayarchived",
+                                    Title = "displayarchived",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','displayarchived');"
+                                },                     
+                         new ButtonDefinition()
+                                {
+                                    Id = "checkout",
+                                    Title = "checkout",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','checkout');"
+                                },                     
+                         new ButtonDefinition()
+                                {
+                                    Id = "checkoutback",
+                                    Title = "checkoutback",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','checkoutback');"
+                                },                     
+                    
+                         new ButtonDefinition()
+                                {
+                                    Id = "checkin",
+                                    Title = "checkin",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','checkin');"
+                                },                     
+                         new ButtonDefinition()
+                                {
+                                    Id = "reattr",
+                                    Title = "reattr",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','reattr');"
+                                },                                         
+                         new ButtonDefinition()
+                                {
+                                    Id = "move",
+                                    Title = "move",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','move');"
+                                },                     
+                         new ButtonDefinition()
+                                {
+                                    Id = "delete",
+                                    Title = "delete",
+                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','delete');"
+                                },                                         
                     }
                     
                 }

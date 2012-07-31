@@ -16,7 +16,7 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
             return new TabDefinition()
             {
                 Id = "MacrosFolder",
-                Title = "Folder",
+                Title = "Folder",                
                 Groups = new GroupDefinition[]
             {
                 new GroupDefinition()
