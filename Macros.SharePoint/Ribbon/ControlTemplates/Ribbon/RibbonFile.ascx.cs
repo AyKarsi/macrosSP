@@ -45,28 +45,28 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                 {
                                     Id = "display",
                                     Title = "display",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(4,13),
                                     CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','display');"
                                 },                                         
                          new ButtonDefinition()
                                 {
                                     Id = "displayarchived",
                                     Title = "displayarchived",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(4,13),
                                     CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','displayarchived');"
                                 },                     
                          new ButtonDefinition()
                                 {
                                     Id = "checkout",
                                     Title = "checkout",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(5,13),
                                     CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','checkout');"
                                 },                     
                          new ButtonDefinition()
                                 {
                                     Id = "checkoutback",
                                     Title = "checkoutback",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(6,13),
                                     CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','checkoutback');"
                                 },                     
                     
@@ -81,21 +81,21 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                 {
                                     Id = "reattr",
                                     Title = "reattr",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(3,4),
                                     CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','reattr');"
                                 },                                         
                          new ButtonDefinition()
                                 {
                                     Id = "move",
                                     Title = "move",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(0,2),
                                     CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','move');"
                                 },                     
                          new ButtonDefinition()
                                 {
                                     Id = "delete",
                                     Title = "delete",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(4,4),
                                     CommandJavaScript = "javascript:SpRibbonBinding.callRibbonAction('file','delete');"
                                 },                                         
                     }

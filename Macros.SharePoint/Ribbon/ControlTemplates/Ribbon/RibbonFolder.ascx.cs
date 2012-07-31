@@ -30,8 +30,7 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                 {
                                     Id = "ShowFolder",
                                     Title = "Anzeigen",
-                                    Image = ImageLibrary.GetStandardImage(7,12)
-                                    ,                                    
+                                    Image = ImageLibrary.GetStandardImage(4,13),                                    
                                     CommandJavaScript = "javascript:SpRibbonBinding.clickSearch();"
                                 },                     
                          new ButtonDefinition()
@@ -45,7 +44,7 @@ namespace Macros.SharePoint.Ribbon.ControlTemplates.Ribbon
                                 {
                                     Id = "CreateFolder",
                                     Title = "Unterodner anlegen",
-                                    Image = ImageLibrary.GetStandardImage(7,12),
+                                    Image = ImageLibrary.GetStandardImage(10,14),
                                     CommandJavaScript = "javascript:SpRibbonBinding.clickSearch();"
                                 }
                     }
