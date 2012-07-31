@@ -1,4 +1,4 @@
-Ext.define('Macros.view.ribbon.documentRibbon', {
+Ext.define('Macros.view.ribbon.fileRibbon', {
     extend: 'Ext.Container',
     layout:'hbox',
     objectData: null,
@@ -71,7 +71,7 @@ Ext.define('Macros.view.ribbon.documentRibbon', {
     loadFileRibbonMenu : function (fileid) {
 
         Ext.each(this.items.items, function(item,index,items){
-            item.btn().setVisible(false);
+            item.setVisible(false);
         });
 
         var docStore = new Macros.store.documentMenuStore();
@@ -82,8 +82,8 @@ Ext.define('Macros.view.ribbon.documentRibbon', {
                 Ext.each(this.items.items, function(item){
 
                     if (menuItem[item.name+'_url'] != null && menuItem[item.name+'_url'] != ""  ){
-                        item.btn().setText(menuItem[item.name]);
-                        item.btn().setVisible(true);
+                        item.setText(menuItem[item.name]);
+                        item.setVisible(true);
                         item.url = menuItem[item.name+'_url'];
                     }
 

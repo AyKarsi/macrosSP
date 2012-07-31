@@ -376,7 +376,7 @@ Ext.define('Macros.store.foldertreeStore', {
         tabPanel.doLayout();
 
         var ribbon = this.application.getController('ribbon');
-        ribbon.toggle('folder');
+        ribbon.toggle('Ribbon.Macros.Folder');
         this.init();
     }
 

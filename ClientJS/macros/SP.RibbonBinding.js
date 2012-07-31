@@ -1,83 +1,54 @@
 var SpRibbonBinding =
 {
+    callRibbonAction : function(ribbonName, actionName)
+    {
+        var ribController = macrosApp.getController("ribbonController");
+        var ribbonGroup = ribController.getRibbonGroup(ribbonName);
+        Ext.each(ribbonGroup.items.items, function(item){
+            if (item.name == actionName){
+                // exectue the handle
+                if (item.handler == null){
+                    console.log(ribbonName + "ribbon has no handle defined on action "+ actionName);
+                }
+                else {
+                    item.handler();
+                }
+            }
+        });
+    },
 
+    // needs to be called very late, to make sure that all ribbons are present..
+    // might possibly fail with other ribbons..
+    ensureRibbonBinding:function() {
 
-
-
-
-    initialized: false,
-    init:function(){
-        if (this.initialized)
+        if (!isInSharePoint)
             return;
-        $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
-        this.initialized = true;
 
-        //$("[id^='Ribbon.Macros']").append("<li class='macrosLogo' style='float:right'><img src='https://macros-sp-dev.s3.amazonaws.com/MacrosSP/macrosLogo.gif' /></li>");
+        //$('.ms-cui-tts li').unbind("click.macrosRibbon");
+        // only bind the click event to non macros ribbon groups
+        //$('.ms-cui-tts li:not([id^="Ribbon.Ma"])').bind("click.macrosRibbon",function(a,b,c){
+        $('.ms-cui-tts li').bind("click.macrosRibbon",function(event){
 
-    },
-
-    toggle: function(ribbonGroup){
-
-        var spRibbonName;
-        var ribbonSelector;
-        switch(ribbonGroup)       {
-            case "file":
-                spRibbonName = "Ribbon.MacrosFile";
-                ribbonSelector = "Ribbon\\\\.MacrosFile";
-                break;
-            case "folder":
-                spRibbonName = "Ribbon.MacrosFolder";
-                ribbonSelector = "Ribbon\\\\.MacrosFolder";
-                break;
-            case "main":
-                spRibbonName = "Ribbon.MacrosMain";
-                ribbonSelector = "Ribbon\\\\.MacrosMain";
-                break;
-        }
-        if (spRibbonName)
-            SelectRibbonTab(spRibbonName, true);
-        else
-            console.log("unkown ribbonGroup " + ribbonGroup);
-/*
-        if ($("[id='"+spRibbonName+"'] li.macrosLogo").length == 0) {
-            $("[id='"+spRibbonName+"']").append("<li class='macrosLogo' style='float:right'><li>lll</li>");
-        }
-*/
+            debugger;
+            var ribbonId = event.currentTarget.id.replace("-title","");
+            var ribController = macrosApp.getController("ribbonController");
+            ribController.toggle(ribbonId);
+        });
 
 
-    },
 
-    clickSearch : function() {
-        this.init();
-        macrosApp.getController("ribbonController").clickSearch();
-        $("#s4-mainarea").hide();
-    },
-
-    fileViewAttributes : function() {
-        this.init();
-        macrosApp.getController("fileController").openFileAttributes();
-        $("#s4-mainarea").hide();
-    },
-    fileEditAttributes : function() {
-        this.init();
-        macrosApp.getController("fileController").editFileAttributes();
-        $("#s4-mainarea").hide();
-    },
-    fileOpen: function() {
-        this.init();
-        macrosApp.getController("fileController").openFile();
-        $("#s4-mainarea").hide();
     },
     hideApp: function() {
-        this.init();
+        //this.ensureRibbonBinding();
+        var macrosPanel = Ext.getCmp("macrosPanel");
+        if (macrosPanel == null)
+        {
+            console.log("macrosPanel is undefined");
+            return;
+        }
         Ext.getCmp("macrosPanel").setVisible(false);
         $("#s4-mainarea").show();
-    },
-    hideSPMainContent: function() {
-        this.init();
-        $("#s4-mainarea").hide();
     }
-
 
 };
 

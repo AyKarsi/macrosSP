@@ -25,7 +25,7 @@ Ext.require('Macros.store.users');
 
 Ext.require('Macros.view.file.attributes');
 Ext.require('Macros.view.file.editattributes');
-Ext.require('Macros.view.ribbon.documentRibbon');
+Ext.require('Macros.view.ribbon.fileRibbon');
 
 
 

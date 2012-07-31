@@ -4,42 +4,32 @@ Ext.Loader.setConfig({enabled:false});
 
 
 
-
-
-
 Ext.onReady(function(){
 
+    console.log("ext.ready");
+
 
 });
-
-
-
-
 $(document).ready(function(){
-
     $("#s4-mainarea").after("<div id='macrosarea'></div>");
-
+    console.log("jquery.ready");
 });
-
 
 var macrosApp = {};
 Ext.application({
-//var Macros = Ext.create('Ext.app.Application',{
     name: 'Macros',
     appFolder: '/macros',
     stores:[
         'users',
         'foldertreeStore'
-
     ],
-
     models:[
         'user',
         'foldertreeModel'
-
     ],
     mainPanel:null,
     launch: function() {
+        console.log("launch;")
         // alert(Ext.get('s4-ribbonrow').getViewSize().height);
 
         var adjustHeight = function(){
@@ -51,8 +41,6 @@ Ext.application({
         };
 
         var ribbonHeight = adjustHeight();
-
-
         this.mainPanel= Ext.create('Ext.panel.Panel', {
             id:"macrosPanel",
             renderTo:'macrosarea',
@@ -124,84 +112,55 @@ Ext.EventManager.onWindowResize(function () {
     macrosApp.mainPanel.doLayout();
 });var SpRibbonBinding =
 {
+    callRibbonAction : function(ribbonName, actionName)
+    {
+        var ribController = macrosApp.getController("ribbonController");
+        var ribbonGroup = ribController.getRibbonGroup(ribbonName);
+        Ext.each(ribbonGroup.items.items, function(item){
+            if (item.name == actionName){
+                // exectue the handle
+                if (item.handler == null){
+                    console.log(ribbonName + "ribbon has no handle defined on action "+ actionName);
+                }
+                else {
+                    item.handler();
+                }
+            }
+        });
+    },
 
+    // needs to be called very late, to make sure that all ribbons are present..
+    // might possibly fail with other ribbons..
+    ensureRibbonBinding:function() {
 
-
-
-
-    initialized: false,
-    init:function(){
-        if (this.initialized)
+        if (!isInSharePoint)
             return;
-        $('.ms-cui-tts li').click(function(){SpRibbonBinding.hideApp()});
-        this.initialized = true;
 
-        //$("[id^='Ribbon.Macros']").append("<li class='macrosLogo' style='float:right'><img src='https://macros-sp-dev.s3.amazonaws.com/MacrosSP/macrosLogo.gif' /></li>");
+        //$('.ms-cui-tts li').unbind("click.macrosRibbon");
+        // only bind the click event to non macros ribbon groups
+        //$('.ms-cui-tts li:not([id^="Ribbon.Ma"])').bind("click.macrosRibbon",function(a,b,c){
+        $('.ms-cui-tts li').bind("click.macrosRibbon",function(event){
 
-    },
-
-    toggle: function(ribbonGroup){
-
-        var spRibbonName;
-        var ribbonSelector;
-        switch(ribbonGroup)       {
-            case "file":
-                spRibbonName = "Ribbon.MacrosFile";
-                ribbonSelector = "Ribbon\\\\.MacrosFile";
-                break;
-            case "folder":
-                spRibbonName = "Ribbon.MacrosFolder";
-                ribbonSelector = "Ribbon\\\\.MacrosFolder";
-                break;
-            case "main":
-                spRibbonName = "Ribbon.MacrosMain";
-                ribbonSelector = "Ribbon\\\\.MacrosMain";
-                break;
-        }
-        if (spRibbonName)
-            SelectRibbonTab(spRibbonName, true);
-        else
-            console.log("unkown ribbonGroup " + ribbonGroup);
-/*
-        if ($("[id='"+spRibbonName+"'] li.macrosLogo").length == 0) {
-            $("[id='"+spRibbonName+"']").append("<li class='macrosLogo' style='float:right'><li>lll</li>");
-        }
-*/
+            debugger;
+            var ribbonId = event.currentTarget.id.replace("-title","");
+            var ribController = macrosApp.getController("ribbonController");
+            ribController.toggle(ribbonId);
+        });
 
 
-    },
 
-    clickSearch : function() {
-        this.init();
-        macrosApp.getController("ribbonController").clickSearch();
-        $("#s4-mainarea").hide();
-    },
-
-    fileViewAttributes : function() {
-        this.init();
-        macrosApp.getController("fileController").openFileAttributes();
-        $("#s4-mainarea").hide();
-    },
-    fileEditAttributes : function() {
-        this.init();
-        macrosApp.getController("fileController").editFileAttributes();
-        $("#s4-mainarea").hide();
-    },
-    fileOpen: function() {
-        this.init();
-        macrosApp.getController("fileController").openFile();
-        $("#s4-mainarea").hide();
     },
     hideApp: function() {
-        this.init();
+        //this.ensureRibbonBinding();
+        var macrosPanel = Ext.getCmp("macrosPanel");
+        if (macrosPanel == null)
+        {
+            console.log("macrosPanel is undefined");
+            return;
+        }
         Ext.getCmp("macrosPanel").setVisible(false);
         $("#s4-mainarea").show();
-    },
-    hideSPMainContent: function() {
-        this.init();
-        $("#s4-mainarea").hide();
     }
-
 
 };
 
@@ -418,52 +377,229 @@ Ext.define('Ext.ux.SimpleIFrame', {
     extend: 'Ext.tree.Panel',
     alias : 'widget.foldertree',
     title : 'All Users',
+    model: 'Macros.model.foldertreeModel',
     store: 'foldertreeStore',
-    model: 'foldertreeModel',
+    clearOnLoad:false,
     style: {
-                fontSize: "25px"
+                "background-color": "green",
+                "color": "green"
     },
-    cls:'macrosTree',
+    cls: 'macrosFoldertree',
     initComponent: function() {
+       this.callParent(arguments);
+        this.on("load",function(treeStore, records, successful, operation) {
 
-       //this.on("itemclick", this.itemclick);
 
-        this.callParent(arguments);
+            Ext.each(successful,function(item){
+                console.log(item.nodeId);
+                item.cls="subitem";
+            });
+
+            //var id = 8; // This is the ID of the node that somehow you know in advance
+            //var node = treeStore.getNodeById(id);
+
+            ///treePanel.expandPath(node.getPath());
+        });
+
     },
 
    itemclick:function(node,opts){
-    //debugger;
-       var id = opts.data.id;
-       this.store.loadChildren(id);
-       alert("expand "+node.id);
+       this.store.load({
+           node:opts.data
+
+           ,callback:function(a,b,c){
+               debugger;
+               console.log("callback");
+           }
+       })
     }
 });Ext.define('Macros.view.folder.tree' ,{
     extend: 'Ext.tree.Panel',
     alias : 'widget.foldertree',
     title : 'All Users',
+    model: 'Macros.model.foldertreeModel',
     store: 'foldertreeStore',
-    model: 'foldertreeModel',
+    clearOnLoad:false,
     style: {
-                fontSize: "25px"
+                "background-color": "green",
+                "color": "green"
     },
-    cls:'macrosTree',
+    cls: 'macrosFoldertree',
     initComponent: function() {
+       this.callParent(arguments);
+        this.on("load",function(treeStore, records, successful, operation) {
 
-       //this.on("itemclick", this.itemclick);
 
-        this.callParent(arguments);
+            Ext.each(successful,function(item){
+                console.log(item.nodeId);
+                item.cls="subitem";
+            });
+
+            //var id = 8; // This is the ID of the node that somehow you know in advance
+            //var node = treeStore.getNodeById(id);
+
+            ///treePanel.expandPath(node.getPath());
+        });
+
     },
 
    itemclick:function(node,opts){
-    //debugger;
-       var id = opts.data.id;
-       this.store.loadChildren(id);
-       alert("expand "+node.id);
+       this.store.load({
+           node:opts.data
+
+           ,callback:function(a,b,c){
+               debugger;
+               console.log("callback");
+           }
+       })
     }
 });Ext.define('Macros.view.main.tabPanel' ,{
     extend: 'Ext.tab.Panel',
     alias : 'widget.tabs'
 
+
+});Ext.define('Macros.view.ribbon.fileRibbon', {
+    extend: 'Ext.Container',
+    layout:'hbox',
+    objectData: null,
+    initComponent: function(config)
+    {
+
+        Ext.apply(this, {
+
+            items:[
+                {
+                    xtype:'ribbonAction',
+                    name:'doctemplate',
+                    ribbonGroup:this
+                },
+                {
+                    xtype:'ribbonAction',
+                    name:'projectdata',
+                    ribbonGroup:this
+                },
+                {
+                    xtype:'ribbonAction',
+                    name:'display',
+                    ribbonGroup:this,
+                    handler: this.openFile
+                },
+                {
+                    xtype:'ribbonAction',
+                    name:'displayarchived',
+                    ribbonGroup:this
+                },
+                {
+                    xtype:'ribbonAction',
+                    name:'checkout',
+                    ribbonGroup:this
+                }
+                ,
+                {
+                    xtype:'ribbonAction',
+                    name:'checkoutback',
+                    ribbonGroup:this
+                }
+                ,
+                {
+                    xtype:'ribbonAction',
+                    name:'checkin',
+                    ribbonGroup:this
+                },
+                {
+                    xtype:'ribbonAction',
+                    name: "reattr",
+                    ribbonGroup:this,
+                    handler: this.editFileAttributes
+                },
+                {
+                    xtype:'ribbonAction',
+                    name: "move",
+                    ribbonGroup:this,
+                    handler: null
+                },
+                {
+                    xtype:'ribbonAction',
+                    name: "delete",
+                    ribbonGroup:this,
+                    handler: null
+                }
+            ]
+        });
+        this.callParent(config);
+    },
+    loadFileRibbonMenu : function (fileid) {
+
+        Ext.each(this.items.items, function(item,index,items){
+            item.setVisible(false);
+        });
+
+        var docStore = new Macros.store.documentMenuStore();
+        docStore.load({
+            params: {id:fileid},
+            callback: Ext.bind(function(records,operation,success){
+                var menuItem = records[0].data;
+                Ext.each(this.items.items, function(item){
+
+                    if (menuItem[item.name+'_url'] != null && menuItem[item.name+'_url'] != ""  ){
+                        item.setText(menuItem[item.name]);
+                        item.setVisible(true);
+                        item.url = menuItem[item.name+'_url'];
+                    }
+
+                });
+                this.doLayout();
+
+            },this)
+        });
+
+    },
+    openFileAttributes: function() {
+        var ctrl =macrosApp.getController("fileController");
+        return ctrl.openFileAttributes();
+    },
+    editFileAttributes : function() {
+        var ctrl =macrosApp.getController("fileController");
+        return ctrl.editFileAttributes();
+    },
+    openFile: function() {
+        var ctrl =macrosApp.getController("fileController");
+        return ctrl.openFile();
+
+    }
+
+
+
+
+});Ext.define('Macros.view.ribbon.folderRibbon', {
+    extend: 'Ext.Container',
+    layout:'hbox',
+    objectData: null,
+    initComponent: function(config)
+    {
+        Ext.apply(this, {
+        items:[
+            {
+                xtype:'ribbonAction',
+                text: "Anzeigen",
+                handler: function() {
+                    alert("click");
+                }
+            },
+            {
+                xtype:'ribbonAction',
+                text: "Suchen",
+                handler: null
+            },
+            {
+                xtype:'ribbonAction',
+                text: "Unterordner anlegen",
+                handler: null
+            }]
+
+    });
+        this.callParent(config);
+    }
 
 });Ext.define('Macros.view.ribbon.ribbonAction', {
     extend: 'Ext.Container',
@@ -471,6 +607,35 @@ Ext.define('Ext.ux.SimpleIFrame', {
     text : "ClickMe",
     ribbonGroup: null,
     handler: null,
+
+    setText:function(text){
+        if (isInSharePoint){
+            $("[title='"+this.name+"'] .ms-cui-ctl-largelabel").html(text);
+        }
+        else{
+            var btn = this.items.items[0];
+            btn.setText(text);
+        }
+
+    },
+    setVisible:function(visible){
+        if (isInSharePoint){
+            if (visible)
+                $("[title='"+this.name+"']").show();
+            else
+                $("[title='"+this.name+"']").hide();
+        }
+        else{
+            var btn = this.items.items[0];
+            btn.setVisible(visible);
+        }
+
+    },
+    handler: function(){
+        var btn = this.items.items[0];
+        return btn.handler
+    },
+
     initComponent: function () {
         Ext.apply(this, {
                 items:[
@@ -478,15 +643,7 @@ Ext.define('Ext.ux.SimpleIFrame', {
                         text: this.text,
                         handler: this.handler,
                         ribbonGroup:this.ribbonGroup
-                        })/*,
-                        {
-                            xtype: 'box',
-                            autoEl: {
-                                tag:'a',
-                                href:'#',
-                                html:'link'
-                            }
-                        }*/
+                        })
                     ]
             }
         );
@@ -558,7 +715,35 @@ Ext.define('Ext.ux.SimpleIFrame', {
 
         this.callParent(arguments);
     }
-});Ext.define('Macros.model.fileModel', {
+});Ext.define('Macros.model.documentMenuModel', {
+    extend: 'Ext.data.Model',
+    fields: [
+        { name: 'doctemplate', type: 'string' , mapping:'doctemplate@text'},
+        { name: 'doctemplate_url', type: 'string' , mapping:'doctemplate'},
+        { name: 'projectdata', type: 'string' , mapping:'projectdata@text'},
+        { name: 'projectdata_url', type: 'string' , mapping:'projectdata'},
+        { name: 'display', type: 'string' , mapping:'display@text'},
+        { name: 'display_url', type: 'string' , mapping:'display'},
+        { name: 'displayarchived', type: 'string' , mapping:'displayarchived@text'},
+        { name: 'displayarchived_url', type: 'string' , mapping:'displayarchived'},
+        { name: 'checkout', type: 'string' , mapping:'checkout@text'},
+        { name: 'checkout_url', type: 'string' , mapping:'checkout'},
+        { name: 'checkoutback', type: 'string' , mapping:'checkoutback@text'},
+        { name: 'checkoutback_url', type: 'string' , mapping:'checkoutback'},
+        { name: 'docedit', type: 'string' , mapping:'docedit@text'},
+        { name: 'docedit_url', type: 'string' , mapping:'docedit'},
+        { name: 'checkin', type: 'string' , mapping:'checkin@text'},
+        { name: 'checkin_url', type: 'string' , mapping:'checkin'},
+        { name: 'reattr', type: 'string' , mapping:'reattr@text'},
+        { name: 'reattr_url', type: 'string' , mapping:'reattr'},
+        { name: 'move', type: 'string' , mapping:'move@text'},
+        { name: 'move_url', type: 'string' , mapping:'move'},
+        { name: 'delete', type: 'string' , mapping:'delete@text'},
+        { name: 'delete_url', type: 'string' , mapping:'delete'}
+
+    ]
+});
+Ext.define('Macros.model.fileModel', {
     extend: 'Ext.data.Model',
     fields: ['title', 'author', 'fileid', 'createdat','lastmodifiedat' ]
 
@@ -621,19 +806,35 @@ Ext.define('Ext.ux.SimpleIFrame', {
   </record>
 </results>
 */Ext.define('Macros.model.foldertreeModel', {
-    extend: 'Ext.data.NodeInterface',
+   // alias : 'widget.foldertreeModel',
+    //extend: 'Ext.data.NodeInterface',
+    extend: 'Ext.data.Model',
+
     fields: [
-        { name: 'id', type: 'int', mapping: 'Id' },
-        { name: 'text', type: 'string', mapping: 'Text' },
+        { name: 'id', type: 'int'},
+        { name: 'text', type: 'string', mapping:'path'},
         { name: 'leaf', type: 'boolean', mapping: 'Leaf' },
         { name: 'loaded', type: 'boolean', mapping: 'Loaded', defaultValue: false },
         { name: 'Properties'},
-        { name: 'expanded', defaultValue: true }
+        { name: 'expanded', defaultValue: false }
     ]
 });Ext.define('Macros.model.user', {
     extend: 'Ext.data.Model',
     fields: ['name', 'email']
 
+});Ext.define('Macros.store.documentMenuStore', {
+    extend: 'Ext.data.Store',
+    model: 'Macros.model.documentMenuModel',
+    autoLoad:true,
+    proxy: new Ext.data.proxy.Ajax({
+        url:proxyUrl+'?entity=documentmenu',
+        method:'get',
+        reader: {
+            type: 'xml',
+            rootProperty : 'results',
+            record: 'record'
+        }
+    })
 });Ext.define('Macros.store.filesStore', {
     extend: 'Ext.data.Store',
     model: 'Macros.model.fileModel',
@@ -655,51 +856,25 @@ Ext.define('Ext.ux.SimpleIFrame', {
             record: 'record'
         }
     })
-});Ext.define('Macros.store.__foldertreeStore', {
+});Ext.define('Macros.store.foldertreeStore', {
     extend: 'Ext.data.TreeStore',
     model: 'Macros.model.foldertreeModel',
-    //entityid: "10",
-    autoLoad:false,
-    defaultRootId: "8",
+    autoLoad:true,
+    defaultRootId: 0,
+    expaned:true,
     root: {
         expanded: true,
         text: "Ordner",
-        id: "8",
-        leaf: false,
-        expanded:false
+        id: 0,
+        leaf: false
     },
-         listeners: {
-
-                // Each demo.UserModel instance will be automatically
-                // decorated with methods/properties of Ext.data.NodeInterface
-                // (i.e., a "node"). Whenever a UserModel node is appended
-                // to the tree, this TreeStore will fire an "append" event.
-                append: function( thisNode, newChildNode, index, eOpts ) {
-                    alert("appending");
-                    debugger;
-                    // If the node that's being appended isn't a root node, then we can
-                    // assume it's one of our UserModel instances that's been "dressed
-                    // up" as a node
-                    if( !newChildNode.isRoot() ) {
-
-                    }
-                    else {
-                        //this.appendChild(newChildNode);
-                    }
-                }
-          }
-        ,
-/*
-    loadChildren: function(parentId){
-        this.proxy.url = proxyUrl+'?entity=foldertree&id='+parentId;
-        this.load();
-    },*/
     proxy: new Ext.data.proxy.Ajax({
-        url:proxyUrl+'?entity=foldertree&id=8',
+        url:proxyUrl+'?entity=foldertree',
         method:'get',
         reader: {
             type: 'xml',
             rootProperty : 'results',
+            root: 'results',
             record: 'record',
             idProperty: 'id'
         }
@@ -707,7 +882,7 @@ Ext.define('Ext.ux.SimpleIFrame', {
 });
 
 
-Ext.define('Macros.store.foldertreeStore', {
+Ext.define('Macros.store.__foldertreeStore', {
     extend: 'Ext.data.TreeStore',
     //model:'Macros.model.foldertreeModel',
     root: {
@@ -776,7 +951,7 @@ Ext.define('Macros.controller.fileController', {
                 itemclick: function(grid, record){
                     this.currentFile = record;
                     var ribbon = this.application.getController('ribbonController');
-                    ribbon.toggle('file');
+                    ribbon.toggle('Ribbon.MacrosFile');
                 }
             }
         });
@@ -815,7 +990,7 @@ Ext.define('Macros.controller.fileController', {
         tabPanel.doLayout();
 
         var ribbon = this.application.getController('ribbonController');
-        ribbon.toggle('folder');
+        ribbon.toggle('Ribbon.MacrosFolder');
         this.init();
     },
     openFileAttributes:function() {
@@ -896,26 +1071,82 @@ Ext.define('Macros.controller.folderController', {
 
 Ext.define('Macros.controller.ribbonController', {
     extend: 'Ext.app.Controller',
-
+    getRibbonGroup:function(ribbonGroupName){
+        for(var i=0;i<this.ribbons.length;i++){
+            var ribbon = this.ribbons[i];
+            if (ribbon.id==ribbonGroupName){
+               return ribbon;
+            }
+        }
+        return null;
+    },
     toggle:function(ribbonGroupName, objectData){
+
+
+
+        console.log("toggle ribbon " + ribbonGroupName);
+
+        $("[id='Ribbon.MacrosFolder-title']").hide();
+        $("[id='Ribbon.MacrosFile-title']").hide();
+
+
+        if (ribbonGroupName.indexOf("Ribbon.Macros")< 0){
+            console.log("toggling sharepoint ootb ribbon");
+            SelectRibbonTab(ribbonGroupName, false);
+
+            this.ensureRibbonBinding();
+
+            //SpRibbonBinding.hideApp();
+            Ext.getCmp("macrosPanel").setVisible(false);
+            $("#s4-mainarea").show();
+            return;
+        }
+
+
+        Ext.getCmp("macrosPanel").setVisible(true);
+        //$("#macrosarea").show();
+        $("#s4-mainarea").hide();
+
+
 
 
         if (isInSharePoint){
 
-            SpRibbonBinding.toggle(ribbonGroupName);
-            return;
+            //SpRibbonBinding.toggle(ribbonGroupName);
+            //return;
         }
 
         for(var i=0;i<this.ribbons.length;i++){
             var ribbon = this.ribbons[i];
-            if (ribbon.id==ribbonGroupName){
-                ribbon.show();
+            if (ribbon.spRibbonName==ribbonGroupName){
+
+                if (isInSharePoint){
+                    SelectRibbonTab(ribbon.spRibbonName, true);
+                }
+                else {
+                    ribbon.show();
+                }
+
                 if (objectData != null)
                     ribbon.objectData = objectData;
+
+                if(ribbonGroupName == "Ribbon.MacrosFile"){
+                    var fc = this.application.getController('fileController');
+                    if (fc.currentFile != null)
+                        ribbon.loadFileRibbonMenu(fc.currentFile.data.fileid);
+                }
+
             }
             else
                 ribbon.hide();
+            console.log("searching: "+ribbon.spRibbonName+"->bound events "+  $('.ms-cui-tts li').data('events'));
         }
+        setTimeout(this.ensureRibbonBinding,1000);
+
+        $("[id='Ribbon.MacrosFolder-title']").hide();
+        $("[id='Ribbon.MacrosFile-title']").hide();
+        $("[id='"+ribbonGroupName+"-title']").show();
+
     },
     refs :[{
         selector: '#macrosPanel',
@@ -924,114 +1155,78 @@ Ext.define('Macros.controller.ribbonController', {
 
     ribbons:[],
 
+    ensureRibbonBinding:function() {
+        console.log("ensuring ribbon bindings. Ribbons: "+ $('.ms-cui-tts li').length);
+        //SpRibbonBinding.ensureRibbonBinding();
+        //$('.ms-cui-tts li').unbind("click.macrosRibbon");
+        // only bind the click event to non macros ribbon groups
+        //$('.ms-cui-tts li:not([id^="Ribbon.Ma"])').bind("click.macrosRibbon",function(a,b,c){
+        $('.ms-cui-tts li').unbind("click.macrosRibbon");
+        $('.ms-cui-tts li').bind("click.macrosRibbon",Ext.bind(function(event){
+            var ribbonId = event.currentTarget.id.replace("-title","");
+            var ribController = macrosApp.getController("ribbonController");
+            ribController.toggle(ribbonId);
+        },this));
+
+        console.log("->bound events "+  $('.ms-cui-tts li').data('events'));
+
+    },
+
+
     clickSearch : function(){
+        //debugger;
+        //this.init();
         Ext.getCmp("macrosPanel").setVisible(true);
-    },
-
-    openFileAttributes: function() {
-
-        var ctrl = macrosApp.getController("fileController");
-        return ctrl.openFileAttributes();
-    },
-    editFileAttributes : function() {
-        var ctrl = macrosApp.getController("fileController");
-        return ctrl.editFileAttributes();
-
-    },
-
-    openFile: function() {
-        var ctrl = macrosApp.getController("fileController");
-        return ctrl.openFile();
-
+        $("#s4-mainarea").hide();
+        Ext.getCmp("macrosPanel").doLayout();
     },
 
     init: function() {
-
-
+        var renderToDiv = 'ribbon'
         if (isInSharePoint)
         {
-            // ribbon binding is done in sharepoint
-            return;
+            // dont render it in sharepoint
+            renderToDiv = null;
         }
 
-        var startRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
+        var startRibbon = Ext.widget('ribbonGroup',{renderTo:renderToDiv,
             id:'start',
+            spRibbonName : "Ribbon.MacrosMain",
             items:[
                 {
                     xtype:'ribbonAction',
                     text: "Suchen",
-                    handler: this.clickSearch
+                    name: 'search',
+                    handler: this.clickSearch,
+                    spRibbonName : "Ribbon.MacrosMain"
+
                 }
             ]
-
         });
+
         this.ribbons.push(startRibbon);
-
-        var folderRibbon = Ext.widget('ribbonGroup',{renderTo:'ribbon',
-            id:'folder',
-            items:[
-                {
-                    xtype:'ribbonAction',
-                    text: "Anzeigen",
-                    handler: function() {
-                        alert("click");
-                    }
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Suchen",
-                    handler: null
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Unterordner anlegen",
-                    handler: null
+        var folderRibbon = Ext.create('Macros.view.ribbon.folderRibbon',
+                {   id:'folder',
+                    renderTo:renderToDiv,
+                    spRibbonName : "Ribbon.MacrosFolder"
                 }
-            ]
-
-        });
+        );
         this.ribbons.push(folderRibbon);
-        var fileRibbon = Ext.widget('ribbonGroup',{
-            //that: this,
-            renderTo:'ribbon',
-            id:'file',
-            items:[
-                {
-                    xtype:'ribbonAction',
-                    text: "Attribute anzeigen",
-                    ribbonGroup:fileRibbon,
-                    handler: this.openFileAttributes
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Document öffnen",
-                    ribbonGroup:fileRibbon,
-                    handler: this.openFile
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Reattributen",
-                    handler: this.editFileAttributes
-                },
-                {
-                    xtype:'ribbonAction',
-                    text: "Weitlerleiten",
-                    handler: null
-                }
-            ]
 
-        });
-        this.ribbons.push(fileRibbon);
-
-        this.toggle('start');
-
-
-     /*   this.control({
-            'list': {
-                itemdblclick: this.editFile
+        var docRibbon = Ext.create('Macros.view.ribbon.fileRibbon',
+            {   id:'file',
+                renderTo:renderToDiv,
+                spRibbonName : "Ribbon.MacrosFile"
             }
-        });
-        */
+        );
+        this.ribbons.push(docRibbon);
+
+        this.ensureRibbonBinding();
+
+
+        //this.toggle('Ribbon.MacrosMain');
+
+
     }
 });
 

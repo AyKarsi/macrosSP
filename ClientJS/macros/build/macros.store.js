@@ -1,4 +1,17 @@
-Ext.define('Macros.store.filesStore', {
+Ext.define('Macros.store.documentMenuStore', {
+    extend: 'Ext.data.Store',
+    model: 'Macros.model.documentMenuModel',
+    autoLoad:true,
+    proxy: new Ext.data.proxy.Ajax({
+        url:proxyUrl+'?entity=documentmenu',
+        method:'get',
+        reader: {
+            type: 'xml',
+            rootProperty : 'results',
+            record: 'record'
+        }
+    })
+});Ext.define('Macros.store.filesStore', {
     extend: 'Ext.data.Store',
     model: 'Macros.model.fileModel',
     entityid: "0",
@@ -19,51 +32,25 @@ Ext.define('Macros.store.filesStore', {
             record: 'record'
         }
     })
-});Ext.define('Macros.store.__foldertreeStore', {
+});Ext.define('Macros.store.foldertreeStore', {
     extend: 'Ext.data.TreeStore',
     model: 'Macros.model.foldertreeModel',
-    //entityid: "10",
-    autoLoad:false,
-    defaultRootId: "8",
+    autoLoad:true,
+    defaultRootId: 0,
+    expaned:true,
     root: {
         expanded: true,
         text: "Ordner",
-        id: "8",
-        leaf: false,
-        expanded:false
+        id: 0,
+        leaf: false
     },
-         listeners: {
-
-                // Each demo.UserModel instance will be automatically
-                // decorated with methods/properties of Ext.data.NodeInterface
-                // (i.e., a "node"). Whenever a UserModel node is appended
-                // to the tree, this TreeStore will fire an "append" event.
-                append: function( thisNode, newChildNode, index, eOpts ) {
-                    alert("appending");
-                    debugger;
-                    // If the node that's being appended isn't a root node, then we can
-                    // assume it's one of our UserModel instances that's been "dressed
-                    // up" as a node
-                    if( !newChildNode.isRoot() ) {
-
-                    }
-                    else {
-                        //this.appendChild(newChildNode);
-                    }
-                }
-          }
-        ,
-/*
-    loadChildren: function(parentId){
-        this.proxy.url = proxyUrl+'?entity=foldertree&id='+parentId;
-        this.load();
-    },*/
     proxy: new Ext.data.proxy.Ajax({
-        url:proxyUrl+'?entity=foldertree&id=8',
+        url:proxyUrl+'?entity=foldertree',
         method:'get',
         reader: {
             type: 'xml',
             rootProperty : 'results',
+            root: 'results',
             record: 'record',
             idProperty: 'id'
         }
@@ -71,7 +58,7 @@ Ext.define('Macros.store.filesStore', {
 });
 
 
-Ext.define('Macros.store.foldertreeStore', {
+Ext.define('Macros.store.__foldertreeStore', {
     extend: 'Ext.data.TreeStore',
     //model:'Macros.model.foldertreeModel',
     root: {

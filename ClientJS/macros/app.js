@@ -1,9 +1,12 @@
 Ext.onReady(function(){
 
+    console.log("ext.ready");
+
 
 });
 $(document).ready(function(){
     $("#s4-mainarea").after("<div id='macrosarea'></div>");
+    console.log("jquery.ready");
 });
 
 var macrosApp = {};
@@ -13,16 +16,14 @@ Ext.application({
     stores:[
         'users',
         'foldertreeStore'
-
     ],
-
     models:[
         'user',
         'foldertreeModel'
-
     ],
     mainPanel:null,
     launch: function() {
+        console.log("launch;")
         // alert(Ext.get('s4-ribbonrow').getViewSize().height);
 
         var adjustHeight = function(){
@@ -34,8 +35,6 @@ Ext.application({
         };
 
         var ribbonHeight = adjustHeight();
-
-
         this.mainPanel= Ext.create('Ext.panel.Panel', {
             id:"macrosPanel",
             renderTo:'macrosarea',
