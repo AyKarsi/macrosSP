@@ -19,6 +19,7 @@ var SpRibbonBinding =
 
     // needs to be called very late, to make sure that all ribbons are present..
     // might possibly fail with other ribbons..
+    // moved to ribbon controller- can probaly be deleted
     ensureRibbonBinding:function() {
 
         if (!isInSharePoint)
@@ -38,6 +39,7 @@ var SpRibbonBinding =
 
 
     },
+    // moved to ribbon controller- can probaly be deleted
     hideApp: function() {
         //this.ensureRibbonBinding();
         var macrosPanel = Ext.getCmp("macrosPanel");
